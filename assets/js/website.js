@@ -1,204 +1,218 @@
-console.log("Variables");
 /**
- * Funciones
+ * Variables globales
  */
-$(function() {
-  "use strict";
-  console.log("Website " + base_url);
+$.getDataJson = function(url, data, callback) {
+	return $.ajax({
+		method: 'POST',
+		url: url,
+		data: data,
+		dataType: 'json',
+		success: callback
+	});
+};
+$.datepicker.regional["es"] = {
+	closeText: 'Cerrar',
+	prevText: '< Ant',
+	nextText: 'Sig >',
+	currentText: 'Hoy',
+	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+	dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+	weekHeader: 'Sm',
+	dateFormat: 'dd-mm-yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: ''
+};
 
-/**
- * Menú hover
- */
- $(".dropdown").hover(            
-  function() {
-    $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-    $(this).toggleClass('open');
-    $('b', this).toggleClass("caret caret-up");                
-  },
-  function() {
-    $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-    $(this).toggleClass('open');
-    $('b', this).toggleClass("caret caret-up");                
-  });
+$.datepicker.setDefaults($.datepicker.regional["es"]);
 
-/**
- * Lightslider
- */
-$('#salones-slider').lightSlider({
-        item:9,
-        loop:false,
-        slideMove:2,
-        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-        speed:600,
-        pager:false,
-        responsive : [
-            {
-                breakpoint:1300,
-                settings: {
-                    item:8,
-                    slideMove:2,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:1120,
-                settings: {
-                    item:7,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:970,
-                settings: {
-                    item:6,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:800,
-                settings: {
-                    item:5,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:700,
-                settings: {
-                    item:4,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:480,
-                settings: {
-                    item:3,
-                    slideMove:1
-                  }
-            },
-            {
-                breakpoint:280,
-                settings: {
-                    item:1,
-                    slideMove:1
-                  }
-            }
-        ]
-    });
-
-/**
- * Validar Formulario #form-contactanos
- */
-//Validar formulario
-$('#form-contactanos').formValidation({
-  framework: 'bootstrap',
-  message: 'Valor no válido.',
-        /*icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },*/
-          fields: {
-            nombre: {
-              row: '.form-group',
-              validators: {
-                notEmpty: {
-                  message: 'Ingrese Nombres y Apellidos.'
-                }
-              }
-            },
-            email: {
-              row: '.form-group',
-              validators: {
-                notEmpty: {
-                  message: 'Ingrese su correo.'
-                },
-                emailAddress: {
-                  message: 'Ingrese un correo válido.'
-                }
-              }
-            },
-            telefono: {
-              row: '.form-group',
-              validators: {
-                notEmpty: {
-                  message: 'Ingrese un teléfono.'
-                }
-              }
-            }
-          }
-        });
-
-/**
- * Galería
- */
-if ( $( "#lightgallery" ).length ) {
-  $( '.btn-galeria a' ).on( 'click', function ( event ) {
-    $('#lightgallery a').first().trigger("click");
-  });
-
-  $('#lightgallery').lightGallery({
-    download:false
-  });
+function getDate(element) {
+	var date;
+	try {
+		date = $.datepicker.parseDate(dateFormat, element.value);
+	} catch( error ) {
+		date = null;
+	}
+	return date;
 }
 
-/*$( '.btn-galeria a' ).on( 'click', function ( event ) {
-  $('#lightgallery a').first().trigger("click");
+$(function() {
+	//Select search select2
+	$(".select_search").select2();
+
+	//Galería
+	$('#imageGallery').lightSlider({
+		gallery:true,
+		item:1,
+		loop:true,
+		/*auto:true,*/
+		thumbItem:9,
+		slideMargin:0,
+		enableDrag: true,
+		enableTouch: true,
+		currentPagerPosition:'left',
+		onSliderLoad: function(el) {
+			el.lightGallery({
+				selector: '#imageGallery .lslide'
+			});
+		}   
+	});
+
+	//Slimscroll
+	$('.box-wscroll').slimScroll({
+		height: '233px'
+	});
+
+	//Toolbar static
+	$("#tool-bar").sticky({ topSpacing: 0 });
+
+	//Galería videos.
+	$("#content-slider").lightSlider({
+		loop:true,
+		auto:true,
+		item:4,
+		slideMove:2,
+		easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+		speed:600,
+		pauseOnHover: true,
+		pager: false,
+		responsive : [
+		{
+			breakpoint:800,
+			settings: {
+				item:3,
+				slideMove:1,
+				slideMargin:6,
+			}
+		},
+		{
+			breakpoint:480,
+			settings: {
+				item:2,
+				slideMove:1
+			}
+		}
+		]
+	});
+
+    //Galería de fotos.
+    $("#content-slider-fotos").lightSlider({
+    	loop:true,
+    	auto:false,
+    	item:4,
+    	slideMove:2,
+    	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+    	speed:600,
+    	pauseOnHover: true,
+    	pager: false,
+    	responsive : [
+    	{
+    		breakpoint:800,
+    		settings: {
+    			item:3,
+    			slideMove:1,
+    			slideMargin:6,
+    		}
+    	},
+    	{
+    		breakpoint:480,
+    		settings: {
+    			item:2,
+    			slideMove:1
+    		}
+    	}
+    	]
+    });
+
+	//Ver video fancybox
+	$(".various").fancybox({
+		maxWidth  : 800,
+		maxHeight : 600,
+		fitToView : false,
+		width   : '70%',
+		height    : '70%',
+		autoSize  : false,
+		closeClick  : false,
+		openEffect  : 'none',
+		closeEffect : 'none'
+	});
+
+	/**
+	 * Fecha datepicker
+	 */
+	 $(".select-fecha").datepicker({
+	 	minDate: 0,
+	 	defaultDate: "+1w",
+	 	changeMonth: true,
+	 	changeYear: true,
+	 	numberOfMonths: 1
+	 });
+
+	 $(".show_calendar").click(function() {
+	 	$(".select-fecha").datepicker("show");
+	 });
+
+	/**
+	 * Formulario home
+	 */
+	 var dateFormat = "dd-mm-yy",
+	 from = $( "#date_from" )
+	 .datepicker({
+	 	minDate: 0,
+	 	defaultDate: "+1w",
+	 	changeMonth: true,
+	 	changeYear: true,
+	 	numberOfMonths: 1
+	 }).on( "change", function() {
+	 	to.datepicker( "option", "minDate", getDate( this ) );
+	 }),
+	 to = $( "#date_to" ).datepicker({
+	 	defaultDate: "+1w",
+	 	changeMonth: true,
+	 	changeYear: true,
+	 	numberOfMonths: 1
+	 })
+	 .on( "change", function() {
+	 	from.datepicker( "option", "maxDate", getDate( this ) );
+	 });
+
+	 $("#fecha_inicio_show").click(function() {
+	 	$("#date_from").datepicker("show");
+	 });
+
+	 $("#fecha_fin_show").click(function() {
+	 	$("#date_to").datepicker("show");
+	 });
+
+	 $('#buscar').on('click',function(event){
+	 	event.preventDefault();
+	//Validar
+	if($('#date_from').val()==""){
+		alert('Seleccionar Fecha Inicio de Tour');
+		$('#date_from').focus();
+		return false;
+	}
+
+	if($('#date_to').val()==""){
+		alert('Seleccionar Fecha Fin de Tour');
+		$('#date_to').focus();
+		return false;
+	}
+
+	//Setear url
+	var date_from = $('#date_from').val();
+	var date_to = $('#date_to').val();
+	date_from = date_from.replace("-", "");
+	date_from = date_from.replace("-", "");
+	date_to = date_to.replace("-", "");
+	date_to = date_to.replace("-", "");
+
+	var urlBusqueda = base_url + 'paquetes-tours/desde_' + date_from + 'hasta_' + date_to;
+	$(location).attr('href',urlBusqueda);
 });
 
-$('#lightgallery').lightGallery({
-  download:false
-});*/
-
-/**
- * Menu Responsive
- */
-
-// Initialize Slidebars
-var controller = new slidebars();
-controller.init();
-
-// Toggle main menu
-$( '.js-toggle-main-menu' ).on( 'click', function ( event ) {
-  event.preventDefault();
-  event.stopPropagation();
-  controller.toggle( 'main-menu' );
-} );
-
-// Close any
-$( document ).on( 'click', '.js-close-any', function ( event ) {
-  if ( controller.getActiveSlidebar() ) {
-    event.preventDefault();
-    event.stopPropagation();
-    controller.close();
-  }
-} );
-
-// Close Slidebar links
-$( '[off-canvas] a' ).on( 'click', function ( event ) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  var url = $( this ).attr( 'href' ),
-  target = $( this ).attr( 'target' ) ? $( this ).attr( 'target' ) : '_self';
-
-  controller.close( function () {
-    window.open( url, target );
-  } );
-} );
-
-// Add close class to canvas container when Slidebar is opened
-$( controller.events ).on( 'opening', function ( event ) {
-  $( '[canvas]' ).addClass( 'js-close-any' );
-} );
-
-// Add close class to canvas container when Slidebar is opened
-$( controller.events ).on( 'closing', function ( event ) {
-  $( '[canvas]' ).removeClass( 'js-close-any' );
-} );
-//--Menu responsive
-
-});
+	});

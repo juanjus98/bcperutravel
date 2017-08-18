@@ -45,26 +45,30 @@ if (!function_exists('wamenu')) {
 
     function wamenu() {
         $CI= & get_instance();
-        //Categorias de productos
-        $CI->load->model('crud_model', 'Crud');
+        //Menu
+        $CI->load->model('menu_model', 'Menu');
 
-        $data_crud['table'] = "servicio as t1";
-        $data_crud['columns'] = "t1.*";
-        $data_crud['where'] = array("t1.estado !=" => 0);
-        $data_crud['order_by'] = "t1.orden Asc";
-        $resultado = $CI->Crud->getRows($data_crud);
-
+        //Menú tours
+        $resultado = $CI->Menu->menuTours();
         foreach ($resultado as $key => $value) {
-            $servicios["servicio/{$value['url_key']}"] = $value['nombre_largo'];
+            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
+            $menuTours["tours/{$urlkey}"] = $value['provincia'];
+        }
+
+        //Menú estadia
+        $resultado = $CI->Menu->menuEstadia();
+        foreach ($resultado as $key => $value) {
+            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
+            $menuEstadia["hoteles/{$urlkey}"] = $value['provincia'];
         }
 
 
         $menu = array(
-            'inicio' => 'Inicio',
-            'contactanos' => 'Contactanos',
-            'salones' => 'Salones',
-            'servicios' => $servicios
-        );
+            'inicio' => '<i class="fa fa-home" aria-hidden="true"></i>',
+            'paquetes-tours' => 'Paquetes Tour Perú',
+            'Tours' => $menuTours,
+            'Estadía' => $menuEstadia
+            );
 
         return $menu;
     }
@@ -228,14 +232,15 @@ if (!function_exists('set_paginacion')) {
  *
  * Genera iformación para el head para seo
  * 
- * @category		Utilitarios
- * @author		Juan Julio Sandoval Layza
- * @since		08-05-2015
- * @version		Version 1.0
+ * @category        Utilitarios
+ * @author      Juan Julio Sandoval Layza
+ * @since       08-05-2015
+ * @version     Version 1.0
  */
 if (!function_exists('head_info')) {
 
     function head_info($info, $page = "inicio") {
+        $CI =& get_instance();
         if (!empty($info)) {
             switch ($page) {
                 case "inicio":
@@ -243,15 +248,15 @@ if (!function_exists('head_info')) {
                     "title" => $info['title'],
                     "description" => strip_tags($info['description']),
                     "keywords" => strip_tags($info['keywords']),
-                    "image" => base_url() . "images/uploads/" . strip_tags($info['imagen_1'])
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen_1'])
                     );
                 break;
-                case "salon":
+                case "paquete":
                 $head_info = array(
-                    "title" => $info['nombre_largo'],
+                    "title" => $info['nombre'],
                     "description" => strip_tags(str_replace("\n", "",$info['descripcion'])),
                     "keywords" => $info['keywords'],
-                    "image" => base_url() . "images/upload/" . $info['imagen_2']
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
                     );
                 break;
                 case "servicio":
@@ -267,4 +272,148 @@ if (!function_exists('head_info')) {
         return $head_info;
     }
 
+}
+
+/**
+ * Video helper
+ */
+/**
+ * Extracts the daily motion id from a daily motion url.
+ * Returns false if the url is not recognized as a daily motion url.
+ */
+function getDailyMotionId($url)
+{
+
+    if (preg_match('!^.+dailymotion\.com/(video|hub)/([^_]+)[^#]*(#video=([^_&]+))?|(dai\.ly/([^_]+))!', $url, $m)) {
+        if (isset($m[6])) {
+            return $m[6];
+        }
+        if (isset($m[4])) {
+            return $m[4];
+        }
+        return $m[2];
+    }
+    return false;
+}
+
+
+/**
+ * Extracts the vimeo id from a vimeo url.
+ * Returns false if the url is not recognized as a vimeo url.
+ */
+function getVimeoId($url)
+{
+    if (preg_match('#(?:https?://)?(?:www.)?(?:player.)?vimeo.com/(?:[a-z]*/)*([0-9]{6,11})[?]?.*#', $url, $m)) {
+        return $m[1];
+    }
+    return false;
+}
+
+/**
+ * Extracts the youtube id from a youtube url.
+ * Returns false if the url is not recognized as a youtube url.
+ */
+function getYoutubeId($url)
+{
+    $parts = parse_url($url);
+    if (isset($parts['host'])) {
+        $host = $parts['host'];
+        if (
+            false === strpos($host, 'youtube') &&
+            false === strpos($host, 'youtu.be')
+            ) {
+            return false;
+    }
+}
+if (isset($parts['query'])) {
+    parse_str($parts['query'], $qs);
+    if (isset($qs['v'])) {
+        return $qs['v'];
+    }
+    else if (isset($qs['vi'])) {
+        return $qs['vi'];
+    }
+}
+if (isset($parts['path'])) {
+    $path = explode('/', trim($parts['path'], '/'));
+    return $path[count($path) - 1];
+}
+return false;
+}
+
+
+/**
+ * Gets the thumbnail url associated with an url from either:
+ *
+ *      - youtube
+ *      - daily motion
+ *      - vimeo
+ *
+ * Returns false if the url couldn't be identified.
+ *
+ * In the case of you tube, we can use the second parameter (format), which
+ * takes one of the following values:
+ *      - small         (returns the url for a small thumbnail)
+ *      - medium        (returns the url for a medium thumbnail)
+ *
+ *
+ *
+ */
+function getVideoThumbnailByUrl($url, $format = 'small')
+{
+    if (false !== ($id = getVimeoId($url))) {
+        $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$id.php"));
+        /**
+         * thumbnail_small
+         * thumbnail_medium
+         * thumbnail_large
+         */
+        return $hash[0]['thumbnail_large'];
+    }
+    elseif (false !== ($id = getDailyMotionId($url))) {
+        return 'http://www.dailymotion.com/thumbnail/video/' . $id;
+    }
+    elseif (false !== ($id = getYoutubeId($url))) {
+        /**
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/0.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/1.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/2.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/3.jpg
+         *
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/hqdefault.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/mqdefault.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/sddefault.jpg
+         * http://img.youtube.com/vi/<insert-youtube-video-id-here>/maxresdefault.jpg
+         */
+        if ('medium' === $format) {
+            return 'http://img.youtube.com/vi/' . $id . '/hqdefault.jpg';
+        }
+        return 'http://img.youtube.com/vi/' . $id . '/default.jpg';
+    }
+    return false;
+}
+
+/**
+ * Returns the location of the actual video for a given url which belongs to either:
+ *
+ *      - youtube
+ *      - daily motion
+ *      - vimeo
+ *
+ * Or returns false in case of failure.
+ * This function can be used for creating video sitemaps.
+ */
+function getVideoLocation($url)
+{
+    if (false !== ($id = getDailyMotionId($url))) {
+        return 'http://www.dailymotion.com/embed/video/' . $id;
+    }
+    elseif (false !== ($id = getVimeoId($url))) {
+        return 'http://player.vimeo.com/video/' . $id;
+    }
+    elseif (false !== ($id = getYoutubeId($url))) {
+        return 'http://www.youtube.com/embed/' . $id;
+    }
+    return false;
 }

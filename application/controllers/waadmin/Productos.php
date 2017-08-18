@@ -35,7 +35,7 @@ class Productos extends CI_Controller {
  public function index() {
  //$data['wa_tipo'] = $tipo;
    $data['wa_modulo'] = 'Listado';
-   $data['wa_menu'] = 'Salones';
+   $data['wa_menu'] = 'Productos';
 
  $sessionName = 's_productos'; //Session name
 
@@ -70,7 +70,7 @@ $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links,
 $this->pagination->initialize($set_paginacion);
 $data["links"] = $this->pagination->create_links();
 
-$this->template->title('Salones');
+$this->template->title('Productos');
 $this->template->build('waadmin/productos/index', $data);
 }
 
@@ -95,7 +95,7 @@ function editar($tipo='C',$id=NULL){
 
    $data['wa_tipo'] = $tipo;
    $data['wa_modulo'] = $data['tipo'];
-   $data['wa_menu'] = 'Salon';
+   $data['wa_menu'] = 'Producto';
 
 
    if($tipo == 'E' || $tipo == 'V'){

@@ -116,9 +116,7 @@ function get_urlkey($data){
   }else{
     $result = $urlkey . "-" .$rand_str;
   }
-
   return $result;
-  
 }
 
 function valida_urlkey($data){
@@ -136,6 +134,9 @@ function valida_urlkey($data){
    }
 }
 
-
+function getPaises(){
+  $jsonPaises = json_decode(file_get_contents('https://restcountries.eu/rest/v2/all'));
+  return $jsonPaises;
+}
 
 }

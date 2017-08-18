@@ -12,14 +12,18 @@ die();*/
     <title><?php echo @$template['title']; ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--Escalable en cualquier dispositivo-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/general.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/waadmin.min.css') ?>">
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('plugins/tagsinput/bootstrap-tagsinput.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.css') ?>">
 
-    <!--iCheked-->
-    <link href="<?php echo base_url('plugins/icheck/skins/all.css?v=1.0.2') ?>" rel="stylesheet">
+    <!-- iCheked-->
+    <link href="<?php echo base_url('assets/plugins/icheck/skins/all.css?v=1.0.2') ?>" rel="stylesheet">
+
+    <!-- Chosen-->
+    <link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="chosen.css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,9 +32,8 @@ die();*/
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="<?php echo base_url() ?>favicon.ico">
-    <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
-    <?php //echo notify();?>
+    <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>">
+    <script type="text/javascript">var base_url='<?php echo base_url($this->config->item('admin_path'));?>';</script>
 
 </head>
 <body class="skin-wa">
@@ -61,7 +64,7 @@ die();*/
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
-                                <img src="<?php echo base_url('images/avatar3.png');?>" class="img-circle" alt="User Image" />
+                                <img src="<?php echo base_url('assets/images/waadmin/avatar04.png');?>" class="img-circle" alt="User Image" />
                                 <p>
                                     <?php echo $user_info['nombre'] ." ". $user_info['apellido'];?>
                                     <small>Desde: <?php echo date("d/m/Y",strtotime($user_info['fch_ingreso'])); ?></small>
@@ -100,7 +103,7 @@ die();*/
             <?php $this->load->view('layouts/waadmin/aside'); ?>
 
             <?php
-                //collpase_cookie (mostrar / ocultar menu)
+            //collpase_cookie (mostrar / ocultar menu)
             $strech_left = "";
             if(isset($_COOKIE["collpase_cookie"])){
               $strech_left = ($_COOKIE["collpase_cookie"] == 2) ? "strech" : "";
@@ -128,20 +131,15 @@ die();*/
      </aside><!-- /.right-side -->
  </div><!-- ./wrapper -->
 
-
- <script src="<?php echo base_url() ?>plugins/jquery/jquery-3.1.1.min.js"></script>
- <script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
- <!-- <script type="text/javascript" src="<?php echo base_url() ?>plugins/sticky/jquery.sticky.js"></script> -->
- <script type="text/javascript" src="<?php echo base_url('plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
-
- <script src="<?php echo base_url('plugins/js-cookie/js.cookie.js');?>"></script>
-
-<script src="<?php echo base_url('plugins/icheck/icheck.js?v=1.0.2');?>"></script>
-
- <script type="text/javascript" src="<?php echo base_url() ?>js/general.min.js"></script>
- <!-- <script type="text/javascript" src="<?php echo base_url() ?>js/app.js"></script> -->
-
+ <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js') ?>"></script>
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap.min.js') ?>"></script>
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
+ <script src="<?php echo base_url('assets/plugins/js-cookie/js.cookie.js');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/icheck/icheck.js?v=1.0.2');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/moment.min.js');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+ 
+ <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
 </body>
-
 </html>
 

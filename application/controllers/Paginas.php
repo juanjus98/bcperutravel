@@ -16,10 +16,21 @@ class Paginas extends CI_Controller {
     $this->load->model('productos_model', 'Productos');
     $this->load->model("crud_model","Crud");
 
+    $this->load->model("promociones_model","Promociones");
+    $this->load->model("videos_model","Videos");
+    $this->load->model("paquetes_model","Paquetes");
+    $this->load->model("tours_model","Tours");
+    $this->load->model("hoteles_model","Hoteles");
+    $this->load->model("paquetes_galeria_model","Paquetes_galeria");
+
     /**
      * Información del website
      */
     $this->website_info = $this->Inicio->get_website();
+  }
+
+  public function redirect(){
+    redirect('waadmin', 'refresh');
   }
 
   public function index() {
@@ -27,6 +38,28 @@ class Paginas extends CI_Controller {
 
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
+
+    //Promociones
+    $data['promociones'] = $this->Promociones->listado(6,0);
+    //Videos
+    $data['videos'] = $this->Videos->listado(8,0);
+
+    //Paquetes
+    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    $total_paquetes = $this->Paquetes->total_registros();
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
+
+    //Tours
+    $total_tours = $this->Tours->total_registros();
+    $data['tours'] = $this->Tours->listado($total_tours,0);
+
+    //Hoteles
+    $total_hoteles = $this->Hoteles->total_registros();
+    $data['hoteles'] = $this->Hoteles->listado($total_hoteles,0);
+    /*echo "<pre>";
+    print_r($data['paquetes']);
+    echo "</pre>";*/
+
 
     $data_crud['table'] = "slider as t1";
     $data_crud['columns'] = "t1.*";
@@ -39,46 +72,133 @@ class Paginas extends CI_Controller {
     $this->template->build('paginas/index', $data);
   }
 
+  public function paquetes($args=null) {
+    $data['dias'] = $this->Paquetes->listadoDias();
+    
+    $data_busqueda = array();
+    $nroDias = 0;
+    if(isset($args)){
+      $_hasta = explode('hasta_', $args);
+      if(count($_hasta) > 1){
+        $_desde = explode('desde_',$_hasta[0]);
+        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+        $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+        $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
+        $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
+        $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
+      }
 
-    public function contactanos() {
-        $this->template->title('Contáctanos');
-        $data['active_link'] = "contactanos";
+      $_dias = explode('dias', $args);
+      if(count($_dias) > 1){
+        $nroDias = $_dias[0];
+      }
+    }
+
+    $data['active_link'] = "paquetes-tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($this->website_info); //siempre
+
+    //Paquetes
+    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    if($nroDias > 0){
+      $data_paquetes['nro_dias'] = $nroDias;
+      $data_busqueda['nroDias'] = $nroDias;
+    }
+
+    $total_paquetes = $this->Paquetes->total_registros($data_paquetes);
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
+
+    //Información de busqueda
+    $data['busqueda'] = $data_busqueda;
+
+    $this->template->title('Paquetes');
+    $this->template->build('paginas/paquetes', $data);
+  }
+
+  public function paquete($url_key) {
+    if(isset($args)){
+      $_hasta = explode('hasta_', $args);
+      if(count($_hasta) > 1){
+        $_desde = explode('desde_',$_hasta[0]);
+        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+        $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+        $nroDias = floor($dateDiff / (60 * 60 * 24));
+      }
+
+      $_dias = explode('dias', $args);
+      if(count($_dias) > 1){
+        $nroDias = $_dias[0];
+      }
+    }
+
+    //Consultar Paquete
+    $data_paquete = array('url_key' => $url_key);
+    $paquete = $this->Paquetes->get_row($data_paquete);
+    $data['paquete'] = $paquete;
+
+    $data['active_link'] = "paquetes-tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($paquete, 'paquete'); //siempre
+
+    //Formas de pago (página)
+    if(!empty($paquete['formas_pago_id'])){
+      $data_pagina = array('id' => $paquete['formas_pago_id']);
+      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+    }
+
+    //Paises
+    $data['paises'] = $this->Crud->getPaises();
+
+    $this->template->title('Paquete');
+    $this->template->build('paginas/paquete', $data);
+  }
+
+
+  public function contactanos() {
+    $this->template->title('Contáctanos');
+    $data['active_link'] = "contactanos";
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 
-      //Enviar formulario
+        //Enviar formulario
         if($this->input->post()){
           $post = $this->input->post();
           $config = array(
            array(
-               'field' => 'nombre',
-               'label' => 'Nombres',
-               'rules' => 'required',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   )
-               ),
-           array(
-               'field' => 'email',
-               'label' => 'E-mail',
-               'rules' => 'required|valid_email',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   'valid_email' => 'E-mail inválido.'
-                   )
-               ),
-           array(
-               'field' => 'telefono',
-               'label' => 'Teléfono',
-               'rules' => 'required',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   )
+             'field' => 'nombre',
+             'label' => 'Nombres',
+             'rules' => 'required',
+             'errors' => array(
+               'required' => 'Campo requerido.',
                )
+             ),
+           array(
+             'field' => 'email',
+             'label' => 'E-mail',
+             'rules' => 'required|valid_email',
+             'errors' => array(
+               'required' => 'Campo requerido.',
+               'valid_email' => 'E-mail inválido.'
+               )
+             ),
+           array(
+             'field' => 'telefono',
+             'label' => 'Teléfono',
+             'rules' => 'required',
+             'errors' => array(
+               'required' => 'Campo requerido.',
+               )
+             )
            );
 
-       $this->form_validation->set_rules($config);
-       $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+          $this->form_validation->set_rules($config);
+          $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
           if ($this->form_validation->run() == FALSE)
           {
@@ -152,13 +272,13 @@ class Paginas extends CI_Controller {
         } //Post
 
 
-      $this->template->build('paginas/contactanos', $data);
-    }
+        $this->template->build('paginas/contactanos', $data);
+      }
 
     //Mensaje de confirmación
-    public function confirmacion($token='') {
-      $data['active_link'] = "inicio";
-      $data['website'] = $this->Inicio->get_website();
+      public function confirmacion($token='') {
+        $data['active_link'] = "inicio";
+        $data['website'] = $this->Inicio->get_website();
       $data['head_info'] = head_info($data['website']); //siempre
 
       $this->template->title('Confirmación');
@@ -244,7 +364,7 @@ class Paginas extends CI_Controller {
       $this->template->build('paginas/servicio', $data);
     }
 
-}
+  }
 
-    /* End of file categorias.php */
+  /* End of file categorias.php */
 /* Location: ./application/controllers/waadmin/categorias.php */

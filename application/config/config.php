@@ -23,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://salonesyeventos.pe';
-/*$config['base_url'] = 'http://webapu.com/dev/bongourmet/';*/
+$config['base_url'] = 'http://bcperutravel.com/v2/';
 
 /*
 |--------------------------------------------------------------------------
