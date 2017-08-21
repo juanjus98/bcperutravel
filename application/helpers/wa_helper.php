@@ -46,28 +46,30 @@ if (!function_exists('wamenu')) {
     function wamenu() {
         $CI= & get_instance();
         //Menu
-        $CI->load->model('menu_model', 'Menu');
+        /*$CI->load->model('menu_model', 'Menu');*/
 
         //Menú tours
-        $resultado = $CI->Menu->menuTours();
+        /*$resultado = $CI->Menu->menuTours();
         foreach ($resultado as $key => $value) {
             $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
             $menuTours["tours/{$urlkey}"] = $value['provincia'];
-        }
+        }*/
 
         //Menú estadia
-        $resultado = $CI->Menu->menuEstadia();
+        /*$resultado = $CI->Menu->menuEstadia();
         foreach ($resultado as $key => $value) {
             $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
             $menuEstadia["hoteles/{$urlkey}"] = $value['provincia'];
-        }
-
+        }*/
 
         $menu = array(
             'inicio' => '<i class="fa fa-home" aria-hidden="true"></i>',
-            'paquetes-tours' => 'Paquetes Tour Perú',
-            'Tours' => $menuTours,
-            'Estadía' => $menuEstadia
+            'paquetes-turisticos' => 'Paquetes turísticos',
+            'promociones' => 'Promociones',
+            'tickets' => 'Tickets',
+            'anio-nuevp' => 'Año nuevo',
+            /*'Tours' => $menuTours,
+            'Estadía' => $menuEstadia*/
             );
 
         return $menu;

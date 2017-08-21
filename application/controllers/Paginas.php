@@ -39,34 +39,12 @@ class Paginas extends CI_Controller {
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
 
-    //Promociones
-    $data['promociones'] = $this->Promociones->listado(6,0);
-    //Videos
-    $data['videos'] = $this->Videos->listado(8,0);
-
-    //Paquetes
-    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
-    $total_paquetes = $this->Paquetes->total_registros();
-    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
-
-    //Tours
-    $total_tours = $this->Tours->total_registros();
-    $data['tours'] = $this->Tours->listado($total_tours,0);
-
-    //Hoteles
-    $total_hoteles = $this->Hoteles->total_registros();
-    $data['hoteles'] = $this->Hoteles->listado($total_hoteles,0);
-    /*echo "<pre>";
-    print_r($data['paquetes']);
-    echo "</pre>";*/
-
-
+    //Slider
     $data_crud['table'] = "slider as t1";
     $data_crud['columns'] = "t1.*";
     $data_crud['where'] = array("t1.estado !=" => 0);
     $data_crud['order_by'] = "t1.orden Asc";
     $data['slider'] = $this->Crud->getRows($data_crud);
-
 
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
