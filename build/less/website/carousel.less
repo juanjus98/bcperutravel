@@ -1,0 +1,87 @@
+#carousel-home {
+	position: relative;
+
+	.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+		width: 100%;
+	}
+
+	.general-caption {
+		position: absolute;
+		width: 100%;
+		/*background: #cff;*/
+		top: 176px;
+		text-align: center;
+
+		h1 {
+			font-family: @font-lobster;
+			font-size: 40pt;
+			color: #fff;
+			text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);
+
+		}
+
+		p{
+			font-family: @font-primary;
+			font-size: 20px;
+			color: #fff;
+			text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);
+		}
+	}
+
+	/**
+	 * Busqueda cont-busqueda
+	 */
+	 .cont-busqueda {
+	 	position: absolute;
+	 	width: 100%;
+	 	background: #fdf;
+	 	bottom: 15px;
+	 	text-align: center;
+
+	 	.nav-tabs > li{
+	 		margin-bottom: -2px;
+	 	}
+	 	
+	 	.tab li a {
+	 		background: #3A3D41;
+	 		color: #fff;
+	 		border-radius: 0;
+	 		margin: 0;
+	 		padding: 10px 15px;
+	 		border:none;
+	 	}
+	 	.tab li{
+	 		border-top: 3px solid #3a3d41;
+	 	}
+	 	.tab li.active{
+	 		background: #ffffff;
+	 		border-top: 3px solid #ea5e50;
+	 		color: #7e828a;
+	 	}
+	 	.tab li a:hover{
+	 		background: #3A3D41;
+	 		color: #ffffff;
+	 	}
+	 	.tab span {
+	 		background:#ea5e50;
+	 		border-radius:100%;
+	 		text-align: center;
+	 		color: #fff;
+	 		height: 21px;
+	 		width: 21px;
+	 		line-height: 21px;
+	 		margin-right:8px;
+	 		display: inline-block;
+	 	}
+	 	.tab-content{
+	 		border: 1px solid #ddd;
+	 		border-top: 0px none;
+	 		padding:12px;
+	 	}
+	 	.tab-content h3{
+	 		margin-top: 0;
+	 	}
+
+	 }
+
+	}
