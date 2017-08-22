@@ -192,30 +192,58 @@ $tag_image = $head_info['image'];
           <div class="tab" role="tabpanel">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab"><span>1</span>Section</a></li>
-              <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab"><span>2</span>Section</a></li>
-              <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab"><span>3</span>Section</a></li>
-              
+              <li role="presentation" class="active"><a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a></li>
+              <li role="presentation"><a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a></li>              
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="Section1">
-                <h3>Web Development</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut maximus purus, quis condimentum odio. Pellentesque lorem ex, tempor sit amet justo.
-                </p>
+              <div role="tabpanel" class="tab-pane fade in active" id="seccion-1">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="origen">Origen</label>
+                    <input type="text" class="form-control" name="origen" id="origen" placeholder="Origen">
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="destino">Origen</label>
+                    <input type="text" class="form-control" name="destino" id="destino" placeholder="Destino">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="partida">Partida</label>
+                    <input type="text" class="form-control" name="partida" id="partida" placeholder="Partida">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="regreso">Regreso</label>
+                    <input type="text" class="form-control" name="regreso" id="regreso" placeholder="Regreso">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary-1">Buscar</button>
+                </form>
               </div>
-              <div role="tabpanel" class="tab-pane" id="Section2">
-                <h3>Brand Building</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper accumsan urna, nec faucibus sem sagittis id. Pellentesque finibus, eros a aliquet ornare, mi est ullamcorper neque, eu accumsan justo massa nec elit. Sed ac leo et erat gravida maximus.
-                </p>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="Section3">
-                <h3>Responsive Design</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum sed diam ac fermentum. Mauris nec pellentesque neque. Cras nec diam euismod, congue sapien eu, fermentum libero. Vestibulum quis sem.
-                </p>
+              <div role="tabpanel" class="tab-pane fade" id="seccion-2">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label class="sr-only" for="origen">Origen</label>
+                    <input type="text" class="form-control" name="origen" id="origen" placeholder="Origen">
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="destino">Origen</label>
+                    <input type="text" class="form-control" name="destino" id="destino" placeholder="Destino">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="partida">Partida</label>
+                    <input type="text" class="form-control" name="partida" id="partida" placeholder="Partida">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only" for="regreso">Regreso</label>
+                    <input type="text" class="form-control" name="regreso" id="regreso" placeholder="Regreso">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary-1">Buscar</button>
+                </form>
               </div>
             </div>
           </div>
