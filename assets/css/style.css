@@ -14,9 +14,6 @@ body {
   font-family: 'Lato', sans-serif, Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
   background: #f7f7f7;
 }
-/**
- * Bc perú travel
- */
 .bg-pattern-1 {
   background: url(../images/pattern_3.png) #E02406;
 }
@@ -28,6 +25,29 @@ body {
 }
 .brd-2 {
   border: solid 1px #F94C31;
+}
+/**
+ * Main contenido principal
+ */
+.wrapper {
+  position: relative;
+  margin-top: -30px;
+}
+.wrapper .container-principal {
+  background: #fff;
+  padding: 0;
+  webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.wrapper .container-principal .divider_border {
+  background: url(../images/divider.png) center top no-repeat;
+  height: 30px;
+  width: 100%;
+  margin-top: -12px;
+}
+.wrapper .container-principal .cont-main {
+  padding: 0 15px;
 }
 #header_1 {
   position: fixed;
@@ -87,13 +107,15 @@ body {
   background: #fff;
 }
 .navbar-website .navbar-brand {
-  height: 80px;
+  height: 68px;
+  float: left;
+  padding: 6px 15px;
 }
 .navbar-website .navbar-nav-wa li a {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   font-family: 'Lato', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   color: #7d7d7d;
@@ -200,7 +222,6 @@ body {
 #carousel-home .general-caption {
   position: absolute;
   width: 100%;
-  /*background: #cff;*/
   top: 176px;
   text-align: center;
 }
@@ -219,9 +240,7 @@ body {
 #carousel-home .cont-busqueda {
   position: absolute;
   width: 100%;
-  /*background: #fdf;*/
-  bottom: 15px;
-  text-align: center;
+  bottom: 68px;
 }
 #carousel-home .cont-busqueda .nav-tabs {
   border: none;
@@ -262,10 +281,10 @@ body {
   border-top-left-radius: 0;
 }
 .nb-footer {
-  background: #272727;
+  background: #222222 url(../images/pattern_2.png);
   padding-left: 15px;
   padding-right: 15px;
-  margin-top: 30px;
+  margin-top: 26px;
   padding-bottom: 30px;
 }
 .nb-footer .footer-single {
@@ -998,17 +1017,11 @@ fieldset[disabled] .btn-primary-1.active {
   body {
     /*background: #cc0 !important;*/
   }
-  .titulo_opciones span {
-    float: right;
-  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   body {
     /*background: #fdd !important;*/
-  }
-  .titulo_opciones span {
-    float: right;
   }
 }
 /* Medium devices (desktops, 992px and up) */
@@ -1016,22 +1029,11 @@ fieldset[disabled] .btn-primary-1.active {
   body {
     /*background: #0dd !important;*/
   }
-  .navbar-wa .navbar-collapse {
-    padding-right: 0px;
-    padding-left: 0px;
-    overflow: hidden;
-  }
-  .logo-salon {
-    padding: 98px 0;
-  }
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   body {
     /*background: #00c !important;*/
-  }
-  .logo-salon {
-    padding: 98px 0;
   }
 }
 /*@import "../hover/hover.less";*/

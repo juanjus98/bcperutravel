@@ -134,45 +134,18 @@ $tag_image = $head_info['image'];
 </div>
 <!-- Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <!-- <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol> -->
-
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <img src="<?php echo base_url('assets/images/slide-1.jpg');?>" alt="Slide 1">
-      <!-- <div class="carousel-caption">
-        Captión 01
-      </div> -->
     </div>
     <div class="item">
       <img src="<?php echo base_url('assets/images/slide-2.jpg');?>" alt="Slide 2">
-      <!-- <div class="carousel-caption">
-        Captión 02
-      </div> -->
     </div>
     <div class="item">
       <img src="<?php echo base_url('assets/images/slide-3.jpg');?>" alt="Slide 3">
-      <!-- <div class="carousel-caption">
-        Captión 03
-      </div> -->
     </div>
-
   </div>
-
-  <!-- Controls -->
-  <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a> -->
 
   <div class="general-caption">
     <div class="container">
@@ -255,14 +228,18 @@ $tag_image = $head_info['image'];
 
 </div>
 <!-- //Carousel-->
-<div class="container">
-  <!-- body-->
-  <?php echo @$template['body']; ?>
-  <!-- //body-->
-</div>
+<section class="wrapper">
+  <div class="container container-principal">
+    <div class="divider_border"></div>
+    <div class="cont-main">
+      <?php echo @$template['body']; ?>
+    </div>
+  </div>
+</section>
 <!-- Footer-->
 <footer>
   <section class="nb-footer">
+  <div class="container">
    <div class="row">
      <div class="col-md-4 col-sm-6">
        <div class="footer-single">
@@ -301,6 +278,7 @@ $tag_image = $head_info['image'];
          </ul>
        </div>
      </div>
+   </div>
    </div>
  </section>
 </footer>
