@@ -47,7 +47,7 @@ body {
   margin-top: -12px;
 }
 .wrapper .container-principal .cont-main {
-  padding: 0 15px;
+  padding: 0 15px 30px 15px;
 }
 #header_1 {
   position: fixed;
@@ -1000,40 +1000,66 @@ fieldset[disabled] .btn-primary-1.active {
   * Carousel priencipal
   */
   #carousel-home {
-    margin-top: 110px;
+    margin-top: 98px;
+  }
+  #carousel-home .general-caption {
+    top: 0px;
+  }
+  #carousel-home .general-caption h1 {
+    font-size: 26pt;
+  }
+  #carousel-home .general-caption p {
+    font-size: 14px;
+  }
+  #carousel-home .cont-busqueda {
+    position: relative;
+    bottom: 0px;
+    margin-top: 15px;
+  }
+  .wrapper {
+    margin-top: 16px;
   }
 }
+/*Fin mobiles*/
 @media (min-width: 768px) and (max-width: 991px) {
   body {
     /*background: #c0f !important;*/
+  }
+  .navbar-website .navbar-nav-wa li a {
+    font-size: 11px;
+  }
+  .wrapper {
+    margin-top: -15px;
+  }
+  #carousel-home .general-caption {
+    top: 120px;
+  }
+  #carousel-home .cont-busqueda {
+    position: relative;
+    bottom: 0px;
+    margin-top: 15px;
+  }
+  .wrapper {
+    margin-top: 16px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   body {
     /*background: #c00 !important;*/
   }
+  #carousel-home .general-caption {
+    top: 100px;
+  }
+  #carousel-home .cont-busqueda {
+    bottom: 35px;
+  }
+  .wrapper {
+    margin-top: -15px;
+  }
 }
 @media (min-width: 1200px) {
   body {
     /*background: #cc0 !important;*/
-  }
-}
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  body {
-    /*background: #fdd !important;*/
-  }
-}
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  body {
-    /*background: #0dd !important;*/
-  }
-}
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  body {
-    /*background: #00c !important;*/
   }
 }
 /*@import "../hover/hover.less";*/
