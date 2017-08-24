@@ -280,6 +280,9 @@ body {
   border-radius: 6px;
   border-top-left-radius: 0;
 }
+/**
+	 * Carousel para promociones .carousel-promo
+	 */
 .nb-footer {
   background: #222222 url(../images/pattern_2.png);
   padding-left: 15px;
@@ -532,10 +535,11 @@ body {
   font-size: 14px;
   font-weight: 600;
 }
-/* Tabs panel */
-.tabbable-panel {
-  border: 1px solid #eee;
-  padding: 10px;
+/**
+ * Tabs promos cont-promos
+ */
+.cont-promos .tab-content {
+  padding: 10px 0;
 }
 /* Default mode */
 .tabbable-line > .nav-tabs {
@@ -555,9 +559,12 @@ body {
 }
 .tabbable-line > .nav-tabs > li.open,
 .tabbable-line > .nav-tabs > li:hover {
-  border-bottom: 4px solid #ffffff;
+  border: 0;
+  border-bottom: 4px solid #fbcdcf;
 }
 .tabbable-line > .nav-tabs > li.open > a,
+.tabbable-line > .nav-tabs > li.active > a:hover,
+.tabbable-line > .nav-tabs > li.active > a:focus,
 .tabbable-line > .nav-tabs > li:hover > a {
   border: 0;
   background: none !important;
@@ -572,7 +579,7 @@ body {
   margin-top: 0px;
 }
 .tabbable-line > .nav-tabs > li.active {
-  border-bottom: 4px solid #FFEF00;
+  border-bottom: 4px solid #f3565d;
   position: relative;
 }
 .tabbable-line > .nav-tabs > li.active > a {
@@ -601,12 +608,12 @@ body {
 }
 .tabbable-line.tabs-below > .nav-tabs > li:hover {
   border-bottom: 0;
-  border-top: 4px solid #ffffff;
+  border-top: 4px solid #fbcdcf;
 }
 .tabbable-line.tabs-below > .nav-tabs > li.active {
   margin-bottom: -2px;
   border-bottom: 0;
-  border-top: 4px solid #FFEF00;
+  border-top: 4px solid #f3565d;
 }
 .tabbable-line.tabs-below > .tab-content {
   margin-top: -10px;
@@ -702,56 +709,8 @@ fieldset[disabled] .btn-primary-1.active {
 .open .dropdown-toggle.btn-detalles {
   background-color: #9B9200;
 }
-.listado-item {
-  background: #f9f9f9;
-  padding: 6px;
-  border: solid 1px #f2f2f2;
-  margin-bottom: 16px;
-}
-.listado-item .thumbnail {
-  padding: 0px;
-  border: none;
-  margin-bottom: 0;
-}
-.listado-item h3 {
-  font-size: 22px;
-  font-weight: bold;
-  padding: 10px 0;
-  margin: 0;
-  font-family: 'Lato', sans-serif;
-}
-.listado-item h3 a {
-  color: #E02406;
-  text-decoration: none;
-  text-transform: capitalize;
-}
-.listado-item h3 a img {
-  max-height: 22px;
-  margin-top: -2px;
-}
-.listado-item .list-group {
-  border: none;
-  background: none;
-}
-.listado-item .list-group .list-group-item {
-  border: none;
-  padding: 2px 0px;
-  background: none;
-}
-.listado-item .list-group .list-group-item h4 {
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-}
-.listado-item .list-group .list-group-item h4 span {
-  font-weight: normal;
-}
-.listado-item .list-group .list-group-item h4 i {
-  color: #FFEF00;
-}
-.listado-item:hover {
-  background: #fff;
-  border: solid 1px #f9f9f9;
+.thumbnail-item {
+  background: #cd0;
 }
 /*==================================
     TIMELINE
