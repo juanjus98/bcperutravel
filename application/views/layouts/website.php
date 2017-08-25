@@ -185,8 +185,8 @@ $tag_image = $head_info['image'];
 <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
 <!-- jquery-ui-->
-<link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
-<script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
+<!-- <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
+<script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script> -->
 <!-- //jquery-ui-->
 <!-- lightslider-->
 <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>

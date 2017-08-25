@@ -2,6 +2,9 @@ $(function() {
 	//Select search select2
 	$(".select_search").select2();
 
+	//Tooltip defoult
+	$('[data-toggle="tooltip"]').tooltip();
+
 	//Galería
 	$('#imageGallery').lightSlider({
 		gallery:true,
@@ -31,13 +34,13 @@ $(function() {
 	/**
  * Lightslider
  */
- $('#carousel-promo-1').lightSlider({
- 	item:4,
+ $('#carousel-promo-1, #carousel-promo-2, #carousel-promo-3, #carousel-promo-4').lightSlider({
+ 	item:3,
  	loop:true,
  	slideMove:2,
  	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
  	speed:600,
- 	slideMargin: 15,
+ 	slideMargin: 10,
  	responsive : [
  	{
  		breakpoint:800,

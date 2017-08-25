@@ -105,10 +105,10 @@
 				<div class="clearfix"></div>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs nav-justified" role="tablist">
-					<li role="presentation" class="active"><a href="#tab-promo-1" aria-controls="tab-promo-1" role="tab" data-toggle="tab">Home</a></li>
-					<li role="presentation"><a href="#tab-promo-2" aria-controls="tab-promo-2" role="tab" data-toggle="tab">Profile</a></li>
-					<li role="presentation"><a href="#tab-promo-3" aria-controls="tab-promo-3" role="tab" data-toggle="tab">Messages</a></li>
-					<li role="presentation"><a href="#tab-promo-4" aria-controls="tab-promo-4" role="tab" data-toggle="tab">Settings</a></li>
+					<li role="presentation" class="active"><a href="#tab-promo-1" aria-controls="tab-promo-1" role="tab" data-toggle="tab">Paquetes turísticos</a></li>
+					<li role="presentation"><a href="#tab-promo-2" aria-controls="tab-promo-2" role="tab" data-toggle="tab">Tickets</a></li>
+					<li role="presentation"><a href="#tab-promo-3" aria-controls="tab-promo-3" role="tab" data-toggle="tab">Año nuevo</a></li>
+					<li role="presentation"><a href="#tab-promo-4" aria-controls="tab-promo-4" role="tab" data-toggle="tab">Tours</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -117,136 +117,462 @@
 						<ul id="carousel-promo-1" class="carousel-promo">
 							<li>
 								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
 									<div class="caption">
-										<h3>Titulo INICIO</h3>
+										<h3><a href="">Titulo INICIO 1</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
 										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
 									</div>
 								</div>
 							</li>
 
 							<li>
 								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
 									<div class="caption">
-										<h3>Titulo</h3>
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
 										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
 									</div>
 								</div>
 							</li>
 
 							<li>
 								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
 									<div class="caption">
-										<h3>Titulo</h3>
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
 										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
 									</div>
 								</div>
 							</li>
 
 							<li>
 								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
 									<div class="caption">
-										<h3>Titulo</h3>
+										<h3><a href="">Titulo FIN 1</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
 										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
 									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
-									<div class="caption">
-										<h3>Titulo</h3>
-										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
-									<div class="caption">
-										<h3>Titulo</h3>
-										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
-									<div class="caption">
-										<h3>Titulo</h3>
-										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="thumbnail thumbnail-item">
-									<a href="#">
-										<img src="https://unsplash.it/800/600?image=59" alt="Alt aquí">
-									</a>
-									<div class="caption">
-										<h3>Titulo FIN</h3>
-										<p>Descripción</p>
-										<p>
-											<a href="#" class="btn btn-primary" role="button">Button</a> 
-											<a href="#" class="btn btn-default" role="button">Button</a>
-										</p>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
 									</div>
 								</div>
 							</li>
 						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-2"><h2>2</h2></div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-3"><h2>3</h2></div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-4"><h2>4</h2></div>
+					<div role="tabpanel" class="tab-pane fade" id="tab-promo-2">
+						<ul id="carousel-promo-2" class="carousel-promo">
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO 2</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo FIN 2</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="tab-promo-3">
+						<ul id="carousel-promo-3" class="carousel-promo">
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO 3</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo FIN 3</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="tab-promo-4">
+						<ul id="carousel-promo-4" class="carousel-promo">
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO 4</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">25%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo INICIO</a></h3>
+										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="thumbnail thumbnail-item">
+									<div class="discount">60%</div>
+									<figure>
+										<a href="#">
+											<img src="https://unsplash.it/800/600" alt="Alt aquí">
+										</a>
+										<div class="tg-icons">
+											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
+										</div>
+									</figure>
+									<div class="caption">
+										<h3><a href="">Titulo FIN 4</a></h3>
+										<h4><i class="fa fa-clock-o" aria-hidden="true"></i> 4 días.</h4>
+										<p>Descripción</p>
+									</div>
+									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+										<div class="btn-group" role="group">
+											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
+										</div>
+										<div class="btn-group" role="group">
+											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 
 			</div>

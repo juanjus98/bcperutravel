@@ -281,8 +281,12 @@ body {
   border-top-left-radius: 0;
 }
 /**
-	 * Carousel para promociones .carousel-promo
-	 */
+ * Carousel para promociones .carousel-promo
+ */
+.carousel-promo li {
+  padding-left: 1px;
+  padding-right: 1px;
+}
 .nb-footer {
   background: #222222 url(../images/pattern_2.png);
   padding-left: 15px;
@@ -552,15 +556,16 @@ body {
 .tabbable-line > .nav-tabs > li > a {
   border: 0;
   margin-right: 0;
-  color: #737373;
-}
-.tabbable-line > .nav-tabs > li > a > i {
-  color: #a6a6a6;
+  color: #666;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
 }
 .tabbable-line > .nav-tabs > li.open,
 .tabbable-line > .nav-tabs > li:hover {
   border: 0;
-  border-bottom: 4px solid #fbcdcf;
+  border-bottom: 4px solid rgba(255, 115, 93, 0.8);
 }
 .tabbable-line > .nav-tabs > li.open > a,
 .tabbable-line > .nav-tabs > li.active > a:hover,
@@ -579,7 +584,7 @@ body {
   margin-top: 0px;
 }
 .tabbable-line > .nav-tabs > li.active {
-  border-bottom: 4px solid #f3565d;
+  border-bottom: 4px solid #F94C31;
   position: relative;
 }
 .tabbable-line > .nav-tabs > li.active > a {
@@ -667,10 +672,10 @@ fieldset[disabled] .btn-primary-1.active {
  */
 .btn-precio {
   color: #fff;
-  background-color: #FFEF00;
+  background-color: rgba(255, 115, 93, 0.8);
   border: none;
   font-size: 18px;
-  /*font-weight: bold;*/
+  /*font-weight: 300;*/
   border-radius: 0px;
 }
 .btn-precio:hover,
@@ -679,17 +684,18 @@ fieldset[disabled] .btn-primary-1.active {
 .btn-precio.active,
 .open .dropdown-toggle.btn-precio {
   color: #fff;
-  background-color: #FFEF00;
+  background-color: rgba(255, 115, 93, 0.8);
   border: none;
 }
 .btn-precio:active,
 .btn-precio.active,
 .open .dropdown-toggle.btn-precio {
-  background-color: #FFEF00;
+  background-color: rgba(255, 115, 93, 0.8);
 }
+/*Botón detalles*/
 .btn-detalles {
   color: #fff;
-  background-color: #9B9200;
+  background-color: #F94C31;
   border: none;
   font-size: 18px;
   /*font-weight: bold;*/
@@ -701,16 +707,114 @@ fieldset[disabled] .btn-primary-1.active {
 .btn-detalles.active,
 .open .dropdown-toggle.btn-detalles {
   color: #fff;
-  background-color: #C6B900;
+  background-color: #f02607;
   border: none;
 }
 .btn-detalles:active,
 .btn-detalles.active,
 .open .dropdown-toggle.btn-detalles {
-  background-color: #9B9200;
+  background-color: #f02607;
 }
 .thumbnail-item {
-  background: #cd0;
+  background: #fff;
+  padding: 0;
+  /*border: 1px solid transparent;*/
+  border-radius: 0;
+  margin-bottom: 15px;
+  position: relative;
+  transition-property: background, border-radius;
+  transition-duration: .2s, 1s;
+  transition-timing-function: linear, ease-in;
+  transition-delay: 0s, 1s;
+  webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.thumbnail-item .discount {
+  height: 40px;
+  width: 46px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background: rgba(224, 36, 6, 0.8);
+  position: absolute;
+  top: 0;
+  z-index: 4;
+  left: 22px;
+}
+.thumbnail-item .discount:before {
+  position: absolute;
+  bottom: -10px;
+  content: '';
+  width: 100%;
+  border-left: 23px solid rgba(224, 36, 6, 0.8);
+  border-right: 23px solid rgba(224, 36, 6, 0.8);
+  border-top: none;
+  border-bottom: 10px solid transparent;
+  left: 0;
+}
+.thumbnail-item figure {
+  position: relative;
+  overflow: hidden;
+}
+.thumbnail-item figure a > img {
+  max-width: 100%;
+  -moz-transition: all .3s linear 0s;
+  -webkit-transition: all .3s linear 0s;
+  transition: all .3s linear 0s;
+}
+.thumbnail-item figure .tg-icons {
+  bottom: 0;
+  right: 0;
+  color: #fff;
+  padding: 4px 6px;
+  position: absolute;
+}
+.thumbnail-item figure .tg-icons .badge {
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  line-height: 23px;
+  font-size: 10pt;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 100%;
+  cursor: pointer;
+}
+.thumbnail-item .caption h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+.thumbnail-item .caption h3 a {
+  color: #333;
+  text-decoration: none;
+}
+.thumbnail-item .caption h4 {
+  font-size: 16px;
+  font-weight: normal;
+  color: #666;
+}
+.thumbnail-item .caption h4 i {
+  color: #FF735D;
+  margin-right: 6px;
+}
+.thumbnail-item .caption p {
+  font-size: 14px;
+  color: #333;
+}
+.thumbnail-item:hover {
+  webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  /*border: 1px solid @color-primary-1;*/
+}
+.thumbnail-item:hover figure > a > img {
+  -moz-transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
 }
 /*==================================
     TIMELINE
