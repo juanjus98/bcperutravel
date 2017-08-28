@@ -47,6 +47,9 @@ $tag_image = $head_info['image'];
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
+
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/animate.min.css'); ?>">
+
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -205,6 +208,9 @@ $tag_image = $head_info['image'];
 <!-- select2-->
 <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
 <!-- //select2-->
+<!-- wow.js-->
+<script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
+<!-- //wow.js-->
 <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 <!-- JavaScript-->
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Lobster" rel="stylesheet">

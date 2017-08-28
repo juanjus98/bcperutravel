@@ -46,3 +46,44 @@ body {
 
 	}
 }
+
+.titulo-principal {
+	padding: 10px 0;
+	text-align: center;
+	h3 {
+		padding:0;
+		margin: 0;
+		font-family: @font-primary;
+		font-size: 36px;
+		font-weight: normal;
+		color: #282828;
+
+		span {
+			font-weight:700;
+		}
+
+		&::after, &::before{
+			content: '';
+			width: 56px;
+			height: 20px;
+			background: url(../images/patterny.png) no-repeat center center;
+			display: inline-block;
+			margin: 0 16px;
+		}
+
+		/*&:before{
+			content: '';
+			width:56px;
+			background: url(../images/patternb.png) no-repeat  #cd0;
+		}*/
+
+	}
+
+	p {
+		color: #828181;
+		font-family: @font-primary;
+		font-size:16px;
+		font-weight: normal;
+	}
+
+}

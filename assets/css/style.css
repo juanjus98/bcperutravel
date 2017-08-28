@@ -49,6 +49,41 @@ body {
 .wrapper .container-principal .cont-main {
   padding: 0 15px 30px 15px;
 }
+.titulo-principal {
+  padding: 10px 0;
+  text-align: center;
+}
+.titulo-principal h3 {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 36px;
+  font-weight: normal;
+  color: #282828;
+  /*&:before{
+			content: '';
+			width:56px;
+			background: url(../images/patternb.png) no-repeat  #cd0;
+		}*/
+}
+.titulo-principal h3 span {
+  font-weight: 700;
+}
+.titulo-principal h3::after,
+.titulo-principal h3::before {
+  content: '';
+  width: 56px;
+  height: 20px;
+  background: url(../images/patterny.png) no-repeat center center;
+  display: inline-block;
+  margin: 0 16px;
+}
+.titulo-principal p {
+  color: #828181;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
 #header_1 {
   position: fixed;
   top: 0;

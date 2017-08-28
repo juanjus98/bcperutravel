@@ -10,9 +10,17 @@ module.exports = function(grunt){
 					"assets/css/bootstrap.css" : "node_modules/bootstrap/less/bootstrap.less",
 					"assets/css/font-awesome.css" : "build/less/font-awesome/less/font-awesome.less",
 					"assets/css/style.css" : "build/less/website/website.less",
-					"assets/css/waadmin.css" : "build/less/AdminLTE/AdminLTE.less",
+					"assets/css/waadmin.css" : "build/less/AdminLTE/AdminLTE.less"
 				}
 			}
+		},
+		copy: {
+		  main: {
+		    files: [
+		      {expand: true, cwd: 'node_modules/animate\.css/', src: ['animate.min.css'], dest: 'assets/css/'},
+		      {expand: true, cwd: 'node_modules/wowjs/dist/', src: ['wow.min.js'], dest: 'assets/js/'},
+		    ],
+		  },
 		},
 		cssmin: {
 			target: {
@@ -53,6 +61,8 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-concat'); //Une archivos javascript
 	grunt.loadNpmTasks('grunt-contrib-uglify'); //Minifica archivos javascript
 
-	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify']);
+	grunt.loadNpmTasks('grunt-contrib-copy'); //Copiar archivos
+
+	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify', 'copy']);
 
 }

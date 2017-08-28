@@ -13,7 +13,7 @@
 		</div>
 	</div>
 
-	<div class="general-caption">
+	<div class="general-caption wow bounceInDown">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
@@ -24,15 +24,19 @@
 		</div>
 	</div>
 
-	<div class="cont-busqueda">
+	<div class="cont-busqueda wow bounceIn">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="tab" role="tabpanel">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a></li>
-							<li role="presentation"><a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a></li>              
+							<li role="presentation" class="active">
+							<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
+							</li>
+							<li role="presentation">
+							<a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a>
+							</li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -99,16 +103,26 @@
 	<div class="container container-principal">
 		<div class="divider_border"></div>
 		<div class="cont-main">
+			<div class="titulo-principal wow bounceInRight">
+			<h3>Nuestras <span>Promociones</span></h3>
+			<p>Aquí encontraras las mejores promociones en paquetes turísticos, vuelos y pasajes de bus.</p>
+			</div>
 			<!--Contenido website cada página-->
 			<div class="cont-promos tabbable-line">
-				<h3>Promociones</h3>
-				<div class="clearfix"></div>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs nav-justified" role="tablist">
-					<li role="presentation" class="active"><a href="#tab-promo-1" aria-controls="tab-promo-1" role="tab" data-toggle="tab">Paquetes turísticos</a></li>
-					<li role="presentation"><a href="#tab-promo-2" aria-controls="tab-promo-2" role="tab" data-toggle="tab">Tickets</a></li>
-					<li role="presentation"><a href="#tab-promo-3" aria-controls="tab-promo-3" role="tab" data-toggle="tab">Año nuevo</a></li>
-					<li role="presentation"><a href="#tab-promo-4" aria-controls="tab-promo-4" role="tab" data-toggle="tab">Tours</a></li>
+					<li role="presentation" class="active">
+						<a href="#tab-promo-1" class="tab-promo-1" aria-controls="tab-promo-1" role="tab" data-toggle="tab">Paquetes turísticos</a>
+					</li>
+					<li role="presentation">
+						<a href="#tab-promo-2" class="tab-promo-2" aria-controls="tab-promo-2" role="tab" data-toggle="tab">Tickets</a>
+					</li>
+					<li role="presentation">
+						<a href="#tab-promo-3" class="tab-promo-3" aria-controls="tab-promo-3" role="tab" data-toggle="tab">Año nuevo</a>
+					</li>
+					<li role="presentation">
+						<a href="#tab-promo-4" class="tab-promo-4" aria-controls="tab-promo-4" role="tab" data-toggle="tab">Tours</a>
+					</li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -129,7 +143,10 @@
 									</figure>
 									<div class="caption">
 										<h3><a href="">Titulo INICIO 1</a></h3>
-										<h4><i class="fa fa-calendar" aria-hidden="true"></i> 4 días.</h4>
+										<h4>
+										<i class="fa fa-calendar" aria-hidden="true"></i>4 días.
+										&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>Lima
+										</h4>
 										<p>Descripción</p>
 									</div>
 									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
@@ -228,7 +245,7 @@
 							</li>
 						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-2">
+					<div role="tabpanel" class="tab-pane fade active" id="tab-promo-2">
 						<ul id="carousel-promo-2" class="carousel-promo">
 							<li>
 								<div class="thumbnail thumbnail-item">
@@ -343,7 +360,7 @@
 							</li>
 						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-3">
+					<div role="tabpanel" class="tab-pane fade active" id="tab-promo-3">
 						<ul id="carousel-promo-3" class="carousel-promo">
 							<li>
 								<div class="thumbnail thumbnail-item">
@@ -458,7 +475,7 @@
 							</li>
 						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="tab-promo-4">
+					<div role="tabpanel" class="tab-pane fade active" id="tab-promo-4">
 						<ul id="carousel-promo-4" class="carousel-promo">
 							<li>
 								<div class="thumbnail thumbnail-item">
