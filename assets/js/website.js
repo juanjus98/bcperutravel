@@ -42,6 +42,13 @@ function addLightSlider(carousel_id){
  });
 }
 new WOW().init();
+
+progressively.init({
+	onLoadComplete: function() {
+		console.log('All images loaded!');
+	}
+});
+
 $(function() {
 	//Select search select2
 	$(".select_search").select2();

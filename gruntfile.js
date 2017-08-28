@@ -19,6 +19,7 @@ module.exports = function(grunt){
 		    files: [
 		      {expand: true, cwd: 'node_modules/animate\.css/', src: ['animate.min.css'], dest: 'assets/css/'},
 		      {expand: true, cwd: 'node_modules/wowjs/dist/', src: ['wow.min.js'], dest: 'assets/js/'},
+		      {expand: true, cwd: 'node_modules/progressively/dist/', src: ['*'], dest: 'assets/plugins/progressively/'},
 		    ],
 		  },
 		},

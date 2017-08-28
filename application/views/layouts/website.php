@@ -50,6 +50,8 @@ $tag_image = $head_info['image'];
 
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/animate.min.css'); ?>">
 
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/progressively/progressively.min.css'); ?>">
+
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -211,6 +213,9 @@ $tag_image = $head_info['image'];
 <!-- wow.js-->
 <script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
 <!-- //wow.js-->
+<!-- progressively.min.js-->
+<script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
+<!-- //progressively.min.js-->
 <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 <!-- JavaScript-->
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Lobster" rel="stylesheet">
