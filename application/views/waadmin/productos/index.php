@@ -14,11 +14,7 @@ echo '</pre>';*/
                         <div class="col-sm-2">
                             <select name="campo" class="form-control input-sm">
                                 <?php
-                                $campos = array(
-                                    "t1.nombre_largo" => "Nombre",
-                                    "t1.url_key" => "Slug"
-                                );
-                                foreach ($campos as $indice => $campo) {
+                                foreach ($campos_busqueda as $indice => $campo) {
                                     $selected_campo = "";
                                     if ($post['campo'] == $indice) {
                                         $selected_campo = "selected";
@@ -38,33 +34,33 @@ echo '</pre>';*/
                         </div>
 
                         <div class="col-sm-2">
-                            <a href="<?php echo base_url('waadmin/productos/index?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
+                            <a href="<?php echo $refresh_url;?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
                         <div class="col-sm-5">
                             <div class="pull-right">
 
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
-                                <a href="<?php echo base_url('waadmin/productos/editar/C');?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
+                                <a href="<?php echo $agregar_url;?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
 
-                                <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar </a>
+                                <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 
                             </div>
                         </div>
                     </div>
                 </form>
             </div><!-- /.box-header -->
-            <form name="index_form" id="index_form" action="<?php echo base_url(); ?>waadmin/productos/eliminar" method="post">
+            <form name="index_form" id="index_form" action="<?php echo $eliminar_url; ?>" method="post">
                 <div class="box-body table-responsive">
                     <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
-                            <th><input type="checkbox" id="chkTodo" /></th>
-                            <th>Nombre</th>
-                            <th>Slug</th>
-                            <th class="text-center">Orden</th>
-                            <th>Fecha de creación</th>
-                            <th></th>
+                                <th><input type="checkbox" id="chkTodo" /></th>
+                                <th>Categoría</th>
+                                <th>Nombre producto</th>
+                                <th>Slug</th>
+                                <th class="text-center">Orden</th>
+                                <th></th>
                             </tr>
                             <?php
                             if(!empty($listado)){
@@ -74,16 +70,20 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
+                                        <td><?php echo $item['categoria_nombre']; ?></td>
                                         <td><?php echo $item['nombre_largo']; ?></td>
                                         <td><?php echo $item['url_key']; ?></td>
-                                        <td class="text-center"><?php echo $item['orden']; ?></td>
-                                        <td><?php echo $item['agregar']; ?></td>
-                                        <td>
-                                            <a href="<?php echo base_url(); ?>waadmin/productos/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            <a href="<?php echo base_url(); ?>waadmin/productos/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="500" href="<?php echo base_url(); ?>waadmin/productos_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Galería"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                                        <td class="text-center" data-controller="<?php echo $order_url;?>" data-identificador="<?php echo $item['id'];?>">
+                                            <div class="box_orden">
+                                                <?php echo $item['orden']; ?>
+                                            </div>
+                                            <input type="text" name="orden_<?php echo $item['id'];?>" value="<?php echo $item['orden'];?>" style="display: none; max-width: 40px; margin: 0 auto;" class="form-control input-sm text-center input-order">
+                                        </td>
 
+                                        <td class="text-center">
+                                            <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -91,7 +91,7 @@ echo '</pre>';*/
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="6">No se encontro ningún registro.</td>
+                                    <td colspan="9" class="text-center"><small>No se encontro ningún registro.</small></td>
                                 </tr>
                                 <?php
                             }
