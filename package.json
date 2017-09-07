@@ -23,6 +23,7 @@
     "grunt-ng-annotate": "^3.0.0"
   },
   "dependencies": {
+    "@staaky/strip": "^1.6.4",
     "animate.css": "^3.5.2",
     "bootstrap": "^3.3.7",
     "progressively": "^1.1.5",

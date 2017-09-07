@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Categorias extends CI_Controller{
+class Unidades extends CI_Controller{
   private $ctr_name;
 	private $base_ctr; //Url base del controlodor
-	private $primary_table = "categoria"; //Tabla principal
-	public $base_title = "Categorias";
+	private $primary_table = "wa_unidad"; //Tabla principal
+	public $base_title = "Unidades";
 
 	public  $user_info;
 
@@ -19,7 +19,7 @@ class Categorias extends CI_Controller{
 		$this->auth->logged_in();
 
 		$this->load->model("crud_model","Crud");
-		$this->load->model("categorias_model","Categorias");
+		$this->load->model("unidades_model","Unidades");
 
 		$this->ctr_name = $this->router->fetch_class();
     //Base del controlador
@@ -27,8 +27,6 @@ class Categorias extends CI_Controller{
 		
 		//Información del usuario que ha iniciado session
 		$this->user_info = $this->auth->user_profile();
-
-    $this->load->library("imaupload");
 	}
 
 	function index(){
@@ -44,18 +42,17 @@ class Categorias extends CI_Controller{
 		$data['eliminar_url'] = base_url($controlador . '/eliminar');
 		$data['refresh_url'] = base_url($controlador . '/index?refresh');
 
-    $data['order_url'] = base_url($controlador . '/uporden');
-
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
-			't1.nombre' => 'Nombre'
+			't1.nombre_unidad' => 'Nombre únidad',
+      't3.nombre_grupo' => 'Tipo únidad'
 			);
 
 		$sessionName = 's_' . $this->primary_table; //Session name
 
 		//Paginacion
 		$base_url = base_url($this->base_ctr . '/index');
-        $per_page = 30; //registros por página
+        $per_page = 10; //registros por página
         $uri_segment = 4; //segmento de la url
         $num_links = 4; //número de links
         //Página actual
@@ -70,10 +67,10 @@ class Categorias extends CI_Controller{
         $data['post'] = $post;
 
         //Total de registros por post
-        $data['total_registros'] = $this->Categorias->total_registros($post);
+        $data['total_registros'] = $this->Unidades->total_registros($post);
 
         //Listado
-        $data['listado'] = $this->Categorias->listado($per_page, $page, $post);
+        $data['listado'] = $this->Unidades->listado($per_page, $page, $post);
 
         //Paginacion
         $total_rows = $data['total_registros'];
@@ -94,8 +91,18 @@ class Categorias extends CI_Controller{
     }
 
     function editar($tipo='C',$id=NULL){
+    	//Tipos de documento
+      $data_crud_td['table'] = "wa_tipo_documento as t1";
+      $data_crud_td['columns'] = "t1.*";
+      $data_crud_td['where'] = array("t1.estado !=" => 0);
+      $data['tipos_documentos'] = $this->Crud->getRows($data_crud_td);
+
     	$data['current_url'] = base_url(uri_string());
     	$data['back_url'] = base_url($this->base_ctr . '/index');
+
+      //Url agregar personas waadmin/personas/index?popup
+      $data['propietario_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=propietario');
+      $data['morador_url'] = base_url($this->config->item('admin_path') . '/personas/index?popup=morador');
       
     	if(isset($id)){
     		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
@@ -115,15 +122,44 @@ class Categorias extends CI_Controller{
 
     	$data['wa_tipo'] = $tipo;
     	$data['wa_modulo'] = $data['tipo'];
-    	$data['wa_menu'] = 'Categoría';
+    	$data['wa_menu'] = 'Unidad';
 
 
     	if($tipo == 'E' || $tipo == 'V'){
     		$data_row = array('id' => $id);
-        $result = $this->Categorias->get_row($data_row);
-        $row_id = $result['id'];
-    		$data['post'] = $result;
-    	}     
+        $unidad = $this->Unidades->get_row($data_row);
+        $unidad_id = $unidad['id'];
+    		$data['post'] = $unidad;
+
+        //Propietarios
+        $data_propietarios = array(
+          "tipo_persona" => "P",
+          "unidad_id" => $unidad_id
+        );
+
+        $data['propietarios'] = $this->Unidades->listar_personas($data_propietarios);
+
+        //Moradores
+        $data_moradores = array(
+          "tipo_persona" => "M",
+          "unidad_id" => $unidad_id
+        );
+        $data['moradores'] = $this->Unidades->listar_personas($data_moradores);
+
+    	}
+
+    	//Consultar grupos (tipos de unidades)
+      $data_crud['table'] = "wa_grupo as t1";
+      $data_crud['columns'] = "t1.*";
+      $data_crud['where'] = array("t1.condominio_id"=>1, "t1.estado !=" => 0);
+      $data['grupos'] = $this->Crud->getRows($data_crud);
+
+      //Consultar condominios
+    	$data_crud['table'] = "wa_condominio as t1";
+    	$data_crud['columns'] = "t1.*";
+    	$data_crud['where'] = array("t1.estado !=" => 0);
+    	$data['condominios'] = $this->Crud->getRows($data_crud);
+     
 
     	if ($this->input->post()) {
     		$post= $this->input->post();
@@ -131,16 +167,16 @@ class Categorias extends CI_Controller{
 
     		$config = array(
     			array(
-    				'field' => 'nombre',
-    				'label' => 'Nombre',
+    				'field' => 'id_grupo',
+    				'label' => 'Tipo de Unidad',
     				'rules' => 'required',
     				'errors' => array(
     					'required' => 'Campo requerido.',
     					)
     				),
           array(
-            'field' => 'orden',
-            'label' => 'Orden',
+            'field' => 'nombre_unidad',
+            'label' => 'Nombre unidad',
             'rules' => 'required',
             'errors' => array(
               'required' => 'Campo requerido.',
@@ -154,39 +190,30 @@ class Categorias extends CI_Controller{
     		if ($this->form_validation->run() == FALSE){
     			/*Error*/
     			$data['post'] = $post;
+          if(!empty($post['propietario'])){
+            $data['propietarios'] = $this->Unidades->listar_personas($post['propietario'],true);
+          }
+
+          if(!empty($post['morador'])){
+            $data['moradores'] = $this->Unidades->listar_personas($post['morador'],true);
+          }
+
     		}else{
 
-          //Cargar Imagen
-          $upload_path = $this->config->item('upload_path');
-          if($_FILES["imagen"]){
-            $imagen_info = $this->imaupload->do_upload($upload_path, "imagen");
-          }
+          $aporta_ingresos = (isset($post['aporta_ingresos'])) ? $post['aporta_ingresos'] : 0 ;
 
     			$data_form = array(
-    				"nombre" => $post['nombre'],
-    				"descripcion" => $post['descripcion'],
-            "orden" => $post['orden'],
+    				"condominio_id" => $post['id_condominio'],
+    				"nombre_unidad" => $post['nombre_unidad'],
+            "id_grupo" => $post['id_grupo'],
+            "descripcion" => $post['descripcion'],
+            "aporta_ingresos" => $aporta_ingresos
     				);
 
-          //cargar imágenes
-          if (!empty($imagen_info['upload_data'])) {
-            $data_form['imagen'] = $imagen_info['upload_data']['file_name'];
-          }
-
-          if(empty($post['url_key_pre'])){
-            $data_urlkey = array('tipo' => 'CAT', 'urlkey' => $post['nombre']);
-            $url_key = $this->Crud->get_urlkey($data_urlkey);
-            $data_form['url_key'] = $url_key;
-
-            //Actualizamos la tabla urlkey
-            $data_urlkey_insert = array('tipo' => 'CAT', 'urlkey' => $url_key);
-            $this->db->insert("urlkey",$data_urlkey_insert);
-          }
-
-          //Agregar
+          		//Agregar
     			if($tipo == 'C'){
     				$this->db->insert($this->primary_table, $data_form);
-    				$row_id = $this->db->insert_id();
+    				$unidad_id = $this->db->insert_id();
     				$this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
     			}
 
@@ -194,16 +221,54 @@ class Categorias extends CI_Controller{
     			if ($tipo == 'E') {
     				$this->db->where('id', $post['id']);
     				$this->db->update($this->primary_table, $data_form);
-    				$row_id = $post['id'];
+    				$unidad_id = $post['id'];
     				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
     			}
+
+          //Insertar Propietarios
+          $data_up = array('estado' => 0);
+          $where_up = array('tipo_persona' => 'P','unidad_id' => $unidad_id);
+          $this->db->where($where_up);
+          $this->db->update('wa_unidad_persona', $data_up);
+          $propietario = $post['propietario'];
+          if(!empty($propietario)){
+            foreach ($propietario as $key => $value) {
+              if(!empty($value)){
+                  $data_insert = array(
+                    'tipo_persona' => 'P', //P:Propietario
+                    'unidad_id' => $unidad_id,
+                    'persona_id' => $value
+                  );
+                  $this->db->insert('wa_unidad_persona', $data_insert);
+              }
+            }
+          }
+
+          //Insertar Moradores
+          $data_up = array('estado' => 0);
+          $where_up = array('tipo_persona' => 'M','unidad_id' => $unidad_id);
+          $this->db->where($where_up);
+          $this->db->update('wa_unidad_persona', $data_up);
+          $morador = $post['propietario'];
+          if(!empty($morador)){
+            foreach ($morador as $key => $value) {
+              if(!empty($value)){
+                  $data_insert = array(
+                    'tipo_persona' => 'M', //P:Propietario
+                    'unidad_id' => $unidad_id,
+                    'persona_id' => $value
+                  );
+                  $this->db->insert('wa_unidad_persona', $data_insert);
+              }
+            }
+          }
 
     			redirect($this->base_ctr . '/index');
     		}
 
     	}
 
-    	$this->template->title($data['tipo'] . ' Categoría');
+    	$this->template->title($data['tipo'] . ' Unidad');
     	$this->template->build($this->base_ctr.'/editar', $data);
     }
 
@@ -211,7 +276,7 @@ class Categorias extends CI_Controller{
  * Eliminar
  *
  *
- * @package     Categorias
+ * @package     Unidades
  * @author      Juan Julio Sandoval Layza
  * @copyright webApu.com 
  * @since       26-02-2015
@@ -243,19 +308,6 @@ class Categorias extends CI_Controller{
 
    $this->template->title('Eliminar.');
    $this->template->build('inicio');
-}
-
- /**
- * Ajax actualizar orden
- */
-public function uporden(){
-  if($this->input->post()){
-    $post = $this->input->post();
-    $data_form = array('orden' => $post['orden']);
-    $this->db->where('id', $post['id']);
-    $this->db->update($this->primary_table, $data_form);
-    echo "Orden actualizado.";
-  }
 }
 
 }

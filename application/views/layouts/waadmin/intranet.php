@@ -23,7 +23,9 @@ die();*/
 
     <!-- Chosen-->
     <link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="chosen.css"> -->
+
+    <!-- Strip para imagenes-->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/strip/css/strip.css');?>"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -138,6 +140,7 @@ die();*/
  <script src="<?php echo base_url('assets/plugins/icheck/icheck.js?v=1.0.2');?>"></script>
  <script src="<?php echo base_url('assets/plugins/moment.min.js');?>"></script>
  <script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/strip/js/strip.pkgd.min.js');?>"></script>
  
  <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
 </body>

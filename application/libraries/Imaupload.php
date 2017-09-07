@@ -41,12 +41,13 @@ class Imaupload {
     function do_upload($upload_path, $file_name) {
         $config_upload['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"]) . $upload_path;
         $config_upload['allowed_types']        = 'gif|jpg|png|doc|docx|pdf';
-        $config_upload['max_size']             = 3000;
+        $config_upload['max_size']             = 9000;
         /*$config_upload['max_width']            = 1024;
         $config_upload['max_height']           = 1024;*/
         $config_upload['file_name'] = $this->new_filename($file_name);
 
-        $this->ci->upload->initialize($config_upload);
+        $this->ci->upload->initialize($config_upload); 
+
         if (!$this->ci->upload->do_upload($file_name)) {
             $data = array('error' => $this->ci->upload->display_errors());
         } else {

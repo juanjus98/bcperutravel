@@ -6,7 +6,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  */
 $config['admin_name'] = "Administrador";
 
-$config['admin_domain'] = "salonesyeventos.pe";
+$config['admin_domain'] = "bcperutravel.com";
 $config['admin_url'] = "http://" . $config['admin_domain'];
 $config['admin_logo'] = $config['admin_url'] . "/images/logo-admin.png";
 
@@ -16,16 +16,16 @@ $config['admin_path'] = 'waadmin';
 /**
  * Generales para el website
  */
-$config['website']['dominio'] = "www.salonesyeventos.pe";
+$config['website']['dominio'] = "www.bcperutravel.com";
 
 /**
  * Directorio de carga de imagenes
  */
-$config['upload_path'] = "/images/uploads/";
+$config['upload_path'] = "/assets/images/uploads/";
 
 /**
  * Configuración de email
  */
-$config['waemail']['dominio'] = "www.salonesyeventos.pe";
-$config['waemail']['logo'] = "http://www.salonesyeventos.pe/images/logo.png";
+$config['waemail']['dominio'] = "www.bcperutravel.com";
+$config['waemail']['logo'] = "http://www.bcperutravel.com/assets/images/logo.png";
 $config['waemail']['color'] = "#F3A313";
