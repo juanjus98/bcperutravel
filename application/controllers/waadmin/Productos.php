@@ -44,9 +44,9 @@ class Productos extends CI_Controller{
 
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
-			't1.nombre_unidad' => 'Nombre únidad',
-      't3.nombre_grupo' => 'Tipo únidad'
-			);
+			't1.codigo' => 'Código',
+      't1.nombre_corto' => 'Nombre producto'
+      );
 
 		$sessionName = 's_' . $this->primary_table; //Session name
 
@@ -88,55 +88,64 @@ class Productos extends CI_Controller{
 
         $this->template->title('Listado ' . $this->base_title);
         $this->template->build($this->base_ctr . '/index', $data);
-    }
+      }
 
-    function editar($tipo='C',$id=NULL){
-    	$data['current_url'] = base_url(uri_string());
-    	$data['back_url'] = base_url($this->base_ctr . '/index');
-      
-    	if(isset($id)){
-    		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
-    	}
+      function editar($tipo='C',$id=NULL){
+        $path = '../../../../assets/plugins/ckfinder';
+        $width = 'auto';
+        $ckEditor = $this->editor($path, $width);
 
-    	switch ($tipo) {
-    		case 'C':
-    		$data['tipo'] = 'Agregar';
-    		break;
-    		case 'E':
-    		$data['tipo'] = 'Editar';
-    		break;
-    		case 'V':
-    		$data['tipo'] = 'Visualizar';
-    		break;
-    	}
+        $data['current_url'] = base_url(uri_string());
+        $data['back_url'] = base_url($this->base_ctr . '/index');
 
-    	$data['wa_tipo'] = $tipo;
-    	$data['wa_modulo'] = $data['tipo'];
-    	$data['wa_menu'] = 'Producto';
+        if(isset($id)){
+          $data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
+        }
+
+        switch ($tipo) {
+          case 'C':
+          $data['tipo'] = 'Agregar';
+          break;
+          case 'E':
+          $data['tipo'] = 'Editar';
+          break;
+          case 'V':
+          $data['tipo'] = 'Visualizar';
+          break;
+        }
+
+        $data['wa_tipo'] = $tipo;
+        $data['wa_modulo'] = $data['tipo'];
+        $data['wa_menu'] = 'Producto';
 
 
-    	if($tipo == 'E' || $tipo == 'V'){
-    		$data_row = array('id' => $id);
-        $result = $this->Productos->get_row($data_row);
-        $row_id = $result['id'];
-    		$data['post'] = $result;
-    	}
-     
+        if($tipo == 'E' || $tipo == 'V'){
+          $data_row = array('id' => $id);
+          $result = $this->Productos->get_row($data_row);
+          $row_id = $result['id'];
+          $data['post'] = $result;
+        }
 
-    	if ($this->input->post()) {
-    		$post= $this->input->post();
-    		$data['post'] = $post; 
 
-    		$config = array(
-    			array(
-    				'field' => 'id_grupo',
-    				'label' => 'Tipo de Unidad',
-    				'rules' => 'required',
-    				'errors' => array(
-    					'required' => 'Campo requerido.',
-    					)
-    				),
-          array(
+        if ($this->input->post()) {
+          $post= $this->input->post();
+          $data['post'] = $post; 
+
+          echo "<pre>";
+          print_r($post);
+          echo "</pre>";
+          die();
+
+          $config = array(
+           array(
+            'field' => 'id_grupo',
+            'label' => 'Tipo de Unidad',
+            'rules' => 'required',
+            'errors' => array(
+             'required' => 'Campo requerido.',
+             )
+            ),
+           array(
             'field' => 'nombre_unidad',
             'label' => 'Nombre unidad',
             'rules' => 'required',
@@ -144,15 +153,15 @@ class Productos extends CI_Controller{
               'required' => 'Campo requerido.',
               )
             )
-    			);
+           );
 
-    		$this->form_validation->set_rules($config);
-    		$this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+          $this->form_validation->set_rules($config);
+          $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-    		if ($this->form_validation->run() == FALSE){
-    			/*Error*/
-    			$data['post'] = $post;
-          if(!empty($post['propietario'])){
+          if ($this->form_validation->run() == FALSE){
+           /*Error*/
+           $data['post'] = $post;
+           if(!empty($post['propietario'])){
             $data['propietarios'] = $this->Productos->listar_personas($post['propietario'],true);
           }
 
@@ -160,40 +169,40 @@ class Productos extends CI_Controller{
             $data['moradores'] = $this->Productos->listar_personas($post['morador'],true);
           }
 
-    		}else{
+        }else{
 
           $aporta_ingresos = (isset($post['aporta_ingresos'])) ? $post['aporta_ingresos'] : 0 ;
 
-    			$data_form = array(
-    				"condominio_id" => $post['id_condominio'],
-    				"nombre_unidad" => $post['nombre_unidad'],
+          $data_form = array(
+            "condominio_id" => $post['id_condominio'],
+            "nombre_unidad" => $post['nombre_unidad'],
             "id_grupo" => $post['id_grupo'],
             "descripcion" => $post['descripcion'],
             "aporta_ingresos" => $aporta_ingresos
-    				);
+            );
 
           		//Agregar
-    			if($tipo == 'C'){
-    				$this->db->insert($this->primary_table, $data_form);
-    				$unidad_id = $this->db->insert_id();
-    				$this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
-    			}
+          if($tipo == 'C'){
+            $this->db->insert($this->primary_table, $data_form);
+            $unidad_id = $this->db->insert_id();
+            $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
+          }
 
           		//Editar
-    			if ($tipo == 'E') {
-    				$this->db->where('id', $post['id']);
-    				$this->db->update($this->primary_table, $data_form);
-    				$unidad_id = $post['id'];
-    				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-    			}
+          if ($tipo == 'E') {
+            $this->db->where('id', $post['id']);
+            $this->db->update($this->primary_table, $data_form);
+            $unidad_id = $post['id'];
+            $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+          }
 
-    			redirect($this->base_ctr . '/index');
-    		}
+          redirect($this->base_ctr . '/index');
+        }
 
-    	}
+      }
 
-    	$this->template->title($data['tipo'] . ' Unidad');
-    	$this->template->build($this->base_ctr.'/editar', $data);
+      $this->template->title($data['tipo'] . ' Unidad');
+      $this->template->build($this->base_ctr.'/editar', $data);
     }
 
 /**
@@ -206,32 +215,55 @@ class Productos extends CI_Controller{
  * @since       26-02-2015
  * @version     Version 1.0
  */
- public function eliminar() {
-   if ($this->input->post()) {
-       $items = $this->input->post('items');
-       if (!empty($items)) {
-           foreach ($items as $item) {
-               $eliminar = date("Y-m-d H:i:s");
-               $data_eliminar = array(
-                   "eliminar" => $eliminar,
-                   "estado" => 0
-                   );
-               $this->db->where('id', $item);
-               $this->db->update($this->primary_table, $data_eliminar);
-           }
-           $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
-           redirect($this->base_ctr . "/index");
-       } else {
-           $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-           redirect($this->base_ctr . "/index");
-       }
+public function eliminar() {
+ if ($this->input->post()) {
+   $items = $this->input->post('items');
+   if (!empty($items)) {
+     foreach ($items as $item) {
+       $eliminar = date("Y-m-d H:i:s");
+       $data_eliminar = array(
+         "eliminar" => $eliminar,
+         "estado" => 0
+         );
+       $this->db->where('id', $item);
+       $this->db->update($this->primary_table, $data_eliminar);
+     }
+     $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
+     redirect($this->base_ctr . "/index");
    } else {
-       $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-       redirect($this->base_ctr . "/index");
+     $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+     redirect($this->base_ctr . "/index");
    }
+ } else {
+   $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+   redirect($this->base_ctr . "/index");
+ }
 
-   $this->template->title('Eliminar.');
-   $this->template->build('inicio');
+ $this->template->title('Eliminar.');
+ $this->template->build('inicio');
+}
+
+function editor($path, $width) {
+
+ //Loading Library For Ckeditor
+
+ $this->load->library('ckeditor');
+
+ $this->load->library('ckfinder');
+
+ //configure base path of ckeditor folder 
+
+ $this->ckeditor->basePath = base_url('assets/plugins/ckeditor/');
+
+ $this->ckeditor->config['toolbar'] = 'Full';
+
+ $this->ckeditor->config['language'] = 'es';
+
+ $this->ckeditor->config['width'] = $width;
+
+ //configure ckfinder with ckeditor config 
+
+ $this->ckfinder->SetupCKEditor($this->ckeditor, $path);
 }
 
 }
