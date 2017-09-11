@@ -632,6 +632,8 @@ function popupCenter(url, title, w, h) {
 }
 $(function() {
     "use strict";
+    moment.locale('es');
+    /*console.log(moment().format('LL'));*/
 
     //Chosen select
     $(".chosen-select").chosen({
@@ -672,6 +674,100 @@ $(function() {
 
     });
 
+    /**
+    * Bloques y detalles
+    */
+    $(document).on("click", "#btn-add-box", function() {
+        $('#box-title').val('');
+        $('#box-id-edit').val('');
+        $('#addBoxModal').modal({
+            backdrop: false,
+            show:true,
+        });
+        return false;
+    });
+
+    $(document).on("click", ".btn-wbox-edit", function() {
+        var wbox_blq = $(this).parents('.wbox-blq');
+        var wbox_id = wbox_blq.find('.wbox-id').val();
+        var wbox_title = wbox_blq.find('.wbox-title').val();
+
+        $("#box-id-edit").val(wbox_id);
+        $("#box-title").val(wbox_title);
+
+        $('#addBoxModal').modal({
+            backdrop: false,
+            show:true,
+        });
+
+        return false;
+    });
+
+    $('#addBoxModal').on('shown.bs.modal', function () {
+        $('#box-title').focus();
+    });
+
+    $(document).on("submit", "#form-add-bloque", function() {
+        var titulo = $(this).find("input[name=box-title]").val();
+        var box_idedit = $(this).find("input[name=box-idedit]").val();
+         if(box_idedit == ''){
+            var idtemplate = $(this).data('idtemplate');
+            var idcontent = $(this).data('idcontent');
+            var box_sufix = moment().unix();
+            var clone = $('#' + idtemplate).clone();
+            clone.css("display", "block");
+            clone.attr('id', 'wbox-' + box_sufix);
+            var box_id_name = 'wbox_blq[' + box_sufix + '][id]';
+            var box_title_name = 'wbox_blq[' + box_sufix + '][titulo]';
+            var box_item_name = 'wbox_blq[' + box_sufix + '][descripciones][]';
+
+            clone.find('.wbox-id').attr('name', box_id_name).val(box_sufix);
+            clone.find('.wbox-title').attr('name', box_title_name).val(titulo);
+            clone.find('.box-header > .box-title').html(titulo);
+            clone.find('.wbox-item').attr('name', box_item_name).val('');
+
+            $('#' + idcontent).append(clone);
+
+        }else{
+            var boxedit = $('#wbox-' + box_idedit);
+            boxedit.find('.wbox-title').val(titulo);
+            boxedit.find('.box-header > .box-title').html(titulo);
+        }
+
+        $('#addBoxModal').modal('hide');
+        $('#box-id-edit').val('');
+
+        return false;
+    });
+
+    //Eliminar bloque
+    $(document).on("click", ".wbox-delete", function() {
+        var box = $(this).parents('.wbox-blq');
+        box.fadeOut().remove();
+        return false;
+    });
+
+    //Agregar item
+    $(document).on("click", ".btn-add-item", function() {
+        console.log('Agregar item');
+        var clone_item = $(this).parents('.wbox-blq').find('.witem-template').clone();
+        clone_item.removeClass('witem-template');
+        clone_item.css("display", "");
+        console.log(clone_item);
+        $(this).parents('.wbox-blq').find('.wbox-contitems').append(clone_item);
+        return false;
+    });
+
+    $(document).on("click", ".btn-remove-wbox-item", function() {
+        var witem = $(this).parents('.winput-group');
+        witem.fadeOut().remove();
+        return false;
+    });
+
+    /**
+    * Fin Bloques y detalles
+    */
+
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {
         if (confirm("Realemente desea aliminar")) {
@@ -697,7 +793,7 @@ $(function() {
 
     //AGREGAR ESPECIFICACIONES DE UN PRODUCTO
     $(document).on("click", "#btn-agregar-especificacion", function() {
-        var html = '<tr class="row-table-rm"> <td><input type="text" name="especificaciones[titulo][]" class="form-control input-sm" placeholder="Título"></td><td><input type="text" name="especificaciones[descripcion][]" class="form-control input-sm" placeholder="Descripción"></td><td> <a href="#" class="btn btn-danger btn-xs btn-quitar-tr">Quitar <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a> </td></tr>';
+        var html = '<tr class="row-table-rm"> <td><input type="text" name="especificaciones[titulo][]" class="form-control input-sm" placeholder="Título"></td><td><input type="text" name="especificaciones[descripcion][]" class="form-control input-sm" placeholder="Descripción"></td><td class="text-center"> <a href="#" class="btn btn-danger btn-xs btn-quitar-tr">Quitar <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a> </td></tr>';
         $("#items-especificaciones").append(html);
         return false;
     });
