@@ -1,4 +1,4 @@
-<!-- Carousel-->
+<!--Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
@@ -32,10 +32,10 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
-							<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
+								<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
 							</li>
 							<li role="presentation">
-							<a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a>
+								<a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
@@ -65,6 +65,7 @@
 								</form>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
+
 								<form class="form-inline">
 									<div class="form-group">
 										<label class="sr-only" for="origen">Origen</label>
@@ -103,9 +104,14 @@
 	<div class="container container-principal">
 		<div class="divider_border"></div>
 		<div class="cont-main">
+
+		<div>
+			<iframe src="http://lineafacil.com/es/microsite/bc-perutravel" frameborder="0" height="1000" width="100%"></iframe>
+		</div>
+
 			<div class="titulo-principal wow bounceInRight">
-			<h3>Nuestras <span>Promociones</span></h3>
-			<p>Aquí encontraras las mejores promociones en paquetes turísticos, vuelos y pasajes de bus.</p>
+				<h3>Nuestras <span>Promociones</span></h3>
+				<p>Aquí encontraras las mejores promociones en paquetes turísticos, vuelos y pasajes de bus.</p>
 			</div>
 			<!--Contenido website cada página-->
 			<div class="cont-promos tabbable-line">
@@ -144,8 +150,8 @@
 									<div class="caption">
 										<h3><a href="">Titulo INICIO 1</a></h3>
 										<h4>
-										<i class="fa fa-calendar" aria-hidden="true"></i>4 días.
-										&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>Lima
+											<i class="fa fa-calendar" aria-hidden="true"></i>4 días.
+											&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>Lima
 										</h4>
 										<p>Descripción</p>
 									</div>
@@ -596,4 +602,4 @@
 		</div>
 	</div>
 </section>
-<!-- //section .wrapper -->
+<!-- //section .wrapper

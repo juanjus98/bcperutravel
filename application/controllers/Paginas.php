@@ -342,6 +342,22 @@ class Paginas extends CI_Controller {
       $this->template->build('paginas/servicio', $data);
     }
 
+    /**
+     * Carrusel travel
+     */
+    function carrusel(){
+      $this->load->view('paginas/motores/carrusel_travel');
+    }
+
+    /**
+     * Despegar
+     */
+    function despegar(){
+      $this->load->view('paginas/motores/despegar');
+    }
+
+
+
   }
 
   /* End of file categorias.php */
