@@ -42,7 +42,6 @@ function addLightSlider(carousel_id){
  });
 }
 new WOW().init();
-
 progressively.init({
 	onLoadComplete: function() {
 		console.log('All images loaded!');

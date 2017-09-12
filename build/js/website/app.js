@@ -1,5 +1,4 @@
 new WOW().init();
-
 progressively.init({
 	onLoadComplete: function() {
 		console.log('All images loaded!');

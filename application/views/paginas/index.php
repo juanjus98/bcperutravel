@@ -105,9 +105,17 @@
 		<div class="divider_border"></div>
 		<div class="cont-main">
 
-		<div>
-			<iframe src="http://lineafacil.com/es/microsite/bc-perutravel" frameborder="0" height="1000" width="100%"></iframe>
-		</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="titulo-principal wow bounceInRight">
+						<h3>Buscar <span>Hoteles y vuelos.</span></h3>
+						<p>Encuentra aquí hoteles y vuelos nacionales e internacionales.</p>
+					</div>
+					<iframe src="<?php echo base_url('paginas/despegar');?>" frameborder="0" scrolling="no"></iframe>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
 
 			<div class="titulo-principal wow bounceInRight">
 				<h3>Nuestras <span>Promociones</span></h3>

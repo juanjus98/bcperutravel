@@ -54,7 +54,7 @@ $tag_image = $head_info['image'];
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/progressively/progressively.min.css'); ?>">
 
 	<!-- Chosen-->
-    <link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
+	<link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -82,6 +82,13 @@ $tag_image = $head_info['image'];
 <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
 <link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
 <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
+
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
+
 </head>
 <body>
 	<div id="header_1">
@@ -220,11 +227,19 @@ $tag_image = $head_info['image'];
 	<!-- progressively.min.js-->
 	<script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
 	<!-- //progressively.min.js-->
+
+	<script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+
+	<!-- <script src="<?php echo base_url('assets/plugins/iframe/pym.v1.min.js');?>"></script> -->
+
+	<script>
+	//var pymParent = new pym.Parent('myiframe', '<?php echo base_url('paginas/despegar');?>', {});
+	</script>
+
 	<script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 	<!-- JavaScript-->
 
-	<script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
-	
+
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Lobster" rel="stylesheet">
 </body>
 </html>
