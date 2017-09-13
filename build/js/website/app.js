@@ -30,30 +30,11 @@ $(function() {
 		} 
 	});
 
-	//Slimscroll
-	$('.box-wscroll').slimScroll({
-		height: '233px'
-	});
+	/*#carousel-promo*/
+	addLightSlider('#carousel-promo-1');
+	/*addLightSlider('#carousel-promo-2');
+	addLightSlider('#carousel-promo-3');
+	addLightSlider('#carousel-promo-4');*/
 
-	//Toolbar static
-	$("#tool-bar").sticky({ topSpacing: 0 });
-
-/*$('[data-toggle="tab"]').click(function (e) {
-  e.preventDefault();
-  var content_id = $(this).attr('href');
-  var carousel_id = $(content_id).find('ul.carousel-promo').attr('id');
-  console.log("Content " + content_id);
-  console.log("Carousel " + carousel_id);
-  addLightSlider('#' + carousel_id);
-});*/
-
-/*#carousel-promo*/
-addLightSlider('#carousel-promo-1');
-addLightSlider('#carousel-promo-2');
-addLightSlider('#carousel-promo-3');
-addLightSlider('#carousel-promo-4');
-
-$( ".tab-promo-2" ).trigger( "click" );
-$( ".tab-promo-1" ).trigger( "click" );
 
 });

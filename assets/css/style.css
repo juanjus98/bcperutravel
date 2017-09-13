@@ -47,7 +47,7 @@ body {
   margin-top: -12px;
 }
 .wrapper .container-principal .cont-main {
-  padding: 0 15px 30px 15px;
+  padding: 0 30px 30px 30px;
 }
 .titulo-principal {
   padding: 10px 0;
@@ -1075,6 +1075,44 @@ fieldset[disabled] .btn-primary-1.active {
 }
 .marker-outline .timeline-item:hover .timeline-marker:before {
   background: #FFEF00;
+}
+.cont-sidebar {
+  /*background: #cd0;*/
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
+}
+.cont-sidebar .titulo {
+  padding: 10px 0;
+  margin: 0;
+  font-size: 20px;
+  color: #282828;
+  text-align: center;
+}
+.cont-sidebar .titulo span {
+  font-weight: 700;
+}
+.cont-sidebar .titulo-desc {
+  font-size: 14px;
+}
+/**
+ * Iframe para despegar
+ */
+.iframe-despegar {
+  width: 100%;
+  background: #cdf;
+}
+/**
+ * Prom despegar
+ */
+.prom-despegar .searchboxContainer {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 32px !important;
+  margin-bottom: 0px !important;
+  padding: 0 !important;
+}
+.prom-despegar .searchboxContainer .searchbox {
+  width: auto !important;
 }
 /**
  * Mobiles

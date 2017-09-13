@@ -83,11 +83,24 @@ $tag_image = $head_info['image'];
 <link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
 <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
 
-<script>
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  }
-</script>
+<script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
+
+<!-- lightslider-->
+<link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
+<script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
+<!-- //lightslider-->
+
+<!-- select2-->
+<script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
+<!-- //select2-->
+<!-- wow.js-->
+<script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
+<!-- //wow.js-->
+<!-- progressively.min.js-->
+<script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
+<!-- //progressively.min.js-->
+
+<script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
 
 </head>
 <body>
@@ -198,43 +211,7 @@ $tag_image = $head_info['image'];
 	</footer>
 	<!-- //Footer-->
 	<!-- JavaScript-->
-	<script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
-	<!-- jquery-ui-->
-<!-- <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
-	<script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script> -->
-	<!-- //jquery-ui-->
-	<!-- lightslider-->
-	<link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
-	<script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
-	<!-- //lightslider-->
-	<!-- fancybox-->
-	<link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
-	<script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
-	<!-- //fancybox-->
-	<!-- sticky-->
-	<script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.js');?>"></script>
-	<!-- sticky-->
-	<!-- slimscroll-->
-	<script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.js');?>"></script>
-	<!-- //slimscroll-->
-	<!-- select2-->
-	<script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
-	<!-- //select2-->
-	<!-- wow.js-->
-	<script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
-	<!-- //wow.js-->
-	<!-- progressively.min.js-->
-	<script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
-	<!-- //progressively.min.js-->
-
-	<script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
-
-	<!-- <script src="<?php echo base_url('assets/plugins/iframe/pym.v1.min.js');?>"></script> -->
-
-	<script>
-	//var pymParent = new pym.Parent('myiframe', '<?php echo base_url('paginas/despegar');?>', {});
-	</script>
 
 	<script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 	<!-- JavaScript-->

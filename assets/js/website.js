@@ -14,7 +14,7 @@ $.getDataJson = function(url, data, callback) {
 function addLightSlider(carousel_id){
 	$(carousel_id).lightSlider({
  	auto:true,
- 	item:3,
+ 	item:2,
  	loop:true,
  	slideMove:2,
  	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
@@ -26,7 +26,7 @@ function addLightSlider(carousel_id){
  	{
  		breakpoint:800,
  		settings: {
- 			item:3,
+ 			item:2,
  			slideMove:1,
  			slideMargin:6,
  		}
@@ -34,7 +34,7 @@ function addLightSlider(carousel_id){
  	{
  		breakpoint:480,
  		settings: {
- 			item:2,
+ 			item:1,
  			slideMove:1
  		}
  	}
@@ -73,30 +73,11 @@ $(function() {
 		} 
 	});
 
-	//Slimscroll
-	$('.box-wscroll').slimScroll({
-		height: '233px'
-	});
+	/*#carousel-promo*/
+	addLightSlider('#carousel-promo-1');
+	/*addLightSlider('#carousel-promo-2');
+	addLightSlider('#carousel-promo-3');
+	addLightSlider('#carousel-promo-4');*/
 
-	//Toolbar static
-	$("#tool-bar").sticky({ topSpacing: 0 });
-
-/*$('[data-toggle="tab"]').click(function (e) {
-  e.preventDefault();
-  var content_id = $(this).attr('href');
-  var carousel_id = $(content_id).find('ul.carousel-promo').attr('id');
-  console.log("Content " + content_id);
-  console.log("Carousel " + carousel_id);
-  addLightSlider('#' + carousel_id);
-});*/
-
-/*#carousel-promo*/
-addLightSlider('#carousel-promo-1');
-addLightSlider('#carousel-promo-2');
-addLightSlider('#carousel-promo-3');
-addLightSlider('#carousel-promo-4');
-
-$( ".tab-promo-2" ).trigger( "click" );
-$( ".tab-promo-1" ).trigger( "click" );
 
 });
