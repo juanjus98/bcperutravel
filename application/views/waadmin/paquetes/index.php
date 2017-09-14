@@ -1,7 +1,7 @@
 <?php
-/*echo '<pre>';
+echo '<pre>';
 print_r($listado);
-echo '</pre>';*/
+echo '</pre>';
 ?>
 <?php echo msj(); ?>
 <div class="row">

@@ -11,6 +11,20 @@ echo '</pre>';*/
                 <form name="frm-buscar" id="frm-buscar" method="post" action="" role="search">
                     <div class="row pad" style="padding-bottom: 0px;">
 
+                    <div class="col-sm-2">
+                        <select name="categoria_id" id="categoria_id" data-placeholder="Seleccionar categoría" class="chosen-select">
+                            <option value=""></option>
+                            <?php
+                            if(!empty($categorias)){
+                              foreach ($categorias as $key => $value) {
+                                $selected_categoria = ($value['id'] == $post['categoria_id']) ? 'selected' : '' ;
+                                echo '<option value="'.$value['id'].'" ' . $selected_categoria . '>'.$value['nombre'].'</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                    </div>
+
                         <div class="col-sm-2">
                             <select name="campo" class="form-control input-sm">
                                 <?php
@@ -37,7 +51,7 @@ echo '</pre>';*/
                             <a href="<?php echo $refresh_url;?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
-                        <div class="col-sm-5">
+                        <div class="col-sm-3">
                             <div class="pull-right">
 
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
@@ -57,6 +71,7 @@ echo '</pre>';*/
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
                                 <th>Categoría</th>
+                                <th>Código</th>
                                 <th>Nombre producto</th>
                                 <th>Slug</th>
                                 <th class="text-center">Orden</th>
@@ -71,6 +86,7 @@ echo '</pre>';*/
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
                                         <td><?php echo $item['categoria_nombre']; ?></td>
+                                        <td><?php echo $item['codigo']; ?></td>
                                         <td><?php echo $item['nombre_largo']; ?></td>
                                         <td><?php echo $item['url_key']; ?></td>
 

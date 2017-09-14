@@ -20,6 +20,7 @@ class Productos extends CI_Controller{
 
 		$this->load->model("crud_model","Crud");
 		$this->load->model("productos_model","Productos");
+    $this->load->model("categorias_model","Categorias");
 
 		$this->ctr_name = $this->router->fetch_class();
     //Base del controlador
@@ -27,6 +28,8 @@ class Productos extends CI_Controller{
 		
 		//Información del usuario que ha iniciado session
 		$this->user_info = $this->auth->user_profile();
+
+    $this->load->library("imaupload");
 	}
 
 	function index(){
@@ -42,13 +45,20 @@ class Productos extends CI_Controller{
 		$data['eliminar_url'] = base_url($controlador . '/eliminar');
 		$data['refresh_url'] = base_url($controlador . '/index?refresh');
 
+    $data['order_url'] = base_url($controlador . '/uporden');
+
 		//BUSQUEDA
 		$data['campos_busqueda'] = array(
 			't1.codigo' => 'Código',
-      't1.nombre_corto' => 'Nombre producto'
+      't1.nombre_largo' => 'Nombre producto'
       );
 
 		$sessionName = 's_' . $this->primary_table; //Session name
+
+    //Categorías
+    $total_categorias = $this->Categorias->total_registros();
+    $categorias = $this->Categorias->listado($total_categorias, 0);
+    $data['categorias'] = $categorias;
 
 		//Paginacion
 		$base_url = base_url($this->base_ctr . '/index');
@@ -95,11 +105,16 @@ class Productos extends CI_Controller{
         $width = 'auto';
         $ckEditor = $this->editor($path, $width);
 
+        //Categorías
+        $total_categorias = $this->Categorias->total_registros();
+        $categorias = $this->Categorias->listado($total_categorias, 0);
+        $data['categorias'] = $categorias;
+
         $data['current_url'] = base_url(uri_string());
         $data['back_url'] = base_url($this->base_ctr . '/index');
 
         if(isset($id)){
-          $data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
+          $data['edit_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
         }
 
         switch ($tipo) {
@@ -131,23 +146,42 @@ class Productos extends CI_Controller{
           $post= $this->input->post();
           $data['post'] = $post; 
 
-          echo "<pre>";
-          print_r($post);
-          echo "</pre>";
-          die();
-
           $config = array(
-           array(
-            'field' => 'id_grupo',
-            'label' => 'Tipo de Unidad',
+            array(
+            'field' => 'nombre_corto',
+            'label' => 'Nombre corto',
             'rules' => 'required',
             'errors' => array(
              'required' => 'Campo requerido.',
              )
             ),
            array(
-            'field' => 'nombre_unidad',
-            'label' => 'Nombre unidad',
+            'field' => 'nombre_largo',
+            'label' => 'Nombre largo',
+            'rules' => 'required',
+            'errors' => array(
+             'required' => 'Campo requerido.',
+             )
+            ),
+           array(
+            'field' => 'categoria_id',
+            'label' => 'Categoría',
+            'rules' => 'required',
+            'errors' => array(
+             'required' => 'Campo requerido.',
+             )
+            ),
+           array(
+            'field' => 'resumen',
+            'label' => 'Resumen',
+            'rules' => 'required',
+            'errors' => array(
+              'required' => 'Campo requerido.',
+              )
+            ),
+           array(
+            'field' => 'precio',
+            'label' => 'Precio',
             'rules' => 'required',
             'errors' => array(
               'required' => 'Campo requerido.',
@@ -158,37 +192,65 @@ class Productos extends CI_Controller{
           $this->form_validation->set_rules($config);
           $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-          if ($this->form_validation->run() == FALSE){
+        if ($this->form_validation->run() == FALSE){
            /*Error*/
            $data['post'] = $post;
-           if(!empty($post['propietario'])){
-            $data['propietarios'] = $this->Productos->listar_personas($post['propietario'],true);
-          }
-
-          if(!empty($post['morador'])){
-            $data['moradores'] = $this->Productos->listar_personas($post['morador'],true);
-          }
-
         }else{
 
-          $aporta_ingresos = (isset($post['aporta_ingresos'])) ? $post['aporta_ingresos'] : 0 ;
+          $destacar = (isset($post['destacar'])) ? $post['destacar'] : 0 ;
 
           $data_form = array(
-            "condominio_id" => $post['id_condominio'],
-            "nombre_unidad" => $post['nombre_unidad'],
-            "id_grupo" => $post['id_grupo'],
+            "categoria_id" => $post['categoria_id'],
+            "nombre_corto" => $post['nombre_corto'],
+            "nombre_largo" => $post['nombre_largo'],
+            "resumen" => $post['resumen'],
             "descripcion" => $post['descripcion'],
-            "aporta_ingresos" => $aporta_ingresos
+            "precio_moneda" => $post['precio_moneda'],
+            "precio" => $post['precio'],
+            "keywords" => $post['keywords'],
+            "orden" => $post['orden'],
+            "destacar" => $destacar
             );
 
-          		//Agregar
+          //Cargar Imagenes
+          $upload_path = $this->config->item('upload_path');
+            if($_FILES["imagen_1"]){
+            $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen_1");
+          }
+
+            if($_FILES["imagen_2"]){
+            $imagen_info2 = $this->imaupload->do_upload($upload_path, "imagen_2");
+          }
+
+          if (!empty($imagen_info1['upload_data'])) {
+            $data_form['imagen_1'] = $imagen_info1['upload_data']['file_name'];
+          }
+
+          if (!empty($imagen_info2['upload_data'])) {
+            $data_form['imagen_2'] = $imagen_info2['upload_data']['file_name'];
+          }
+
+          if(empty($post['url_key_pre'])){
+           $data_urlkey = array('tipo' => 'p', 'urlkey' => $post['nombre_largo']);
+           $url_key = $this->Crud->get_urlkey($data_urlkey);
+           $data_form['url_key'] = $url_key;
+
+           //Actualizamos la tabla urlkey
+           $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
+           $this->db->insert("urlkey",$data_urlkey_insert);
+          }
+
+          //Agregar
           if($tipo == 'C'){
+            $codigo = strtoupper(random_string('alnum',5));
+            $data_form['codigo'] = $codigo;
+
             $this->db->insert($this->primary_table, $data_form);
             $unidad_id = $this->db->insert_id();
             $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
           }
 
-          		//Editar
+          //Editar
           if ($tipo == 'E') {
             $this->db->where('id', $post['id']);
             $this->db->update($this->primary_table, $data_form);
@@ -201,7 +263,7 @@ class Productos extends CI_Controller{
 
       }
 
-      $this->template->title($data['tipo'] . ' Unidad');
+      $this->template->title($data['tipo'] . ' Producto');
       $this->template->build($this->base_ctr.'/editar', $data);
     }
 
@@ -264,6 +326,19 @@ function editor($path, $width) {
  //configure ckfinder with ckeditor config 
 
  $this->ckfinder->SetupCKEditor($this->ckeditor, $path);
+}
+
+ /**
+ * Ajax actualizar orden
+ */
+public function uporden(){
+  if($this->input->post()){
+    $post = $this->input->post();
+    $data_form = array('orden' => $post['orden']);
+    $this->db->where('id', $post['id']);
+    $this->db->update($this->primary_table, $data_form);
+    echo "Orden actualizado.";
+  }
 }
 
 }
