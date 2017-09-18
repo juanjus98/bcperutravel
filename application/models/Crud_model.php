@@ -134,9 +134,55 @@ function valida_urlkey($data){
    }
 }
 
+/**
+ * Paises
+ */
 function getPaises(){
   $jsonPaises = json_decode(file_get_contents('https://restcountries.eu/rest/v2/all'));
   return $jsonPaises;
+}
+
+/**
+ * Ubigeo peru
+ */
+function getUbigeoPeru(){
+  $json_file = 'assets/json/ubigeo/ubigeo-peru.json';
+  $jsonResult = json_decode(file_get_contents($json_file));
+  return $jsonResult; 
+}
+
+/**
+ * Ubigeo Departamentos y provincias
+ */
+function getUbigeoDP(){
+  $result = $this->getUbigeoPeru();
+  $departamentos = array();
+  $provincias = array();
+
+  foreach ($result as $key => $value) {
+    if($value->provincia == '00'){
+      $departamentos[$value->departamento] = $value; 
+      $resultado[$value->departamento] = $value;
+    } 
+
+    if($value->distrito == '00' && $value->provincia != '00'){
+      $departamento = $departamentos[$value->departamento];
+      $value->nombre = $departamento->nombre . ', ' . $value->nombre;
+      $provincias[$value->departamento . $value->provincia] = $value;
+      $resultado[$value->departamento . $value->provincia] = $value;
+    }
+
+  }
+
+  echo "<pre>";
+  print_r($resultado);
+  echo "</pre><hr>";
+  /*echo "<pre>";
+  print_r($provincias);
+  echo "</pre><hr>";*/
+
+  return $resultado;
+
 }
 
 }

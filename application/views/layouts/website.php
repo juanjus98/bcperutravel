@@ -47,7 +47,6 @@ $tag_image = $head_info['image'];
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/animate.min.css'); ?>">
 
@@ -90,9 +89,6 @@ $tag_image = $head_info['image'];
 <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
 <!-- //lightslider-->
 
-<!-- select2-->
-<script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
-<!-- //select2-->
 <!-- wow.js-->
 <script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
 <!-- //wow.js-->

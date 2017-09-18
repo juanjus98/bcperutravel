@@ -6,8 +6,7 @@ progressively.init({
 });
 
 $(function() {
-	//Select search select2
-	$(".select_search").select2();
+	//Chosen origen nacional
 
 	//Tooltip defoult
 	$('[data-toggle="tooltip"]').tooltip();

@@ -46,6 +46,12 @@ class Paginas extends CI_Controller {
     $data_crud['order_by'] = "t1.orden Asc";
     $data['slider'] = $this->Crud->getRows($data_crud);
 
+    //Consultar ubigeo
+    $ubigeo = $this->Crud->getUbigeoDP();
+    /*echo '<pre>';
+    print_r($ubigeo);
+    echo "</pre>";*/
+
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
   }
