@@ -6,7 +6,13 @@ progressively.init({
 });
 
 $(function() {
+	//Bootstrap datepicker home
+	$('.datepicker').datepicker();
+	
 	//Chosen origen nacional
+	$(".chosen-select").chosen({
+		no_results_text: "Sin resultados.",
+	});
 
 	//Tooltip defoult
 	$('[data-toggle="tooltip"]').tooltip();

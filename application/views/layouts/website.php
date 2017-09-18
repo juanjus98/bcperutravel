@@ -45,15 +45,12 @@ $tag_image = $head_info['image'];
 	<meta property="og:url" content="<?php echo $tag_url; ?>" />
 	<meta property="og:image" content="<?php echo $tag_image; ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
+
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/animate.min.css'); ?>">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/progressively/progressively.min.css'); ?>">
-
-	<!-- Chosen-->
-	<link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -96,7 +93,16 @@ $tag_image = $head_info['image'];
 <script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
 <!-- //progressively.min.js-->
 
+<!-- Chosen-->
 <script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+<!-- //Chosen-->
+
+<!-- Bootstrap datepicker-->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css'); ?>">
+<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
+<!-- //Bootstrap datepicker-->
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
 
 </head>
 <body>

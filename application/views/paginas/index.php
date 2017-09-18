@@ -1,3 +1,8 @@
+<?php
+/*echo "<pre>";
+print_r($ubigeo);
+echo "</pre>";*/
+?>
 <!--Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
 	<!-- Wrapper for slides -->
@@ -35,7 +40,7 @@
 								<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
 							</li>
 							<li role="presentation">
-								<a href="#seccion-2" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a>
+								<a href="#seccion-2" aria-controls="pasajes_nacionales" role="tab" data-toggle="tab">Pasajes Nacionales</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
@@ -65,28 +70,40 @@
 								</form>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
+								<form name="frm-pasajes">
+									<div class="row">
+										<div class="col-md-3">
+											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Origen">
+												<option value=""></option>
+												<?php
+												if(!empty($ubigeo)){
+													foreach ($ubigeo as $key => $value) {
+														echo '<option value="' . $key . '">' . $value->nombre . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
 
-								<form class="form-inline">
-									<div class="form-group">
-										<label class="sr-only" for="origen">Origen</label>
-										<input type="text" class="form-control" name="origen" id="origen" placeholder="Origen">
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="destino">Origen</label>
-										<input type="text" class="form-control" name="destino" id="destino" placeholder="Destino">
-									</div>
+										<div class="col-md-3">
+											<select name="destino" id="destino" class="form-control chosen-select" data-placeholder="Destino">
+												<option value=""></option>
+												<?php
+												if(!empty($ubigeo)){
+													foreach ($ubigeo as $key => $value) {
+														echo '<option value="' . $key . '">' . $value->nombre . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
 
-									<div class="form-group">
-										<label class="sr-only" for="partida">Partida</label>
-										<input type="text" class="form-control" name="partida" id="partida" placeholder="Partida">
-									</div>
+										<div class="col-md-3">
+											<input type="text" class="form-control datepicker" name="partida" id="partida" placeholder="Partida">
+										</div>
 
-									<div class="form-group">
-										<label class="sr-only" for="regreso">Regreso</label>
-										<input type="text" class="form-control" name="regreso" id="regreso" placeholder="Regreso">
+										<div class="col-md-3"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
 									</div>
-
-									<button type="submit" class="btn btn-primary-1">Buscar</button>
 								</form>
 							</div>
 						</div>

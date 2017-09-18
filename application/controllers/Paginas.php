@@ -48,6 +48,7 @@ class Paginas extends CI_Controller {
 
     //Consultar ubigeo
     $ubigeo = $this->Crud->getUbigeoDP();
+    $data['ubigeo'] = $ubigeo;
     /*echo '<pre>';
     print_r($ubigeo);
     echo "</pre>";*/

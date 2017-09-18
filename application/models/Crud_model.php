@@ -174,13 +174,6 @@ function getUbigeoDP(){
 
   }
 
-  echo "<pre>";
-  print_r($resultado);
-  echo "</pre><hr>";
-  /*echo "<pre>";
-  print_r($provincias);
-  echo "</pre><hr>";*/
-
   return $resultado;
 
 }

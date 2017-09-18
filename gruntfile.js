@@ -22,6 +22,7 @@ module.exports = function(grunt){
 		      {expand: true, cwd: 'node_modules/progressively/dist/', src: ['*'], dest: 'assets/plugins/progressively/'},
 		      {expand: true, cwd: 'node_modules/@staaky/strip/dist/', src: ['*/*/*/*'], dest: 'assets/plugins/strip/'},
 		      {expand: true, cwd: 'node_modules/moment/min/', src: ['*'], dest: 'assets/plugins/moment/'},
+		      {expand: true, cwd: 'node_modules/bootstrap-datepicker/dist/', src: ['*/*'], dest: 'assets/plugins/bootstrap-datepicker/'},
 		    ],
 		  },
 		},
