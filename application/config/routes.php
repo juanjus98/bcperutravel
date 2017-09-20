@@ -62,8 +62,10 @@ $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 
-$route['salones'] = 'paginas/salones';
-$route['salon/(:any)'] = 'paginas/salon/$1';
+/**
+ * Carrusel
+ */
+$route['carrusellist'] = 'paginas/carrusellist';
 
 //Servicio servicio
 $route['servicio/(:any)'] = 'paginas/servicio/$1';

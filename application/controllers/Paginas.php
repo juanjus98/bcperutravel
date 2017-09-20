@@ -357,6 +357,13 @@ class Paginas extends CI_Controller {
     }
 
     /**
+     * Carrusel travel
+     */
+    function carrusellist(){
+      $this->load->view('paginas/motores/carrusellist');
+    }
+
+    /**
      * Despegar
      */
     function despegar(){
