@@ -100,6 +100,7 @@ $tag_image = $head_info['image'];
 <!-- Bootstrap datepicker-->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css'); ?>">
 <script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
+<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js');?>" charset="UTF-8"></script>
 <!-- //Bootstrap datepicker-->
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">

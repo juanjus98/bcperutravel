@@ -7,7 +7,11 @@ progressively.init({
 
 $(function() {
 	//Bootstrap datepicker home
-	$('.datepicker').datepicker();
+	$('.datepicker').datepicker({
+		language: "es",
+		autoclose: true,
+		todayHighlight: true,
+	});
 	
 	//Chosen origen nacional
 	$(".chosen-select").chosen({

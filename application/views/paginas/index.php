@@ -72,7 +72,7 @@ echo "</pre>";*/
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
 								<form name="frm-pasajes">
 									<div class="row">
-										<div class="col-md-3">
+										<div class="col-md-3 mrg-bottom-15">
 											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Origen">
 												<option value=""></option>
 												<?php
@@ -85,7 +85,7 @@ echo "</pre>";*/
 											</select>
 										</div>
 
-										<div class="col-md-3">
+										<div class="col-md-3 mrg-bottom-15">
 											<select name="destino" id="destino" class="form-control chosen-select" data-placeholder="Destino">
 												<option value=""></option>
 												<?php
@@ -98,11 +98,15 @@ echo "</pre>";*/
 											</select>
 										</div>
 
-										<div class="col-md-3">
-											<input type="text" class="form-control datepicker" name="partida" id="partida" placeholder="Partida">
+										<div class="col-md-2 mrg-bottom-15">
+											<input type="text" class="form-control datepicker" name="partida" id="partida" placeholder="Fecha de partida">
 										</div>
 
-										<div class="col-md-3"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
+										<div class="col-md-2 mrg-bottom-15">
+											<input type="text" class="form-control datepicker" name="retorno" id="retorno" placeholder="Fecha de retorno">
+										</div>
+
+										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
 									</div>
 								</form>
 							</div>

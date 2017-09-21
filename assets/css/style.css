@@ -26,6 +26,9 @@ body {
 .brd-2 {
   border: solid 1px #F94C31;
 }
+.mrg-bottom-15 {
+  margin-bottom: 0px;
+}
 /**
  * Main contenido principal
  */
@@ -1125,6 +1128,7 @@ fieldset[disabled] .btn-primary-1.active {
   font-size: 14px;
   position: relative;
   vertical-align: middle;
+  width: 100% !important;
 }
 .chosen-container .chosen-drop {
   background: #ffffff;
@@ -1558,6 +1562,9 @@ fieldset[disabled] .btn-primary-1.active {
   }
   .wrapper {
     margin-top: 16px;
+  }
+  .mrg-bottom-15 {
+    margin-bottom: 15px;
   }
 }
 /*Fin mobiles*/
