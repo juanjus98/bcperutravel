@@ -125,18 +125,8 @@ echo "</pre>";*/
 	<div class="container container-principal">
 		<div class="divider_border"></div>
 		<div class="cont-main">
-
 			<div class="row">
-				<!-- Sidebar-->
-				<div class="col-md-4">
-					<div class="cont-sidebar">
-						<h3 class="titulo">Busca <span>Hoteles y vuelos.</span></h3>
-						<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
-					</div>
-				</div>
-				<!-- //Sidebar-->
-
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<div class="titulo-principal">
 						<h3>Nuestras <span>Promociones</span></h3>
 						<p>Aquí encontraras las mejores promociones en paquetes turísticos, vuelos y pasajes de bus.</p>
@@ -262,6 +252,18 @@ echo "</pre>";*/
 					</div>
 					<!-- //cont-promos-->
 				</div>
+			</div>
+			<!-- //row-->
+
+			<div class="row">
+				<!-- Sidebar-->
+				<div class="col-md-4">
+					<div class="cont-sidebar">
+						<h3 class="titulo">Busca <span>Hoteles y vuelos.</span></h3>
+						<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
+					</div>
+				</div>
+				<!-- //Sidebar-->
 
 			</div>
 			<!-- //row-->

@@ -30,27 +30,26 @@ $tag_image = $head_info['image'];
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 	<title><?php echo $retVal = (@$template['title'] != 'Inicio') ? @$template['title'] . ' - ' : ''; ?> <?php echo $tag_title; ?></title>
-	<meta name="description" content="<?php echo $tag_description; ?>">
-	<meta name="author" content="<?php echo base64_decode("d2ViQXB1LmNvbQ=="); ?>">
-	<meta name="keywords" content="<?php echo strip_tags($head_info['keywords']); ?>">
-	<meta name="robots" content="index, follow">
+	<meta name="description" content="<?php echo $tag_description; ?>" />
+	<meta name="author" content="<?php echo base64_decode("d2ViQXB1LmNvbQ=="); ?>" />
+	<meta name="keywords" content="<?php echo strip_tags($head_info['keywords']); ?>" />
+	<meta name="robots" content="index, follow" />
 	<!--Para facebook-->
-	<meta property="og:title" content="<?php echo $tag_title; ?>">
-	<meta property="og:description" content="<?php echo $tag_description; ?>">
+	<meta property="og:title" content="<?php echo $tag_title; ?>" />
+	<meta property="og:description" content="<?php echo $tag_description; ?>" />
 	<meta property="og:url" content="<?php echo $tag_url; ?>" />
-	<meta property="og:image" content="<?php echo $tag_image; ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+	<meta property="og:image" content="<?php echo $tag_image; ?>" />
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css" />
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
-
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/animate.min.css'); ?>">
-
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/progressively/progressively.min.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="assets/plugins/progressively/progressively.min.css" />
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,52 +57,52 @@ $tag_image = $head_info['image'];
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('assets/icons/apple-icon-57x57.png') ?>">
-<link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('assets/icons/apple-icon-60x60.png') ?>">
-<link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('assets/icons/apple-icon-72x72.png') ?>">
-<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('assets/icons/apple-icon-76x76.png') ?>">
-<link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url('assets/icons/apple-icon-114x114.png') ?>">
-<link rel="apple-touch-icon" sizes="120x120" href="<?php echo base_url('assets/icons/apple-icon-120x120.png') ?>">
-<link rel="apple-touch-icon" sizes="144x144" href="<?php echo base_url('assets/icons/apple-icon-144x144.png') ?>">
-<link rel="apple-touch-icon" sizes="152x152" href="<?php echo base_url('assets/icons/apple-icon-152x152.png') ?>">
-<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('assets/icons/apple-icon-180x180.png') ?>">
-<link rel="icon" type="image/png" sizes="192x192" href="<?php echo base_url('assets/icons/android-icon-192x192.png') ?>">
-<link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('assets/icons/favicon-32x32.png') ?>">
-<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/icons/favicon-96x96.png') ?>">
-<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/icons/favicon-16x16.png') ?>">
-<link rel="manifest" href="<?php echo base_url('assets/icons/manifest.json') ?>">
+<link rel="apple-touch-icon" sizes="57x57" href="assets/icons/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="assets/icons/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="assets/icons/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="assets/icons/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="assets/icons/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="assets/icons/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="assets/icons/apple-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="assets/icons/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-icon-192x192.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
+<link rel="manifest" href="assets/icons/manifest.json" />
 <meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="<?php echo base_url('assets/icons/ms-icon-144x144.png') ?>">
+<meta name="msapplication-TileImage" content="assets/icons/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
-<link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
+<link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon" />
 <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
 
-<script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
+<script src="assets/plugins/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
 
 <!-- lightslider-->
-<link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
-<script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
+<link href="assets/plugins/lightslider/css/lightslider.min.css" rel="stylesheet"/>
+<script src="assets/plugins/lightslider/js/lightslider.min.js"></script>
 <!-- //lightslider-->
 
 <!-- wow.js-->
-<script src="<?php echo base_url('assets/js/wow.min.js');?>" type="text/javascript"></script>
+<script src="assets/js/wow.min.js" type="text/javascript"></script>
 <!-- //wow.js-->
 <!-- progressively.min.js-->
-<script src="<?php echo base_url('assets/plugins/progressively/progressively.min.js');?>" type="text/javascript"></script>
+<script src="assets/plugins/progressively/progressively.min.js" type="text/javascript"></script>
 <!-- //progressively.min.js-->
 
 <!-- Chosen-->
-<script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+<script src="assets/plugins/chosen/chosen.jquery.min.js"></script>
 <!-- //Chosen-->
 
 <!-- Bootstrap datepicker-->
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css'); ?>">
-<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
-<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js');?>" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 <!-- //Bootstrap datepicker-->
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
 
 </head>
 <body>
@@ -143,7 +142,7 @@ $tag_image = $head_info['image'];
 								<span class="icon-bar bottom-bar"></span>
 							</button>
 							<a class="navbar-brand" href="<?php echo base_url();?>">
-								<img src="<?php echo base_url('assets/images/logo.png');?>" alt="">
+								<img src="assets/images/logo.png" alt="">
 							</a>
 						</div>
 						<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
@@ -214,12 +213,12 @@ $tag_image = $head_info['image'];
 	</footer>
 	<!-- //Footer-->
 	<!-- JavaScript-->
-	<script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
+	<script src="assets/plugins/bootstrap.min.js" type="text/javascript"></script>
 
-	<script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
+	<script src="assets/js/website.min.js" type="text/javascript"></script>
 	<!-- JavaScript-->
 
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Lobster" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Lato:300,400,700|Lobster" rel="stylesheet">
 </body>
 </html>
