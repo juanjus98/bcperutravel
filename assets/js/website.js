@@ -54,6 +54,7 @@ $(function() {
 		language: "es",
 		autoclose: true,
 		todayHighlight: true,
+		startDate: '+1d',
 	});
 	
 	//Chosen origen nacional
