@@ -13,7 +13,30 @@ $(function() {
 		todayHighlight: true,
 		startDate: '+1d',
 	});
-	
+
+/**
+ * Datepicker pasajes nacionales
+ */
+ var dpOptions = {
+ 	format: 'dd/mm/yyyy',
+ 	startDate: '+1d',
+ 	language: "es",
+ 	autoclose: true,
+ };
+ 
+ var dp1 = $("#pasajes_partida");
+ var dp2 = $("#pasajes_retorno");
+
+ var datePicker1 = dp1.datepicker(dpOptions).
+ on('changeDate', function (e) {
+ 	var nDate = new Date(e.date);
+ 	nDate.setDate(nDate.getDate() + 1);
+ 	datePicker2.datepicker('setStartDate', nDate);
+ 	dp2.focus();
+ });
+ 
+ var datePicker2 = dp2.datepicker(dpOptions);
+ 
 	//Chosen origen nacional
 	$(".chosen-select").chosen({
 		no_results_text: "Sin resultados.",

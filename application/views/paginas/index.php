@@ -99,11 +99,11 @@ echo "</pre>";*/
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15">
-											<input type="text" class="form-control datepicker" name="partida" id="partida" placeholder="Fecha de partida">
+											<input type="text" class="form-control" name="partida" id="pasajes_partida" placeholder="Fecha de partida">
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15">
-											<input type="text" class="form-control datepicker" name="retorno" id="retorno" placeholder="Fecha de retorno">
+											<input type="text" class="form-control" name="retorno" id="pasajes_retorno" placeholder="Fecha de retorno">
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
@@ -258,11 +258,19 @@ echo "</pre>";*/
 			<div class="row">
 				<!-- Sidebar-->
 				<div class="col-md-4">
-					<div class="cont-sidebar">
-						<h3 class="titulo">Busca <span>Hoteles y vuelos.</span></h3>
+					<!-- <div class="cont-sidebar"> -->
+<!-- 						<h3 class="titulo">Busca <span>Hoteles y vuelos.</span></h3> -->
 						<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
-					</div>
+					<!-- </div> -->
 				</div>
+				<div class="col-md-4">
+					Banner 1
+				</div>
+
+				<div class="col-md-4">
+					Banner 2
+				</div>
+
 				<!-- //Sidebar-->
 
 			</div>

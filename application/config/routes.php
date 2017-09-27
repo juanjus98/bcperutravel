@@ -65,6 +65,7 @@ $route['confirmacion'] = 'paginas/confirmacion';
 /**
  * Carrusel
  */
+$route['traslados-actividades-circuitos'] = 'paginas/carrusel';
 $route['carrusellist'] = 'paginas/carrusellist';
 
 //Servicio servicio
