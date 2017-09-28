@@ -2,6 +2,7 @@
 /*echo "<pre>";
 print_r($ubigeo);
 echo "</pre>";*/
+/*echo phpinfo();*/
 ?>
 <!--Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
