@@ -13,9 +13,9 @@ $.getDataJson = function(url, data, callback) {
 
 function addLightSlider(carousel_id){
 	$(carousel_id).lightSlider({
- 	auto:true,
+ 	auto:false,
  	item:3,
- 	loop:true,
+ 	loop:false,
  	slideMove:3,
  	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
  	speed:600,
@@ -112,5 +112,15 @@ $(function() {
 	addLightSlider('#carousel-promo-3');
 	addLightSlider('#carousel-promo-4');*/
 
+	/**
+	 * Slider banners home
+	 */
+	
+	$('#bannersHome').lightSlider({
+        item:1,
+        loop:true,
+        auto:true,
+        pager: false
+    });
 
 });

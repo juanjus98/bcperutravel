@@ -69,5 +69,15 @@ $(function() {
 	addLightSlider('#carousel-promo-3');
 	addLightSlider('#carousel-promo-4');*/
 
+	/**
+	 * Slider banners home
+	 */
+	
+	$('#bannersHome').lightSlider({
+        item:1,
+        loop:true,
+        auto:true,
+        pager: false
+    });
 
 });

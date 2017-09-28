@@ -256,25 +256,60 @@ echo "</pre>";*/
 			<!-- //row-->
 
 			<div class="row">
-				<!-- Sidebar-->
 				<div class="col-md-4">
-					<!-- <div class="cont-sidebar"> -->
-<!-- 						<h3 class="titulo">Busca <span>Hoteles y vuelos.</span></h3> -->
 						<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
-					<!-- </div> -->
 				</div>
 				<div class="col-md-4">
-					Banner 1
+					<a href="<?php echo base_url('traslados-actividades-circuitos');?>">
+						<img src="assets/images/banner-1.jpg" class="img-responsive">
+					</a>
 				</div>
 
 				<div class="col-md-4">
-					Banner 2
+					<ul id="bannersHome">
+						<li>
+							<a href="#">
+								<img src="assets/images/bann-1.jpg" class="img-responsive">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="assets/images/bann-2.jpg" class="img-responsive">
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="assets/images/bann-3.jpg" class="img-responsive">
+							</a>
+						</li>
+					</ul>
 				</div>
-
-				<!-- //Sidebar-->
 
 			</div>
 			<!-- //row-->
+		</div>
+	</div>
+
+	<div class="container container-respaldados">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<h4>Respaldados por:</h4>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="logo-item">
+					<img class="PaymentMethods-method-logo" src="assets/images/logo_mincetur.jpg">
+				</div>
+				<div class="logo-item">
+					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
+				</div>
+				<div class="logo-item">
+					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
+				</div>
+				<div class="logo-item">
+					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
+				</div>
+				
+			</div>
 		</div>
 	</div>
 </section>

@@ -10,9 +10,9 @@ $.getDataJson = function(url, data, callback) {
 
 function addLightSlider(carousel_id){
 	$(carousel_id).lightSlider({
- 	auto:true,
+ 	auto:false,
  	item:3,
- 	loop:true,
+ 	loop:false,
  	slideMove:3,
  	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
  	speed:600,
