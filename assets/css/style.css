@@ -125,6 +125,44 @@ body {
   z-index: 999999;
 }
 /**
+ * Cabecera
+ */
+.container-cabecera {
+  width: 100%;
+  height: 100%;
+  /*background: url('../images/slide-2.jpg') fixed no-repeat*/
+  background-size: cover;
+  position: relative;
+}
+.container-cabecera:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
+  opacity: .6;
+}
+.container-cabecera .cont-titulos {
+  margin-top: 100px;
+  padding-top: 30px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+.container-cabecera .cont-titulos h1 {
+  font-family: 'Lobster', cursive;
+  font-size: 40pt;
+  color: #fff;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+.container-cabecera .cont-titulos p {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+/**
  * Noavbar nav-pills to nav-topline
  */
 .nav-topline {
@@ -474,9 +512,10 @@ body {
 }
 .form-home {
   padding: 20px 15px;
-  background: #E02406;
+  background: #FFEF00;
   color: #FFF564;
   border-radius: 4px;
+  font-family: 'Lato', sans-serif;
 }
 .form-home .help-block {
   color: #fff;
@@ -490,8 +529,9 @@ body {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  border-bottom: solid 1px #FF735D;
-  color: #FFF564;
+  text-transform: uppercase;
+  /*border-bottom: solid 1px @color-primary-1;*/
+  color: #FF735D;
 }
 /**
  * Formulario de reserva
@@ -871,6 +911,63 @@ fieldset[disabled] .btn-primary-1.active {
   /*border: 1px solid @color-primary-1;*/
 }
 .thumbnail-item:hover figure > a > img {
+  -moz-transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+/**
+ * Listado items
+ */
+.listado-item {
+  font-family: 'Lato', sans-serif;
+  background: #fff;
+  padding: 0;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  position: relative;
+  transition-property: background, border-radius;
+  transition-duration: .2s,1s;
+  transition-timing-function: linear, ease-in;
+  transition-delay: 0s,1s;
+  webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #fff;
+}
+.listado-item figure {
+  position: relative;
+  border-radius: 3px 0 0 3px;
+  overflow: hidden;
+}
+.listado-item figure a > img {
+  max-width: 100%;
+  -moz-transition: all .3s linear 0s;
+  -webkit-transition: all .3s linear 0s;
+  transition: all .3s linear 0s;
+}
+.listado-item .titulo-item {
+  font-size: 18px;
+  font-weight: 700;
+}
+.listado-item .titulo-item a {
+  color: #333;
+  text-decoration: none;
+}
+.listado-item p {
+  font-size: 14px;
+  font-weight: 300;
+  color: #555;
+}
+.listado-item:hover {
+  webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+  border: 1px solid #FF735D;
+}
+.listado-item:hover .titulo-item a {
+  color: #FF735D;
+}
+.listado-item:hover figure > a > img {
   -moz-transform: scale(1.15);
   -webkit-transform: scale(1.15);
   transform: scale(1.15);

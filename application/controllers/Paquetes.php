@@ -27,6 +27,8 @@ class Paquetes extends CI_Controller {
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
 
+    $data['paquetes'] = $this->Productos->listado(10,0);
+
 
     $this->template->title('Paquetes');
     $this->template->build('paginas/paquetes', $data);

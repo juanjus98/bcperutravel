@@ -6,7 +6,7 @@ echo "</pre>";*/
 <div id="sticky-sidebar">
   <form class="form-vertical" name="buscador" id="buscador" action="" method="post">
    <fieldset class="form-home">
-     <h3>¿En qué fechas viajas?</h3>
+     <h3>Buscar</h3>
      <div class="form-group">
       <label>Desde</label>
       <div class="input-group date">
