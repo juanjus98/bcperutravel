@@ -3,7 +3,10 @@
 print_r($dias);
 echo "</pre>";*/
 ?>
-<section class="main-container">
+<section class="wrapper">
+<div class="container container-principal">
+    <div class="divider_border"></div>
+    <div class="cont-main">
   <div class="row">
     <div class="col-md-3">
       <?php $this->load->view('paginas/iside');?>
@@ -80,5 +83,8 @@ echo "</pre>";*/
     </div>
 
   </div>
+</div>
+</div>
 
 </section>
+<!-- //section .wrapper

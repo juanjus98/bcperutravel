@@ -291,27 +291,5 @@ echo "</pre>";*/
 		</div>
 	</div>
 
-	<div class="container container-respaldados">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<h4>Respaldados por:</h4>
-			</div>
-			<div class="col-md-8 col-md-offset-2">
-				<div class="logo-item">
-					<img class="PaymentMethods-method-logo" src="assets/images/logo_mincetur.jpg">
-				</div>
-				<div class="logo-item">
-					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
-				</div>
-				<div class="logo-item">
-					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
-				</div>
-				<div class="logo-item">
-					<img class="PaymentMethods-method-logo" src="assets/images/visa.png">
-				</div>
-				
-			</div>
-		</div>
-	</div>
 </section>
 <!-- //section .wrapper

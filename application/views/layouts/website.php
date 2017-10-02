@@ -165,6 +165,44 @@ $tag_image = $head_info['image'];
 	<!-- //header_1-->
 	<?php echo @$template['body']; ?>
 	<!-- Footer-->
+
+	<div class="container container-respaldados">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<h4>Respaldados por:</h4>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<?php
+				$respaldados = array(
+					array(
+						'titulo' => 'Ministerio de Comercio Exterior y Turimo',
+						'imagen' => 'assets/images/logo_mincetur.jpg'
+					),
+					array(
+						'titulo' => 'Ministerio de Comercio Exterior y Turimo',
+						'imagen' => 'assets/images/visa.png'
+					),
+					array(
+						'titulo' => 'Ministerio de Comercio Exterior y Turimo',
+						'imagen' => 'assets/images/visa.png'
+					),
+					array(
+						'titulo' => 'Ministerio de Comercio Exterior y Turimo',
+						'imagen' => 'assets/images/visa.png'
+					),
+				);
+				foreach ($respaldados as $key => $value) {
+					?>
+					<div class="logo-item">
+						<img src="<?php echo $value['imagen'];?>" title="<?php echo $value['titulo'];?>">
+					</div>
+					<?php
+				}
+				?>				
+			</div>
+		</div>
+	</div>
+
 	<footer>
 		<section class="nb-footer">
 			<div class="container">

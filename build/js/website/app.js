@@ -6,13 +6,14 @@ progressively.init({
 });
 
 $(function() {
-	//Bootstrap datepicker home
-	$('.datepicker').datepicker({
-		language: "es",
-		autoclose: true,
-		todayHighlight: true,
-		startDate: '+1d',
-	});
+
+//Bootstrap datepicker solo una fecha
+$('.datepicker').datepicker({
+	language: "es",
+	autoclose: true,
+	todayHighlight: true,
+	startDate: '+1d',
+});
 
 /**
  * Datepicker pasajes nacionales
