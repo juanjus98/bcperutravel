@@ -49,9 +49,12 @@ class Paginas extends CI_Controller {
     //Consultar ubigeo
     $ubigeo = $this->Crud->getUbigeoDP();
     $data['ubigeo'] = $ubigeo;
+
     /*echo '<pre>';
     print_r($ubigeo);
     echo "</pre>";*/
+
+    $locations = $this->Crud->getLocations();
 
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
