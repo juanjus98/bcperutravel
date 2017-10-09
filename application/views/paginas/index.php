@@ -1,6 +1,6 @@
 <?php
 /*echo "<pre>";
-print_r($ubigeo);
+print_r($ciudades);
 echo "</pre>";*/
 /*echo phpinfo();*/
 ?>
@@ -47,39 +47,41 @@ echo "</pre>";*/
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active" id="seccion-1">
-								<form class="form-inline">
-									<div class="form-group">
-										<label class="sr-only" for="origen">Origen</label>
-										<input type="text" class="form-control" name="origen" id="origen" placeholder="Origen">
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="destino">Origen</label>
-										<input type="text" class="form-control" name="destino" id="destino" placeholder="Destino">
-									</div>
+								<form class="form-paquetes">
+									<div class="row">
+										<div class="col-md-3 mrg-bottom-15">
+											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Ciudad de destino">
+												<option value=""></option>
+												<?php
+												if(!empty($ciudades)){
+													foreach ($ciudades as $key => $value) {
+														$location_name = $value['country'] . ', ' . $value['city'];
+														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
 
-									<div class="form-group">
-										<label class="sr-only" for="partida">Partida</label>
-										<input type="text" class="form-control" name="partida" id="partida" placeholder="Partida">
-									</div>
+										<div class="col-md-2 mrg-bottom-15">
+											<input type="text" class="form-control" name="partida" placeholder="Mes de salida.">
+										</div>
 
-									<div class="form-group">
-										<label class="sr-only" for="regreso">Regreso</label>
-										<input type="text" class="form-control" name="regreso" id="regreso" placeholder="Regreso">
+										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
 									</div>
-
-									<button type="submit" class="btn btn-primary-1">Buscar</button>
 								</form>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
-								<form name="frm-pasajes">
+								<form name="form-pasajes">
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
 											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Origen">
 												<option value=""></option>
 												<?php
-												if(!empty($ubigeo)){
-													foreach ($ubigeo as $key => $value) {
-														echo '<option value="' . $key . '">' . $value->nombre . '</option>';
+												if(!empty($ciudades)){
+													foreach ($ciudades as $key => $value) {
+														$location_name = $value['country'] . ', ' . $value['city'];
+														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
 													}
 												}
 												?>
@@ -90,9 +92,10 @@ echo "</pre>";*/
 											<select name="destino" id="destino" class="form-control chosen-select" data-placeholder="Destino">
 												<option value=""></option>
 												<?php
-												if(!empty($ubigeo)){
-													foreach ($ubigeo as $key => $value) {
-														echo '<option value="' . $key . '">' . $value->nombre . '</option>';
+												if(!empty($ciudades)){
+													foreach ($ciudades as $key => $value) {
+														$location_name = $value['country'] . ', ' . $value['city'];
+														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
 													}
 												}
 												?>

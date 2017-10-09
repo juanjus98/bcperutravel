@@ -110,6 +110,12 @@ class Productos extends CI_Controller{
         $categorias = $this->Categorias->listado($total_categorias, 0);
         $data['categorias'] = $categorias;
 
+        //Consultar ubigeo
+        $ubigeo = $this->Crud->getUbigeoDP();
+        $data['nacionales'] = $ubigeo;
+        $locations = $this->Crud->getLocations();
+        $data['internacionales'] = $ubigeo;
+
         $data['current_url'] = base_url(uri_string());
         $data['back_url'] = base_url($this->base_ctr . '/index');
 

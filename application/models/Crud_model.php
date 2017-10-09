@@ -134,6 +134,11 @@ function valida_urlkey($data){
    }
 }
 
+function getMonths($num_meses){
+  echo num_meses;
+  return $num_meses; 
+}
+
 /**
  * Paises
  */
