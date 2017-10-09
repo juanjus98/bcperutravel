@@ -34,6 +34,12 @@ class Paginas extends CI_Controller {
   }
 
   public function index() {
+    //Consultar ciudades
+    $this->load->model('ciudades_model', 'Ciudades');
+    $total_ciudades = $this->Ciudades->total_registros();
+    $ciudades = $this->Ciudades->listado($total_ciudades, 0);
+    $data['ciudades'] = $ciudades;
+
     $data['active_link'] = "inicio";
 
     $data['website'] = $this->Inicio->get_website();
@@ -46,16 +52,27 @@ class Paginas extends CI_Controller {
     $data_crud['order_by'] = "t1.orden Asc";
     $data['slider'] = $this->Crud->getRows($data_crud);
 
-    //Consultar ubigeo
-    $ubigeo = $this->Crud->getUbigeoDP();
-    $data['ubigeo'] = $ubigeo;
-    /*echo '<pre>';
-    print_r($ubigeo);
-    echo "</pre>";*/
+    //Consultar meses
+    /*$meses = $this->Crud->getMonths(4);*/
+    
 
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
   }
+
+  /*public function addciudades(){
+    $locations = $this->Crud->getLocations();
+    foreach ($locations as $key => $value) {
+      $data_form = array(
+          "altitude" => $value->altitude,
+          "city" => $value->city,
+          "country" => $value->country,
+          "latitude" => $value->altitude,
+          "longitude" => $value->altitude,
+          );
+      $this->db->insert("ciudades", $data_form);
+    }
+  }*/
 
   public function paquetes($args=null) {
     $data['dias'] = $this->Paquetes->listadoDias();

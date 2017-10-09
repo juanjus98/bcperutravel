@@ -134,6 +134,11 @@ function valida_urlkey($data){
    }
 }
 
+function getMonths($num_meses){
+  echo num_meses;
+  return $num_meses; 
+}
+
 /**
  * Paises
  */
@@ -152,7 +157,7 @@ function getUbigeoPeru(){
 }
 
 /**
- * Ubigeo Departamentos y provincias
+ * Ubigeo Departamentos y provincias nacional
  */
 function getUbigeoDP(){
   $result = $this->getUbigeoPeru();
@@ -176,6 +181,15 @@ function getUbigeoDP(){
 
   return $resultado;
 
+}
+
+/**
+ * Locations; principales ciudades de cada país
+ */
+function getLocations(){
+  $json_file = 'assets/json/ubigeo/locations.json';
+  $jsonResult = json_decode(file_get_contents($json_file));
+  return $jsonResult; 
 }
 
 }
