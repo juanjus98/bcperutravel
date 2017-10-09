@@ -22,24 +22,24 @@ class Productos extends CI_Controller{
 		$this->load->model("productos_model","Productos");
     $this->load->model("categorias_model","Categorias");
 
-		$this->ctr_name = $this->router->fetch_class();
+    $this->ctr_name = $this->router->fetch_class();
     //Base del controlador
-		$this->base_ctr = $this->config->item('admin_path') . '/' . $this->ctr_name;
-		
+    $this->base_ctr = $this->config->item('admin_path') . '/' . $this->ctr_name;
+
 		//Información del usuario que ha iniciado session
-		$this->user_info = $this->auth->user_profile();
+    $this->user_info = $this->auth->user_profile();
 
     $this->load->library("imaupload");
-	}
+  }
 
-	function index(){
-		/*$data['wa_tipo'] = $tipo;*/
-		$data['wa_modulo'] = 'Listado';
-		$data['wa_menu'] = $this->base_title;
+  function index(){
+    /*$data['wa_tipo'] = $tipo;*/
+    $data['wa_modulo'] = 'Listado';
+    $data['wa_menu'] = $this->base_title;
 
 		//URLS
-		$controlador = $this->base_ctr;
-		$data['agregar_url'] = base_url($controlador . '/editar/C');
+    $controlador = $this->base_ctr;
+    $data['agregar_url'] = base_url($controlador . '/editar/C');
 		$data['ver_url'] = base_url($controlador . '/editar/V/'); //Adicionar ID
 		$data['editar_url'] = base_url($controlador . '/editar/E/'); //Adicionar ID
 		$data['eliminar_url'] = base_url($controlador . '/eliminar');
@@ -48,10 +48,10 @@ class Productos extends CI_Controller{
     $data['order_url'] = base_url($controlador . '/uporden');
 
 		//BUSQUEDA
-		$data['campos_busqueda'] = array(
-			't1.codigo' => 'Código',
-      't1.nombre_largo' => 'Nombre producto'
-      );
+    $data['campos_busqueda'] = array(
+     't1.codigo' => 'Código',
+     't1.nombre_largo' => 'Nombre producto'
+   );
 
 		$sessionName = 's_' . $this->primary_table; //Session name
 
@@ -61,7 +61,7 @@ class Productos extends CI_Controller{
     $data['categorias'] = $categorias;
 
 		//Paginacion
-		$base_url = base_url($this->base_ctr . '/index');
+    $base_url = base_url($this->base_ctr . '/index');
         $per_page = 10; //registros por página
         $uri_segment = 4; //segmento de la url
         $num_links = 4; //número de links
@@ -110,11 +110,11 @@ class Productos extends CI_Controller{
         $categorias = $this->Categorias->listado($total_categorias, 0);
         $data['categorias'] = $categorias;
 
-        //Consultar ubigeo
-        $ubigeo = $this->Crud->getUbigeoDP();
-        $data['nacionales'] = $ubigeo;
-        $locations = $this->Crud->getLocations();
-        $data['internacionales'] = $ubigeo;
+        //Consultar ciudades
+        $this->load->model('ciudades_model', 'Ciudades');
+        $total_ciudades = $this->Ciudades->total_registros();
+        $ciudades = $this->Ciudades->listado($total_ciudades, 0);
+        $data['ciudades'] = $ciudades;
 
         $data['current_url'] = base_url(uri_string());
         $data['back_url'] = base_url($this->base_ctr . '/index');
@@ -150,58 +150,63 @@ class Productos extends CI_Controller{
 
         if ($this->input->post()) {
           $post= $this->input->post();
-          $data['post'] = $post; 
+          $data['post'] = $post;
+
+          echo "<pre>";
+          print_r($post);
+          echo "</pre>";
+          die();
 
           $config = array(
             array(
-            'field' => 'nombre_corto',
-            'label' => 'Nombre corto',
-            'rules' => 'required',
-            'errors' => array(
-             'required' => 'Campo requerido.',
+              'field' => 'nombre_corto',
+              'label' => 'Nombre corto',
+              'rules' => 'required',
+              'errors' => array(
+               'required' => 'Campo requerido.',
              )
             ),
-           array(
-            'field' => 'nombre_largo',
-            'label' => 'Nombre largo',
-            'rules' => 'required',
-            'errors' => array(
-             'required' => 'Campo requerido.',
+            array(
+              'field' => 'nombre_largo',
+              'label' => 'Nombre largo',
+              'rules' => 'required',
+              'errors' => array(
+               'required' => 'Campo requerido.',
              )
             ),
-           array(
-            'field' => 'categoria_id',
-            'label' => 'Categoría',
-            'rules' => 'required',
-            'errors' => array(
-             'required' => 'Campo requerido.',
+            array(
+              'field' => 'categoria_id',
+              'label' => 'Categoría',
+              'rules' => 'required',
+              'errors' => array(
+               'required' => 'Campo requerido.',
              )
             ),
-           array(
-            'field' => 'resumen',
-            'label' => 'Resumen',
-            'rules' => 'required',
-            'errors' => array(
-              'required' => 'Campo requerido.',
+            array(
+              'field' => 'resumen',
+              'label' => 'Resumen',
+              'rules' => 'required',
+              'errors' => array(
+                'required' => 'Campo requerido.',
               )
             ),
-           array(
-            'field' => 'precio',
-            'label' => 'Precio',
-            'rules' => 'required',
-            'errors' => array(
-              'required' => 'Campo requerido.',
+            array(
+              'field' => 'precio',
+              'label' => 'Precio',
+              'rules' => 'required',
+              'errors' => array(
+                'required' => 'Campo requerido.',
               )
             )
-           );
+          );
 
           $this->form_validation->set_rules($config);
           $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-        if ($this->form_validation->run() == FALSE){
+          if ($this->form_validation->run() == FALSE){
            /*Error*/
            $data['post'] = $post;
-        }else{
+         }else{
 
           $destacar = (isset($post['destacar'])) ? $post['destacar'] : 0 ;
 
@@ -216,15 +221,15 @@ class Productos extends CI_Controller{
             "keywords" => $post['keywords'],
             "orden" => $post['orden'],
             "destacar" => $destacar
-            );
+          );
 
           //Cargar Imagenes
           $upload_path = $this->config->item('upload_path');
-            if($_FILES["imagen_1"]){
+          if($_FILES["imagen_1"]){
             $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen_1");
           }
 
-            if($_FILES["imagen_2"]){
+          if($_FILES["imagen_2"]){
             $imagen_info2 = $this->imaupload->do_upload($upload_path, "imagen_2");
           }
 
@@ -244,34 +249,34 @@ class Productos extends CI_Controller{
            //Actualizamos la tabla urlkey
            $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
            $this->db->insert("urlkey",$data_urlkey_insert);
-          }
+         }
 
           //Agregar
-          if($tipo == 'C'){
-            $codigo = strtoupper(random_string('alnum',5));
-            $data_form['codigo'] = $codigo;
+         if($tipo == 'C'){
+          $codigo = strtoupper(random_string('alnum',5));
+          $data_form['codigo'] = $codigo;
 
-            $this->db->insert($this->primary_table, $data_form);
-            $unidad_id = $this->db->insert_id();
-            $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
-          }
-
-          //Editar
-          if ($tipo == 'E') {
-            $this->db->where('id', $post['id']);
-            $this->db->update($this->primary_table, $data_form);
-            $unidad_id = $post['id'];
-            $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-          }
-
-          redirect($this->base_ctr . '/index');
+          $this->db->insert($this->primary_table, $data_form);
+          $unidad_id = $this->db->insert_id();
+          $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
         }
 
+          //Editar
+        if ($tipo == 'E') {
+          $this->db->where('id', $post['id']);
+          $this->db->update($this->primary_table, $data_form);
+          $unidad_id = $post['id'];
+          $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+        }
+
+        redirect($this->base_ctr . '/index');
       }
 
-      $this->template->title($data['tipo'] . ' Producto');
-      $this->template->build($this->base_ctr.'/editar', $data);
     }
+
+    $this->template->title($data['tipo'] . ' Producto');
+    $this->template->build($this->base_ctr.'/editar', $data);
+  }
 
 /**
  * Eliminar
@@ -292,7 +297,7 @@ public function eliminar() {
        $data_eliminar = array(
          "eliminar" => $eliminar,
          "estado" => 0
-         );
+       );
        $this->db->where('id', $item);
        $this->db->update($this->primary_table, $data_eliminar);
      }
@@ -337,7 +342,7 @@ function editor($path, $width) {
  /**
  * Ajax actualizar orden
  */
-public function uporden(){
+ public function uporden(){
   if($this->input->post()){
     $post = $this->input->post();
     $data_form = array('orden' => $post['orden']);

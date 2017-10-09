@@ -1,6 +1,6 @@
 <?php
 /*echo '<pre>';
-print_r($post);
+print_r($ciudades);
 echo '</pre>';*/
 ?>
 <div class="row">
@@ -229,35 +229,26 @@ echo '</pre>';*/
                   </tr>
 
                   <tr>
-                     <td>
-                       <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
-                         <div class="col-sm-10">
-                           <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
-                            <option value=""></option>
-                            <?php
-                            if(!empty($provincias)){
-                              foreach ($provincias as $key => $value) {
-                                $provincia = strip_tags($value['provincia']);
-                                $provincia_id = $value['id'];
-                                $selected_ciudad = '';
-                                if(!empty($post['ciudades'])){
-                                  foreach ($post['ciudades'] as $key => $item) {
-                                    if($item == $provincia_id){
-                                      $selected_ciudad = 'selected';
-                                      break;
-                                    }
-                                  }
-                                }
-                                echo '<option value="'.$provincia_id.'" ' . $selected_ciudad . '>'.$provincia.'</option>';
-                              }
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
+                       <div class="col-sm-10">
+                         <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
+                          <option value=""></option>
+                          <?php
+                          if(!empty($ciudades)){
+                            foreach ($ciudades as $key => $value) {
+                              //$selected_ciudad = ($value['id'] = $post['ciudades']) ? 'selected' : '' ;
+                              $location_name = $value['country'] . ', ' . $value['city'];
+                              echo '<option value="'.$value['id'].'">'.$location_name.'</option>';
                             }
-                            ?>
-                          </select>
-                          <?php echo form_error('ciudades[]', '<div class="error">', '</div>'); ?>
-                        </div>
-                      </td>
-                    </tr>
+                          }
+                          ?>
+                        </select>
+                        <?php echo form_error('ciudades[]', '<div class="error">', '</div>'); ?>
+                      </div>
+                    </td>
+                  </tr>
 
                 </tbody>
               </table><br>
