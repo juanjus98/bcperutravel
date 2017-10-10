@@ -152,11 +152,6 @@ class Productos extends CI_Controller{
           $post= $this->input->post();
           $data['post'] = $post;
 
-          echo "<pre>";
-          print_r($post);
-          echo "</pre>";
-          die();
-
           $config = array(
             array(
               'field' => 'nombre_corto',
@@ -223,6 +218,11 @@ class Productos extends CI_Controller{
             "destacar" => $destacar
           );
 
+          if(!empty($post['ciudades'])){
+            $ciudades = implode(",", $post['ciudades']);
+            $data_form['ciudades'] = $ciudades;
+          }
+
           //Cargar Imagenes
           $upload_path = $this->config->item('upload_path');
           if($_FILES["imagen_1"]){
@@ -268,6 +268,9 @@ class Productos extends CI_Controller{
           $unidad_id = $post['id'];
           $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
         }
+
+        //Agregar ciudades
+        
 
         redirect($this->base_ctr . '/index');
       }
