@@ -192,6 +192,22 @@ class Productos extends CI_Controller{
               'errors' => array(
                 'required' => 'Campo requerido.',
               )
+            ),
+            array(
+              'field' => 'ambito',
+              'label' => 'Ambito',
+              'rules' => 'required',
+              'errors' => array(
+                'required' => 'Campo requerido.',
+              )
+            ),
+            array(
+              'field' => 'ciudades[]',
+              'label' => 'Ciudades',
+              'rules' => 'required',
+              'errors' => array(
+                'required' => 'Campo requerido.',
+              )
             )
           );
 
@@ -215,7 +231,8 @@ class Productos extends CI_Controller{
             "precio" => $post['precio'],
             "keywords" => $post['keywords'],
             "orden" => $post['orden'],
-            "destacar" => $destacar
+            "destacar" => $destacar,
+            "ambito" => $post['ambito']
           );
 
           if(!empty($post['ciudades'])){

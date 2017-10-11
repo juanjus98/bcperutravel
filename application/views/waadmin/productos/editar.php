@@ -1,6 +1,6 @@
 <?php
 /*echo '<pre>';
-print_r($ciudades);
+print_r($post);
 echo '</pre>';*/
 ?>
 <div class="row">
@@ -237,10 +237,12 @@ echo '</pre>';*/
                           <option value=""></option>
                           <?php
                           if(!empty($ciudades)){
+                            $post_ciudades = $post['ciudades'];
+                            $post_ciudades = (is_array($post_ciudades)) ? $post_ciudades : explode(',', $post['ciudades']) ;
                             foreach ($ciudades as $key => $value) {
-                              //$selected_ciudad = ($value['id'] = $post['ciudades']) ? 'selected' : '' ;
+                              $selected_ciudad = (in_array($value['id'], $post_ciudades)) ? 'selected' : '' ;
                               $location_name = $value['country'] . ', ' . $value['city'];
-                              echo '<option value="'.$value['id'].'">'.$location_name.'</option>';
+                              echo '<option value="'.$value['id'].'" ' . $selected_ciudad . '>'.$location_name.'</option>';
                             }
                           }
                           ?>
