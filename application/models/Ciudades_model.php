@@ -92,6 +92,52 @@ class Ciudades_model extends CI_Model {
         return $resultado;
     }
 
+/**
+     * Listado de ciudades
+     *
+     * Muestra un listado de todas las ciudades
+     *
+     * @package     ciudades
+     * @author      Juan Julio Sandoval Layza
+     * @copyright   webApu.com 
+     * @since       2017-07-07
+     * @version     Version 1.0
+     */
+    function listado_all($data = NULL) {
+        //Where
+        $where = array('t1.estado != ' => 0);
+
+        //Where
+        if (!empty($data['country'])) {
+            $where["t1.country"] = $data['country'];
+        }
+
+        //Like
+        if (!empty($data['campo']) && !empty($data['busqueda'])) {
+            $like[$data['campo']] = $data['busqueda'];
+        } else {
+            $like["t1.city"] = "";
+        }
+
+        //ORDENAR POR
+        if (!empty($data['ordenar_por'])) {
+            $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
+        } else {
+            $order_by = 't1.city ASC';
+        }
+
+        $resultado = $this->db->select("t1.id, t1.country, t1.city")
+        ->where($where)
+        ->like($like)
+        ->order_by($order_by)
+        ->get("ciudades as t1")
+        ->result_array();
+
+        /*echo $this->db->last_query();*/
+
+        return $resultado;
+    }
+
     /**
      * Cosultar ciudades
      *

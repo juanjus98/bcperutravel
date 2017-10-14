@@ -50,14 +50,15 @@ echo "</pre>";*/
 								<form class="form-paquetes">
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
+											<input type="text" name="ciudad_destino" id="ciudad_destino" class="form-control" placeholder="Ciudad de destino.">
 											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Ciudad de destino">
 												<option value=""></option>
 												<?php
 												if(!empty($ciudades)){
-													foreach ($ciudades as $key => $value) {
+													/*foreach ($ciudades as $key => $value) {
 														$location_name = $value['country'] . ', ' . $value['city'];
 														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}
+													}*/
 												}
 												?>
 											</select>
@@ -79,10 +80,10 @@ echo "</pre>";*/
 												<option value=""></option>
 												<?php
 												if(!empty($ciudades)){
-													foreach ($ciudades as $key => $value) {
+													/*foreach ($ciudades as $key => $value) {
 														$location_name = $value['country'] . ', ' . $value['city'];
 														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}
+													}*/
 												}
 												?>
 											</select>
@@ -93,10 +94,10 @@ echo "</pre>";*/
 												<option value=""></option>
 												<?php
 												if(!empty($ciudades)){
-													foreach ($ciudades as $key => $value) {
+													/*foreach ($ciudades as $key => $value) {
 														$location_name = $value['country'] . ', ' . $value['city'];
 														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}
+													}*/
 												}
 												?>
 											</select>
