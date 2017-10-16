@@ -102,8 +102,8 @@ $tag_image = $head_info['image'];
 <!-- //Bootstrap datepicker-->
 
 <!-- assets/plugins/typeahead.jquery.js-->
-<link rel="stylesheet" type="text/css" href="assets/plugins/typehead/jquery.typeahead.css" />
-<script src="assets/plugins/typehead/jquery.typeahead.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="assets/plugins/typehead/jquery.typeahead.css" />
+<script src="assets/plugins/typehead/jquery.typeahead.js"></script> -->
 
 <link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
 

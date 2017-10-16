@@ -50,18 +50,18 @@ echo "</pre>";*/
 								<form class="form-paquetes">
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
-											<input type="text" name="ciudad_destino" id="ciudad_destino" class="form-control" placeholder="Ciudad de destino.">
-											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Ciudad de destino">
-												<option value=""></option>
-												<?php
-												if(!empty($ciudades)){
-													/*foreach ($ciudades as $key => $value) {
-														$location_name = $value['country'] . ', ' . $value['city'];
-														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}*/
-												}
-												?>
-											</select>
+											<div class="dropdown">
+											<input type="text" name="ciudad_destino" id="ciudad_destino" class="form-control" placeholder="Ciudad de destino." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+											<ul class="dropdown-menu" aria-labelledby="ciudad_destino" id="ciudades-dropdown">
+												<li class="dropdown-header">LISTADO DE CIUDADES</li>
+												<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>
+												<!-- <li><a href="#">Action</a></li>
+												<li><a href="#">Another action</a></li>
+												<li><a href="#">Something else here</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#">Separated link</a></li> -->
+											</ul>
+											</div>
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15">

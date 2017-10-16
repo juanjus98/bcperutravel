@@ -71,6 +71,10 @@ $route['carrusellist'] = 'paginas/carrusellist';
 //Servicio servicio
 $route['servicio/(:any)'] = 'paginas/servicio/$1';
 
+/**
+ * json
+ */
+$route['json/ciudades'] = 'ciudades_json/all';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

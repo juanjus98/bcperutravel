@@ -128,10 +128,11 @@ class Ciudades_model extends CI_Model {
 
         $resultado = $this->db->select("t1.id, t1.country, t1.city")
         ->where($where)
-        ->like($like)
+        ->like('city', $data['busqueda'], 'after')
         ->order_by($order_by)
         ->get("ciudades as t1")
         ->result_array();
+
 
         /*echo $this->db->last_query();*/
 

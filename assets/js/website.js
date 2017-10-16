@@ -50,99 +50,55 @@ progressively.init({
 
 $(function() {
 
-/**
- * Busqueuda de paquetes input ciudad_destino
- */
- /*$(document).on("click", "#ciudad_destino", function() {
- 	$(this)
- 	.popover({ 
- 		title: 'Twitter Bootstrap Popover', 
- 		content: "It's so simple to create a tooltop for my website!",
- 		placement : "bottom"
- 	})
- 	.blur(function () {
- 		$(this).popover('hide');
- 	});
- 	return false;
- });*/
 
- /*var ajaxUrl = base_url + 'ciudades_json/filter';*/
- var ajaxUrl = 'assets/json/ubigeo/locations.json';
+ $('#ciudad_destino').keyup(function(){
+ 	var ajaxUrl = base_url + 'json/ciudades';
+ 	var q = $(this).val();
+  	var dataSearch = { q: q };
 
- $.typeahead({
- 	input: '#ciudad_destino',
- 	minLength: 1,
- 	maxItem: 20,
- 	order: "asc",
- 	href: "https://en.wikipedia.org/?title={{display}}",
- 	template: "{{display}} <small style='color:#999;'>{{group}}</small>",
- 	source: {
- 		/*country: {
- 			ajax: {
- 				url: "/jquerytypeahead/country_v2.json",
- 				path: "data.country"
- 			}
- 		},*/
- 		capital: {
- 			ajax: {
- 				type: "POST",
- 				url: ajaxUrl,
- 				path: "data.city",
- 				/*data: {myKey: "myValue"}*/
- 			}
- 		}
- 	},
- 	callback: {
- 		onNavigateAfter: function (node, lis, a, item, query, event) {
- 			if (~[38,40].indexOf(event.keyCode)) {
- 				var resultList = node.closest("form").find("ul.typeahead__list"),
- 				activeLi = lis.filter("li.active"),
- 				offsetTop = activeLi[0] && activeLi[0].offsetTop - (resultList.height() / 2) || 0;
+  	var contDropdown = $("#ciudades-dropdown");
+	
+	if(q.length > 2){
+		$.ajax({
+			method: "POST",
+			url: ajaxUrl,
+			data: dataSearch,
+			dataType : 'json',
+			beforeSend: function(){
+				// Handle the beforeSend event
+				/*console.log("Cargando...");*/
+				contDropdown.find('.cont-load').fadeIn();
+			}
+		})
+		.done(function( result ) {
+			contDropdown.empty();
+			var item = '<li class="dropdown-header">LISTADO DE CIUDADES</li>';
+			item += '<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>';
+			$.each(result, function( index, value ) {
+				item += '<li><a href="#" class="city-item" data-cityid="' + value.id + '" data-city="' + value.city + '">' + value.city + ', ' + value.country + '</a></li>';
+				/*console.log(value);*/
+			});
+			contDropdown.append( item );
+		});
+	}else{
+		contDropdown.empty();
+		var item = '<li class="dropdown-header">LISTADO DE CIUDADES</li>';
+		item += '<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>';
+		contDropdown.append( item );
+	}
 
- 				resultList.scrollTop(offsetTop);
- 			}
-
- 		},
- 		onClickAfter: function (node, a, item, event) {
-
- 			event.preventDefault();
-
- 			var r = confirm("You will be redirected to:\n" + item.href + "\n\nContinue?");
- 			if (r == true) {
- 				window.open(item.href);
- 			}
-
- 			$('#result-container').text('');
-
- 		},
- 		onResult: function (node, query, result, resultCount) {
- 			if (query === "") return;
-
- 			var text = "";
- 			if (result.length > 0 && result.length < resultCount) {
- 				text = "Showing <strong>" + result.length + "</strong> of <strong>" + resultCount + '</strong> elements matching "' + query + '"';
- 			} else if (result.length > 0) {
- 				text = 'Showing <strong>' + result.length + '</strong> elements matching "' + query + '"';
- 			} else {
- 				text = 'No results matching "' + query + '"';
- 			}
- 			$('#result-container').html(text);
-
- 		},
- 		onMouseEnter: function (node, a, item, event) {
-
- 			if (item.group === "country") {
- 				$(a).append('<span class="flag-chart flag-' + item.display.replace(' ', '-').toLowerCase() + '"></span>');
- 			}
-
- 		},
- 		onMouseLeave: function (node, a, item, event) {
-
- 			$(a).find('.flag-chart').remove();
-
- 		}
- 	}
  });
+
+//city-item
+$(document).on("click",".city-item",function() {
+	var cityid = $(this).data('cityid');
+	var city = $(this).data('city');
+	$('#ciudad_destino').val(city);
+	/*console.log(cityid);*/
+	$("#ciudades-dropdown").dropdown('toggle');
+	return false;
+});
+ 
 
 
 //Bootstrap datepicker solo una fecha
