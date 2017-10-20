@@ -11,18 +11,18 @@ echo '</pre>';*/
                 <form name="frm-buscar" id="frm-buscar" method="post" action="" role="search">
                     <div class="row pad" style="padding-bottom: 0px;">
 
-                    <div class="col-sm-2">
-                        <select name="categoria_id" id="categoria_id" data-placeholder="Seleccionar categoría" class="chosen-select">
-                            <option value=""></option>
-                            <?php
-                            if(!empty($categorias)){
-                              foreach ($categorias as $key => $value) {
-                                $selected_categoria = ($value['id'] == $post['categoria_id']) ? 'selected' : '' ;
-                                echo '<option value="'.$value['id'].'" ' . $selected_categoria . '>'.$value['nombre'].'</option>';
-                              }
-                            }
-                            ?>
-                          </select>
+                        <div class="col-sm-2">
+                        <select name="tipo_transporte" id="tipo_transporte" class="form-control input-sm">
+                             <?php
+                             $transportes = $this->tipos_transporte;
+                             if (!empty($transportes)) {
+                               foreach ($transportes as $key => $value) {
+                                $selected_transporte = ($key == $post['tipo_transporte']) ? 'selected' : '' ;
+                                 echo '<option value="'.$key.'" '.$selected_transporte.'>'.$value.'</option>';
+                               }
+                             }
+                             ?>
+                           </select>
                     </div>
 
                         <div class="col-sm-2">
@@ -70,11 +70,10 @@ echo '</pre>';*/
                         <tbody>
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
-                                <th>Código</th>
-                                <th>Nombre producto</th>
-                                <th>Categoría</th>
-                                <!-- <th>Slug</th> -->
-                                <th class="text-center">Orden</th>
+                                <th>Nombre</th>
+                                <th>Imagen</th>
+                                <th>Slug</th>
+                                <th>Orden</th>
                                 <th></th>
                             </tr>
                             <?php
@@ -85,10 +84,11 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
-                                        <td><?php echo $item['codigo']; ?></td>
-                                        <td><?php echo $item['nombre_largo']; ?></td>
-                                        <td><?php echo $item['categoria_nombre']; ?></td>
-                                        <!-- <td><?php echo $item['url_key']; ?></td> -->
+                                        <td><?php echo $item['nombre']; ?></td>
+                                        <td>
+                                        <a href="<?php echo base_url($this->config->item('upload_path') . $item['imagen']); ?>" class="strip" data-strip-caption="<?php echo $item['nombre']; ?>" target="_blank"><?php echo $item['imagen']; ?></a>
+                                        </td>
+                                        <td><?php echo $item['url_key']; ?></td>
 
                                         <td class="text-center" data-controller="<?php echo $order_url;?>" data-identificador="<?php echo $item['id'];?>">
                                             <div class="box_orden">

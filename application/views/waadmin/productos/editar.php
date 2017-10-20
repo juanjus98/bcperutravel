@@ -259,6 +259,58 @@ echo '</pre>';*/
                 <thead class="thead-default">
                  <tr>
                    <th>
+                     <i class="fa fa-map-marker"></i> Transporte.
+                   </th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                      <label for="tipo_transporte" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Tipo transporte:</label>
+                         <div class="col-sm-4">
+                           <select name="tipo_transporte" id="tipo_transporte" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                             <?php
+                             $transportes = $this->tipos_transporte;
+                             if (!empty($transportes)) {
+                               foreach ($transportes as $key => $value) {
+                                $selected_transporte = ($key == $post['tipo_transporte']) ? 'selected' : '' ;
+                                 echo '<option value="'.$key.'" '.$selected_transporte.'>'.$value.'</option>';
+                               }
+                             }
+                             ?>
+                           </select>
+                           <?php echo form_error('tipo_transporte', '<div class="error">', '</div>'); ?>
+                         </div>
+
+                       <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Empresa transporte:</label>
+                       <div class="col-sm-4">
+                         <select name="ambito" id="ambito" class="form-control">
+                          <option value="">Seleccionar</option>
+                          <?php
+                          $ambitos = array(
+                            'INTL' => 'Internacional', 
+                            'NAL' => 'Nacional', 
+                          );
+                          if(!empty($ambitos)){
+                            foreach ($ambitos as $key => $value) {
+                              $selected_ambito = ($key == $post['ambito']) ? 'selected' : '' ;
+                              echo '<option value="'.$key.'" ' . $selected_ambito . '>'.$value.'</option>';
+                            }
+                          }
+                          ?>
+                        </select>
+                        <?php echo form_error('ambito', '<div class="error">', '</div>'); ?>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><br>
+
+              <table class="table table-bordered">
+                <thead class="thead-default">
+                 <tr>
+                   <th>
                      <i class="fa fa-list"></i> Bloques y detalles.
                      <span class="pull-right">
                       <a href="#" class="btn btn-info btn-xs" id="btn-add-box">

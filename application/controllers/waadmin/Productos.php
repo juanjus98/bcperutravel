@@ -7,6 +7,13 @@ class Productos extends CI_Controller{
 	private $primary_table = "producto"; //Tabla principal
 	public $base_title = "Productos";
 
+    public $tipos_transporte = array(
+    1 => 'Terrestre', 
+    2 => 'Aéreo',
+    3 => 'Marino',
+    4 => 'Fluvial',
+  );
+
 	public  $user_info;
 
 	function __construct(){

@@ -34,7 +34,7 @@ class Productos_model extends CI_Model {
             $like["t1.nombre_corto"] = "";
         }
 
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre")
+        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key")
         ->join("categoria as t2","t2.id = t1.categoria_id","left")
         ->where($where)
         ->like($like)
@@ -82,7 +82,7 @@ class Productos_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre")
+        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key")
         ->join("categoria as t2","t2.id = t1.categoria_id","left")
         ->where($where)
         ->like($like)
@@ -115,7 +115,7 @@ class Productos_model extends CI_Model {
             $where['t1.url_key'] = $data['url_key'];
         }
 
-        $result = $this->db->select("t1.*, t2.nombre as categoria_nombre, t3.nombre as marca_nombre")
+        $result = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key, t3.nombre as marca_nombre")
         ->join("categoria as t2","t2.id = t1.categoria_id","left")
         ->join("marca as t3","t3.id = t1.marca_id","left")
         ->where($where)
@@ -182,7 +182,7 @@ class Productos_model extends CI_Model {
         //ORDENAR POR
         $order_by = 't1.agregar DESC';
 
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t3.nombre as marca_nombre")
+        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key, t3.nombre as marca_nombre")
         ->join("categoria as t2","t2.id = t1.categoria_id")
         ->join("marca as t3","t3.id = t1.marca_id")
         ->where($where)
