@@ -14,11 +14,11 @@ class Transportes extends CI_Controller{
     4 => 'Fluvial',
   );
 
-	public  $user_info;
+  public  $user_info;
 
-	function __construct(){
-		parent::__construct();
-		$this->template->set_layout('waadmin/intranet.php');
+  function __construct(){
+    parent::__construct();
+    $this->template->set_layout('waadmin/intranet.php');
 
 		/**
 		 * Verficamos si existe una session activa
@@ -36,16 +36,16 @@ class Transportes extends CI_Controller{
 		$this->user_info = $this->auth->user_profile();
 
     $this->load->library("imaupload");
-	}
+  }
 
-	function index(){
-		/*$data['wa_tipo'] = $tipo;*/
-		$data['wa_modulo'] = 'Listado';
-		$data['wa_menu'] = $this->base_title;
+  function index(){
+    /*$data['wa_tipo'] = $tipo;*/
+    $data['wa_modulo'] = 'Listado';
+    $data['wa_menu'] = $this->base_title;
 
 		//URLS
-		$controlador = $this->base_ctr;
-		$data['agregar_url'] = base_url($controlador . '/editar/C');
+    $controlador = $this->base_ctr;
+    $data['agregar_url'] = base_url($controlador . '/editar/C');
 		$data['ver_url'] = base_url($controlador . '/editar/V/'); //Adicionar ID
 		$data['editar_url'] = base_url($controlador . '/editar/E/'); //Adicionar ID
 		$data['eliminar_url'] = base_url($controlador . '/eliminar');
@@ -54,9 +54,9 @@ class Transportes extends CI_Controller{
     $data['order_url'] = base_url($controlador . '/uporden');
 
 		//BUSQUEDA
-		$data['campos_busqueda'] = array(
-			't1.nombre' => 'Nombre'
-			);
+    $data['campos_busqueda'] = array(
+     't1.nombre' => 'Nombre'
+   );
 
 		$sessionName = 's_' . $this->primary_table; //Session name
 
@@ -98,122 +98,122 @@ class Transportes extends CI_Controller{
 
         $this->template->title('Listado ' . $this->base_title);
         $this->template->build($this->base_ctr . '/index', $data);
-    }
+      }
 
-    function editar($tipo='C',$id=NULL){
-    	$data['current_url'] = base_url(uri_string());
-    	$data['back_url'] = base_url($this->base_ctr . '/index');
-      
-    	if(isset($id)){
-    		$data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
-    	}
+      function editar($tipo='C',$id=NULL){
+       $data['current_url'] = base_url(uri_string());
+       $data['back_url'] = base_url($this->base_ctr . '/index');
 
-    	switch ($tipo) {
-    		case 'C':
-    		$data['tipo'] = 'Agregar';
-    		break;
-    		case 'E':
-    		$data['tipo'] = 'Editar';
-    		break;
-    		case 'V':
-    		$data['tipo'] = 'Visualizar';
-    		break;
-    	}
+       if(isset($id)){
+        $data['editar_url'] = base_url($this->base_ctr . '/editar/E/' . $id);
+      }
 
-    	$data['wa_tipo'] = $tipo;
-    	$data['wa_modulo'] = $data['tipo'];
-    	$data['wa_menu'] = 'Transporte';
+      switch ($tipo) {
+        case 'C':
+        $data['tipo'] = 'Agregar';
+        break;
+        case 'E':
+        $data['tipo'] = 'Editar';
+        break;
+        case 'V':
+        $data['tipo'] = 'Visualizar';
+        break;
+      }
+
+      $data['wa_tipo'] = $tipo;
+      $data['wa_modulo'] = $data['tipo'];
+      $data['wa_menu'] = 'Transporte';
 
 
-    	if($tipo == 'E' || $tipo == 'V'){
-    		$data_row = array('id' => $id);
+      if($tipo == 'E' || $tipo == 'V'){
+        $data_row = array('id' => $id);
         $result = $this->Transportes->get_row($data_row);
         $row_id = $result['id'];
-    		$data['post'] = $result;
-    	}     
+        $data['post'] = $result;
+      }     
 
-    	if ($this->input->post()) {
-    		$post= $this->input->post();
-    		$data['post'] = $post; 
+      if ($this->input->post()) {
+        $post= $this->input->post();
+        $data['post'] = $post; 
 
-    		$config = array(
-    			array(
-    				'field' => 'nombre',
-    				'label' => 'Nombre',
-    				'rules' => 'required',
-    				'errors' => array(
-    					'required' => 'Campo requerido.',
-    					)
-    				),
-          array(
-            'field' => 'orden',
-            'label' => 'Orden',
-            'rules' => 'required',
-            'errors' => array(
-              'required' => 'Campo requerido.',
-              )
-            )
-    			);
+        $config = array(
+         array(
+          'field' => 'nombre',
+          'label' => 'Nombre',
+          'rules' => 'required',
+          'errors' => array(
+           'required' => 'Campo requerido.',
+         )
+        ),
+         array(
+          'field' => 'orden',
+          'label' => 'Orden',
+          'rules' => 'required',
+          'errors' => array(
+            'required' => 'Campo requerido.',
+          )
+        )
+       );
 
-    		$this->form_validation->set_rules($config);
-    		$this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-    		if ($this->form_validation->run() == FALSE){
-    			/*Error*/
-    			$data['post'] = $post;
-    		}else{
+        if ($this->form_validation->run() == FALSE){
+         /*Error*/
+         $data['post'] = $post;
+       }else{
 
           //Cargar Imagen
-          $upload_path = $this->config->item('upload_path');
-          if($_FILES["imagen"]){
-            $imagen_info = $this->imaupload->do_upload($upload_path, "imagen");
-          }
+        $upload_path = $this->config->item('upload_path');
+        if($_FILES["imagen"]){
+          $imagen_info = $this->imaupload->do_upload($upload_path, "imagen");
+        }
 
-    			$data_form = array(
-            "tipo_transporte" => $post['tipo_transporte'],
-    				"nombre" => $post['nombre'],
-    				"descripcion" => $post['descripcion'],
-            "orden" => $post['orden'],
-    				);
+        $data_form = array(
+          "tipo_transporte" => $post['tipo_transporte'],
+          "nombre" => $post['nombre'],
+          "descripcion" => $post['descripcion'],
+          "orden" => $post['orden'],
+        );
 
           //cargar imágenes
-          if (!empty($imagen_info['upload_data'])) {
-            $data_form['imagen'] = $imagen_info['upload_data']['file_name'];
-          }
+        if (!empty($imagen_info['upload_data'])) {
+          $data_form['imagen'] = $imagen_info['upload_data']['file_name'];
+        }
 
-          if(empty($post['url_key_pre'])){
-            $data_urlkey = array('tipo' => 'CAT', 'urlkey' => $post['nombre']);
-            $url_key = $this->Crud->get_urlkey($data_urlkey);
-            $data_form['url_key'] = $url_key;
+        if(empty($post['url_key_pre'])){
+          $data_urlkey = array('tipo' => 'CAT', 'urlkey' => $post['nombre']);
+          $url_key = $this->Crud->get_urlkey($data_urlkey);
+          $data_form['url_key'] = $url_key;
 
             //Actualizamos la tabla urlkey
-            $data_urlkey_insert = array('tipo' => 'CAT', 'urlkey' => $url_key);
-            $this->db->insert("urlkey",$data_urlkey_insert);
-          }
+          $data_urlkey_insert = array('tipo' => 'CAT', 'urlkey' => $url_key);
+          $this->db->insert("urlkey",$data_urlkey_insert);
+        }
 
           //Agregar
-    			if($tipo == 'C'){
-    				$this->db->insert($this->primary_table, $data_form);
-    				$row_id = $this->db->insert_id();
-    				$this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
-    			}
+        if($tipo == 'C'){
+          $this->db->insert($this->primary_table, $data_form);
+          $row_id = $this->db->insert_id();
+          $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
+        }
 
           		//Editar
-    			if ($tipo == 'E') {
-    				$this->db->where('id', $post['id']);
-    				$this->db->update($this->primary_table, $data_form);
-    				$row_id = $post['id'];
-    				$this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-    			}
+        if ($tipo == 'E') {
+          $this->db->where('id', $post['id']);
+          $this->db->update($this->primary_table, $data_form);
+          $row_id = $post['id'];
+          $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+        }
 
-    			redirect($this->base_ctr . '/index');
-    		}
+        redirect($this->base_ctr . '/index');
+      }
 
-    	}
-
-    	$this->template->title($data['tipo'] . ' Transporte');
-    	$this->template->build($this->base_ctr.'/editar', $data);
     }
+
+    $this->template->title($data['tipo'] . ' Transporte');
+    $this->template->build($this->base_ctr.'/editar', $data);
+  }
 
 /**
  * Eliminar
@@ -225,38 +225,38 @@ class Transportes extends CI_Controller{
  * @since       26-02-2015
  * @version     Version 1.0
  */
- public function eliminar() {
-   if ($this->input->post()) {
-       $items = $this->input->post('items');
-       if (!empty($items)) {
-           foreach ($items as $item) {
-               $eliminar = date("Y-m-d H:i:s");
-               $data_eliminar = array(
-                   "eliminar" => $eliminar,
-                   "estado" => 0
-                   );
-               $this->db->where('id', $item);
-               $this->db->update($this->primary_table, $data_eliminar);
-           }
-           $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
-           redirect($this->base_ctr . "/index");
-       } else {
-           $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-           redirect($this->base_ctr . "/index");
-       }
+public function eliminar() {
+ if ($this->input->post()) {
+   $items = $this->input->post('items');
+   if (!empty($items)) {
+     foreach ($items as $item) {
+       $eliminar = date("Y-m-d H:i:s");
+       $data_eliminar = array(
+         "eliminar" => $eliminar,
+         "estado" => 0
+       );
+       $this->db->where('id', $item);
+       $this->db->update($this->primary_table, $data_eliminar);
+     }
+     $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
+     redirect($this->base_ctr . "/index");
    } else {
-       $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-       redirect($this->base_ctr . "/index");
+     $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+     redirect($this->base_ctr . "/index");
    }
+ } else {
+   $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+   redirect($this->base_ctr . "/index");
+ }
 
-   $this->template->title('Eliminar.');
-   $this->template->build('inicio');
+ $this->template->title('Eliminar.');
+ $this->template->build('inicio');
 }
 
  /**
  * Ajax actualizar orden
  */
-public function uporden(){
+ public function uporden(){
   if($this->input->post()){
     $post = $this->input->post();
     $data_form = array('orden' => $post['orden']);
@@ -264,6 +264,25 @@ public function uporden(){
     $this->db->update($this->primary_table, $data_form);
     echo "Orden actualizado.";
   }
+}
+
+/**
+ * Json transporte
+ */
+public function jsonTransportes(){
+
+  $post = array(
+    'tipo_transporte' => 1, 
+    'ordenar_por' => 'nombre',
+    'ordentipo' => 'ASC'
+  );
+
+  $per_page = $this->Transportes->total_registros($post);
+  $listado = $this->Transportes->listado($per_page, 0, $post);
+
+  $this->output->set_content_type('application/json');
+  $this->output->set_output(json_encode($listado));
+
 }
 
 }

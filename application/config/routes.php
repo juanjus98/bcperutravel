@@ -75,6 +75,7 @@ $route['servicio/(:any)'] = 'paginas/servicio/$1';
  * json
  */
 $route['json/ciudades'] = 'ciudades_json/all';
+$route['waadmin/json/transportes'] = 'waadmin/transportes/jsontransportes';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -266,10 +266,11 @@ echo '</pre>';*/
                <tbody>
                  <tr>
                    <td>
-                     <div class="form-group" style="margin-bottom: 0px;">
+                     <div class="form-group" id="jq-dynamic-select" style="margin-bottom: 0px;">
                       <label for="tipo_transporte" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Tipo transporte:</label>
                          <div class="col-sm-4">
-                           <select name="tipo_transporte" id="tipo_transporte" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <select name="tipo_transporte" id="tipo_transporte" class="step1 form-control" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                            <option value="">Seleccionar</option>
                              <?php
                              $transportes = $this->tipos_transporte;
                              if (!empty($transportes)) {
@@ -285,10 +286,10 @@ echo '</pre>';*/
 
                        <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Empresa transporte:</label>
                        <div class="col-sm-4">
-                         <select name="ambito" id="ambito" class="form-control">
+                         <select name="transporte_id" id="transporte_id" class="step2 form-control" disabled>
                           <option value="">Seleccionar</option>
                           <?php
-                          $ambitos = array(
+                          /*$ambitos = array(
                             'INTL' => 'Internacional', 
                             'NAL' => 'Nacional', 
                           );
@@ -297,10 +298,10 @@ echo '</pre>';*/
                               $selected_ambito = ($key == $post['ambito']) ? 'selected' : '' ;
                               echo '<option value="'.$key.'" ' . $selected_ambito . '>'.$value.'</option>';
                             }
-                          }
+                          }*/
                           ?>
                         </select>
-                        <?php echo form_error('ambito', '<div class="error">', '</div>'); ?>
+                        <?php echo form_error('transporte_id', '<div class="error">', '</div>'); ?>
                       </div>
                     </td>
                   </tr>
