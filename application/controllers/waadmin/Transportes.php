@@ -271,14 +271,21 @@ public function eliminar() {
  */
 public function jsonTransportes(){
 
-  $post = array(
-    'tipo_transporte' => 1, 
+  $data_sel = array(
+    /*'tipo_transporte' => 1, */
     'ordenar_por' => 'nombre',
     'ordentipo' => 'ASC'
   );
 
-  $per_page = $this->Transportes->total_registros($post);
-  $listado = $this->Transportes->listado($per_page, 0, $post);
+  if($this->input->post()){
+    $post = $this->input->post();
+    if (!empty($post['q'])) {
+      $data_sel['tipo_transporte'] = $post['q'];
+    }
+  }
+
+  $per_page = $this->Transportes->total_registros($data_sel);
+  $listado = $this->Transportes->listado($per_page, 0, $data_sel);
 
   $this->output->set_content_type('application/json');
   $this->output->set_output(json_encode($listado));

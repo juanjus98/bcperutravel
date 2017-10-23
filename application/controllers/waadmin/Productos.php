@@ -14,6 +14,27 @@ class Productos extends CI_Controller{
     4 => 'Fluvial',
   );
 
+    public $paquete_incluye_list = array(
+    1 => 'Vuelo', 
+    2 => 'Traslados',
+    3 => 'Estadia',
+  );
+
+  public $listado_meses = array(
+    1 => 'ENE', 
+    2 => 'FEB',
+    3 => 'MAR',
+    4 => 'ABR',
+    5 => 'MAY',
+    6 => 'JUN',
+    7 => 'JUL',
+    8 => 'AGO',
+    9 => 'SET',
+    10 => 'OCT',
+    11 => 'NOV',
+    12 => 'DIC'
+  );
+
 	public  $user_info;
 
 	function __construct(){
@@ -28,6 +49,7 @@ class Productos extends CI_Controller{
 		$this->load->model("crud_model","Crud");
 		$this->load->model("productos_model","Productos");
     $this->load->model("categorias_model","Categorias");
+    $this->load->model("transportes_model","Transportes");
 
     $this->ctr_name = $this->router->fetch_class();
     //Base del controlador
@@ -149,9 +171,22 @@ class Productos extends CI_Controller{
 
         if($tipo == 'E' || $tipo == 'V'){
           $data_row = array('id' => $id);
-          $result = $this->Productos->get_row($data_row);
-          $row_id = $result['id'];
-          $data['post'] = $result;
+          $post = $this->Productos->get_row($data_row);
+          $row_id = $post['id'];
+          $data['post'] = $post;
+
+
+          //Empresas de transporte
+        $data_empresas = array(
+          'tipo_transporte' => $post['tipo_transporte'],
+          'ordenar_por' => 'nombre',
+          'ordentipo' => 'ASC',
+        );
+
+        $total_empresas = $this->Transportes->total_registros($data_empresas);
+        $listado_empresas = $this->Transportes->listado($total_empresas, 0, $data_empresas);
+        $data['empresas_transporte'] = $listado_empresas;
+
         }
 
 
@@ -199,22 +234,6 @@ class Productos extends CI_Controller{
               'errors' => array(
                 'required' => 'Campo requerido.',
               )
-            ),
-            array(
-              'field' => 'ambito',
-              'label' => 'Ambito',
-              'rules' => 'required',
-              'errors' => array(
-                'required' => 'Campo requerido.',
-              )
-            ),
-            array(
-              'field' => 'ciudades[]',
-              'label' => 'Ciudades',
-              'rules' => 'required',
-              'errors' => array(
-                'required' => 'Campo requerido.',
-              )
             )
           );
 
@@ -227,24 +246,50 @@ class Productos extends CI_Controller{
          }else{
 
           $destacar = (isset($post['destacar'])) ? $post['destacar'] : 0 ;
+          $mostrar_descuento = (isset($post['mostrar_descuento'])) ? $post['mostrar_descuento'] : 0 ;
+
+          $categoria_id = $post['categoria_id'];
 
           $data_form = array(
-            "categoria_id" => $post['categoria_id'],
+            "categoria_id" => $categoria_id,
             "nombre_corto" => $post['nombre_corto'],
             "nombre_largo" => $post['nombre_largo'],
             "resumen" => $post['resumen'],
             "descripcion" => $post['descripcion'],
             "precio_moneda" => $post['precio_moneda'],
             "precio" => $post['precio'],
+            "precio_descuento" => $post['precio_descuento'],
+            "mostrar_descuento" => $mostrar_descuento,
             "keywords" => $post['keywords'],
             "orden" => $post['orden'],
             "destacar" => $destacar,
-            "ambito" => $post['ambito']
           );
 
-          if(!empty($post['ciudades'])){
-            $ciudades = implode(",", $post['ciudades']);
-            $data_form['ciudades'] = $ciudades;
+          //Paquetes turisticos
+          if($categoria_id == 6){
+            $data_form['ambito'] = $post['ambito'];
+            if(!empty($post['ciudades'])){
+                $ciudades = implode(",", $post['ciudades']);
+                $paquete_meses = implode(",", $post['paquete_meses']);
+
+                $data_form['ciudades'] = $ciudades;
+                $data_form['paquete_meses'] = $paquete_meses;
+                $data_form['paquete_noches'] = $post['paquete_noches'];
+
+            }
+
+            if(!empty($post['paquete_incluye'])){
+                $paquete_incluye = implode(",", $post['paquete_incluye']);
+                $data_form['paquete_incluye'] = $paquete_incluye;
+            }
+          }
+
+          //Tickets
+          if ($categoria_id == 1 || $categoria_id == 2) {
+            $data_form['tipo_transporte'] = $post['tipo_transporte'];
+            $data_form['transporte_id'] = $post['transporte_id'];
+            $data_form['ciudad_origen'] = $post['ciudad_origen'];
+            $data_form['ciudad_destino'] = $post['ciudad_destino'];
           }
 
           //Cargar Imagenes

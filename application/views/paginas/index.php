@@ -1,8 +1,9 @@
 <?php
+$meses = $this->listado_meses;
+$numero_noches = $this->numero_noches;
 /*echo "<pre>";
-print_r($ciudades);
+print_r($meses);
 echo "</pre>";*/
-/*echo phpinfo();*/
 ?>
 <!--Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
@@ -53,19 +54,36 @@ echo "</pre>";*/
 											<div class="dropdown">
 											<input type="text" name="ciudad_destino" id="ciudad_destino" class="form-control" placeholder="Ciudad de destino." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 											<ul class="dropdown-menu" aria-labelledby="ciudad_destino" id="ciudades-dropdown">
-												<li class="dropdown-header">LISTADO DE CIUDADES</li>
-												<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>
-												<!-- <li><a href="#">Action</a></li>
-												<li><a href="#">Another action</a></li>
-												<li><a href="#">Something else here</a></li>
-												<li role="separator" class="divider"></li>
-												<li><a href="#">Separated link</a></li> -->
+											<li class="dropdown-header">LISTADO DE CIUDADES</li>
+											<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>
 											</ul>
 											</div>
 										</div>
 
-										<div class="col-md-2 mrg-bottom-15">
-											<input type="text" class="form-control" name="partida" placeholder="Mes de salida.">
+										<div class="col-md-3 mrg-bottom-15">
+											<select name="mes_salida" id="mes_salida" class="form-control chosen-select" data-placeholder="Mes de salida">
+												<option value=""></option>
+												<?php
+												if(!empty($meses)){
+													foreach ($meses as $key => $value) {
+														echo '<option value="' . $key . '">' . $value . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
+
+										<div class="col-md-3 mrg-bottom-15">
+											<select name="numero_noches" id="numero_noches" class="form-control chosen-select" data-placeholder="N° de Noches">
+												<option value=""></option>
+												<?php
+												if(!empty($numero_noches)){
+													foreach ($numero_noches as $nnoche) {
+														echo '<option value="' . $nnoche . '">' . $nnoche . '</option>';
+													}
+												}
+												?>
+											</select>
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>

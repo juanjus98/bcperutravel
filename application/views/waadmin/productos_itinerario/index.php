@@ -37,12 +37,12 @@ echo '</pre><hr>';*/
                         </div>
 
                         <div class="col-sm-2">
-                            <a href="<?php echo base_url('waadmin/paquetes_galeria/index/'.$this->paquete_id.'?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
+                            <a href="<?php echo base_url('waadmin/productos_itinerario/index/'.$this->paquete_id.'?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
                         <div class="col-sm-5">
                             <div class="pull-right">
-                                <a href="<?php echo base_url('waadmin/paquetes_galeria/editar/C/null/' . $this->paquete_id);?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
+                                <a href="<?php echo base_url('waadmin/productos_itinerario/editar/C/null/' . $this->paquete_id);?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
                                 <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar </a>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ echo '</pre><hr>';*/
                 </form>
             </div><!-- /.box-header -->
             <div class="box-body table-responsive">
-                <form name="index_form" id="index_form" action="<?php echo base_url(); ?>waadmin/paquetes_galeria/eliminar/<?php echo $this->paquete_id;?>" method="post">
+                <form name="index_form" id="index_form" action="<?php echo base_url(); ?>waadmin/productos_itinerario/eliminar/<?php echo $this->paquete_id;?>" method="post">
                     <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
@@ -78,8 +78,8 @@ echo '</pre><hr>';*/
                                         </td>
                                         <td class="text-center"><?php echo $item['orden'];?></td>
                                         <td>
-                                            <a href="<?php echo base_url(); ?>waadmin/paquetes_galeria/editar/V/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            <a href="<?php echo base_url(); ?>waadmin/paquetes_galeria/editar/E/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="<?php echo base_url(); ?>waadmin/productos_itinerario/editar/V/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="<?php echo base_url(); ?>waadmin/productos_itinerario/editar/E/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                     <?php

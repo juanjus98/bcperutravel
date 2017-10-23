@@ -35,7 +35,7 @@ echo "</pre>";*/
                 /*$total_itinerario = $this->Paquetes_galeria->total_registros($data_post);*/
                 /*$itinerarios = $this->Paquetes_galeria->listado($total_itinerario, 0, $data_post);*/
 
-                $nombre_paquete = trim($paquete['nombre_largo']);
+                $nombre_paquete = trim($paquete['nombre_corto']);
                 $url_paquete = base_url('paquete-tour/' . $paquete['url_key']);
                 $urlImagen = (!empty($paquete['imagen_2'])) ? base_url($this->config->item('upload_path') . $paquete['imagen_2']) : base_url('assets/images/no-image.jpg') ;
                 ?>

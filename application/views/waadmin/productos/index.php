@@ -86,7 +86,7 @@ echo '</pre>';*/
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
                                         <td><?php echo $item['codigo']; ?></td>
-                                        <td><?php echo $item['nombre_largo']; ?></td>
+                                        <td><?php echo $item['nombre_corto']; ?></td>
                                         <td><?php echo $item['categoria_nombre']; ?></td>
                                         <!-- <td><?php echo $item['url_key']; ?></td> -->
 
@@ -98,6 +98,8 @@ echo '</pre>';*/
                                         </td>
 
                                         <td class="text-center">
+                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/productos_itinerario/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo $editar_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>

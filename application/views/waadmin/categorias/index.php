@@ -56,6 +56,7 @@ echo '</pre>';*/
                         <tbody>
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
+                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Imagen</th>
                                 <th>Slug</th>
@@ -70,6 +71,7 @@ echo '</pre>';*/
                                         <td>
                                             <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
                                         </td>
+                                        <td><?php echo $item['id']; ?></td>
                                         <td><?php echo $item['nombre']; ?></td>
                                         <td>
                                         <a href="<?php echo base_url($this->config->item('upload_path') . $item['imagen']); ?>" class="strip" data-strip-caption="<?php echo $item['nombre']; ?>" target="_blank"><?php echo $item['imagen']; ?></a>

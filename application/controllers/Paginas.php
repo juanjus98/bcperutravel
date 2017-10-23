@@ -6,6 +6,23 @@ if (!defined('BASEPATH'))
 class Paginas extends CI_Controller {
   public $website_info;
 
+public $listado_meses = array(
+    1 => 'Enero', 
+    2 => 'Febrero',
+    3 => 'Marzo',
+    4 => 'Abril',
+    5 => 'Mayo',
+    6 => 'Junio',
+    7 => 'Julio',
+    8 => 'Agosto',
+    9 => 'Setiembre',
+    10 => 'Octubre',
+    11 => 'Noviembre',
+    12 => 'Diciembre'
+  );
+
+public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
+
   function __construct() {
     parent::__construct();
     $this->template->set_layout('website.php');
@@ -16,12 +33,12 @@ class Paginas extends CI_Controller {
     $this->load->model('productos_model', 'Productos');
     $this->load->model("crud_model","Crud");
 
-    $this->load->model("promociones_model","Promociones");
+    /*$this->load->model("promociones_model","Promociones");
     $this->load->model("videos_model","Videos");
     $this->load->model("paquetes_model","Paquetes");
     $this->load->model("tours_model","Tours");
     $this->load->model("hoteles_model","Hoteles");
-    $this->load->model("paquetes_galeria_model","Paquetes_galeria");
+    $this->load->model("paquetes_galeria_model","Paquetes_galeria");*/
 
     /**
      * Información del website
