@@ -11,6 +11,17 @@ $(function() {
  });
 
  /**
+  * Select categoría muestra/oculta bloques
+  */
+ $(document).on("change", ".categoria_muestra_oculta", function() {
+    var id = $(this).val();
+    id = (id == 2) ? 1 : id;
+    $('.table-mostrar-ocultar').hide();
+    $('#table-mostrar-' + id).show();
+    return false;
+ });
+
+ /**
  * jQuery Cascading Dropdown empresas de transporte
  */
  $(document).on("change", "#tipo_transporte", function() {

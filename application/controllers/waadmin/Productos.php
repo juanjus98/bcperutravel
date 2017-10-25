@@ -176,7 +176,7 @@ class Productos extends CI_Controller{
           $data['post'] = $post;
 
 
-          //Empresas de transporte
+        //Empresas de transporte
         $data_empresas = array(
           'tipo_transporte' => $post['tipo_transporte'],
           'ordenar_por' => 'nombre',
@@ -186,13 +186,16 @@ class Productos extends CI_Controller{
         $total_empresas = $this->Transportes->total_registros($data_empresas);
         $listado_empresas = $this->Transportes->listado($total_empresas, 0, $data_empresas);
         $data['empresas_transporte'] = $listado_empresas;
-
         }
-
 
         if ($this->input->post()) {
           $post= $this->input->post();
           $data['post'] = $post;
+
+          /*echo "<pre>";
+          print_r($post);
+          echo "</pre>";
+          die();*/
 
           $config = array(
             array(
@@ -244,7 +247,6 @@ class Productos extends CI_Controller{
            /*Error*/
            $data['post'] = $post;
          }else{
-
           $destacar = (isset($post['destacar'])) ? $post['destacar'] : 0 ;
           $mostrar_descuento = (isset($post['mostrar_descuento'])) ? $post['mostrar_descuento'] : 0 ;
 
@@ -326,7 +328,7 @@ class Productos extends CI_Controller{
           $data_form['codigo'] = $codigo;
 
           $this->db->insert($this->primary_table, $data_form);
-          $unidad_id = $this->db->insert_id();
+          $producto_id = $this->db->insert_id();
           $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
         }
 
@@ -334,11 +336,75 @@ class Productos extends CI_Controller{
         if ($tipo == 'E') {
           $this->db->where('id', $post['id']);
           $this->db->update($this->primary_table, $data_form);
-          $unidad_id = $post['id'];
+          $producto_id = $post['id'];
           $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
         }
 
-        //Agregar ciudades
+        //Agregar bloques y detalles
+        $wbox_blq = $post['wbox_blq'];
+        $this->db->where('producto_id', $producto_id);
+        $this->db->delete('producto_bloque');
+
+        $this->db->where('producto_id', $producto_id);
+        $this->db->delete('producto_bloque_detalle');
+
+        if(count($wbox_blq) > 1){
+          $row_1 = array_shift($wbox_blq);
+          foreach ($wbox_blq as $key => $value) {
+            $descripciones = $value['descripciones'];
+            $data_wbox = array(
+                "producto_id" => $producto_id,
+                "titulo" => $value['titulo']
+            );
+            $this->db->insert('producto_bloque', $data_wbox);
+            $producto_bloque_id = $this->db->insert_id();
+
+            if(count($descripciones)>1){
+              $row_0 = array_shift($descripciones);
+              foreach ($descripciones as $key => $value) {
+                $data_desc = array(
+                "producto_id" => $producto_id,
+                "producto_bloque_id" => $producto_bloque_id,
+                "titulo" => $value
+                );
+                $this->db->insert('producto_bloque_detalle', $data_desc);
+              }
+            }
+
+          }
+        }
+
+                //INSERTAMOS CARACTERISTICAS
+                $this->db->where('producto_id', $producto_id);
+                $this->db->delete('producto_caracteristicas');
+                if (!empty($post['caracteristicas'])) {
+                    $caracteristicas = $post['caracteristicas'];
+                    foreach ($caracteristicas['titulo'] as $index => $titulo) {
+                        $descripcion = $caracteristicas['descripcion'][$index];
+                        $data_insert_caracteristica = array(
+                            "producto_id" => $producto_id,
+                            "nombre" => $titulo,
+                            "descripcion" => $descripcion
+                        );
+                        $this->db->insert('producto_caracteristicas', $data_insert_caracteristica);
+                    }
+                }
+
+                //INSERTAMOS ESPECIFICACIONES
+                $this->db->where('producto_id', $producto_id);
+                $this->db->delete('producto_especificaciones');
+                if (!empty($post['especificaciones'])) {
+                    $especificaciones = $post['especificaciones'];
+                    foreach ($especificaciones['titulo'] as $index => $titulo) {
+                        $descripcion = $especificaciones['descripcion'][$index];
+                        $data_insert_especificacion = array(
+                            "producto_id" => $producto_id,
+                            "nombre" => $titulo,
+                            "descripcion" => $descripcion
+                        );
+                        $this->db->insert('producto_especificaciones', $data_insert_especificacion);
+                    }
+                }
         
 
         redirect($this->base_ctr . '/index');

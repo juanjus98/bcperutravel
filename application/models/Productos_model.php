@@ -122,6 +122,49 @@ class Productos_model extends CI_Model {
         ->get("producto as t1")
         ->row_array();
 
+        //Consultar bloques y detalles
+        $producto_bloques = $this->db->select("t1.*")
+        ->where("t1.producto_id =", $result['id'])
+        ->where("t1.estado !=", 0)
+        ->order_by("t1.id","ASC")
+        ->get(" producto_bloque as t1")
+        ->result_array();
+        if(!empty($producto_bloques)){
+            $bloque[1] = array(
+                'id' => '', 
+                'titulo' => 'Box 1', 
+                'descripciones' => array(), 
+            );
+            foreach ($producto_bloques as $key => $value) {
+                //Consultar detalles
+                $bloque_detalles = $this->db->select("t1.*")
+                ->where("t1.producto_bloque_id =", $value['id'])
+                ->where("t1.estado !=", 0)
+                ->order_by("t1.id","ASC")
+                ->get(" producto_bloque_detalle as t1")
+                ->result_array();
+                if (!empty($bloque_detalles)) {
+                    $descripciones[] = '';
+                    foreach ($bloque_detalles as $detalle) {
+                        $descripciones[] = $detalle['titulo'];
+                    }
+                }
+
+                $bloque[$value['id']] = array(
+                'id' => $value['id'], 
+                'titulo' => $value['titulo'], 
+                'descripciones' => $descripciones, 
+                );
+
+                unset($descripciones);
+
+            }
+        }
+
+        if (!empty($bloque)) {
+            $result['wbox_blq'] = $bloque;
+        }
+
         //Caracteristicas
         $producto_caracteristicas = $this->db->select("t1.*")
         ->where("t1.producto_id =", $result['id'])

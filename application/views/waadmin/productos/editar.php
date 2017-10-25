@@ -79,7 +79,7 @@ echo '</pre>';*/
                            <span style="color: red; font-weight: bold;">*</span>Categoría:
                          </label>
                          <div class="col-sm-4">
-                          <select name="categoria_id" id="categoria_id" data-placeholder="Seleccionar categoría" class="chosen-select">
+                          <select name="categoria_id" id="categoria_id" class="form-control input-sm categoria_muestra_oculta">
                             <option value=""></option>
                             <?php
                             if(!empty($categorias)){
@@ -224,8 +224,7 @@ echo '</pre>';*/
                   </tr>
                 </tbody>
               </table><br>
-
-              <table class="table table-bordered">
+              <table class="table table-bordered table-mostrar-ocultar" id="table-mostrar-6" style="<?php echo $retVal = ($post['categoria_id'] != 6) ? 'display: none;' : '';?>">
                 <thead class="thead-default">
                  <tr>
                    <th>
@@ -342,8 +341,7 @@ echo '</pre>';*/
 
                 </tbody>
               </table><br>
-
-              <table class="table table-bordered">
+              <table class="table table-bordered table-mostrar-ocultar" id="table-mostrar-1" style="<?php echo $retVal = ($post['categoria_id'] != 1 && $post['categoria_id'] != 2) ? 'display: none;' : '' ;?>">
                 <thead class="thead-default">
                  <tr>
                    <th>
@@ -475,6 +473,58 @@ echo '</pre>';*/
                     </div>
                   </div>
                   <div class="text-center"><small>BLOQUES AQUÍ</small></div>
+                  <?php 
+                  if(count($post['wbox_blq']) > 1){
+                    foreach ($post['wbox_blq'] as $key => $wbox_blq) {
+                      if($key != 1){
+                        /*echo "<pre>";
+                        print_r($wbox_blq);
+                        echo "</pre>";*/
+                        $wbox_id = $wbox_blq['id'];
+                        $wbox_titulo = $wbox_blq['titulo'];
+                    ?>
+                    <div class="box box-primary wbox-blq" id="wbox-<?php echo $wbox_id;?>">
+                    <div class="box-header">
+                      <h3 class="box-title"><?php echo $wbox_titulo;?></h3>
+                      <div class="box-tools pull-right">
+                        <a href="#" class="btn btn-info btn-xs btn-wbox-edit"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs wbox-delete"><i class="fa fa-times"></i></a>
+                      </div>
+                      <input type="hidden" name="wbox_blq[<?php echo $wbox_id;?>][id]" value="<?php echo $wbox_id;?>" class="wbox-id">
+                      <input type="hidden" name="wbox_blq[<?php echo $wbox_id;?>][titulo]" value="<?php echo $wbox_titulo;?>" class="wbox-title">
+                    </div>
+                    <div class="box-body wbox-contitems">
+                      <div class="input-group input-group-sm winput-group witem-template" style="margin-bottom: 6px; display: none;">
+                        <input type="text" name="wbox_blq[<?php echo $wbox_id;?>][descripciones][]" value="" class="form-control wbox-item" placeholder="Descripción aquí.">
+                        <span class="input-group-btn">
+                          <button class="btn btn-danger btn-flat btn-remove-wbox-item" type="button"><i class="fa fa-times"></i></button>
+                        </span>
+                      </div>
+                      <?php
+                      $descripciones = $wbox_blq['descripciones'];
+                      foreach ($descripciones as $key => $value) {
+                        if ($key > 0) {
+                          ?>
+                          <div class="input-group input-group-sm winput-group" style="margin-bottom: 6px;">
+                            <input type="text" name="wbox_blq[<?php echo $wbox_id;?>][descripciones][]" value="<?php echo $value;?>" class="form-control wbox-item" placeholder="Descripción aquí.">
+                            <span class="input-group-btn">
+                              <button class="btn btn-danger btn-flat btn-remove-wbox-item" type="button"><i class="fa fa-times"></i></button>
+                            </span>
+                          </div>
+                          <?php
+                        }
+                      }
+                      ?>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix no-border">
+                      <a href="#" class="btn btn-default pull-right btn-add-item"><i class="fa fa-plus"></i> Add item</a>
+                    </div>
+                  </div>
+                  <?php
+                }
+                }
+                }
+                 ?>
                 </td>
               </tr>
             </tbody>
