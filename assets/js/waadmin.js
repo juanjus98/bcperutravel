@@ -650,7 +650,6 @@ $(function() {
     id = (id == 2) ? 1 : id;
     $('.table-mostrar-ocultar').hide();
     $('#table-mostrar-' + id).show();
-    /*console.log(id);*/
     return false;
  });
 

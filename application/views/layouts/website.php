@@ -101,9 +101,12 @@ $tag_image = $head_info['image'];
 <script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 <!-- //Bootstrap datepicker-->
 
-<!-- assets/plugins/typeahead.jquery.js-->
-<!-- <link rel="stylesheet" type="text/css" href="assets/plugins/typehead/jquery.typeahead.css" />
-<script src="assets/plugins/typehead/jquery.typeahead.js"></script> -->
+<!--//Spinner-->
+<!-- <link href="assets/plugins/spinner/css/bootstrap-spinner.min.css?v=7887" /> -->
+<script src="assets/plugins/spinner/js/jquery.spinner.min.js"></script>
+
+<!-- bootstrap3-typeahead-->
+<script src="assets/plugins/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
 

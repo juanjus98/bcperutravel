@@ -79,6 +79,23 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
     $this->template->build('paginas/index', $data);
   }
 
+
+  /**
+   * Buscar
+   */
+  public function buscar(){
+    if ($this->input->post()) {
+      $post = $this->input->post();
+      echo "<pre>";
+      print_r($post);
+      echo "</pre>";
+    }
+    if(!empty($post)){
+      
+    }
+    die();
+  }
+
   /*public function addciudades(){
     $locations = $this->Crud->getLocations();
     foreach ($locations as $key => $value) {

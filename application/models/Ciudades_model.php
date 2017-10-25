@@ -126,9 +126,9 @@ class Ciudades_model extends CI_Model {
             $order_by = 't1.city ASC';
         }
 
-        $resultado = $this->db->select("t1.id, t1.country, t1.city")
+        $resultado = $this->db->select("t1.id, t1.country, t1.city as name")
         ->where($where)
-        ->like('city', $data['busqueda'], 'after')
+        ->like('city', $data['busqueda'])
         ->order_by($order_by)
         ->get("ciudades as t1")
         ->result_array();

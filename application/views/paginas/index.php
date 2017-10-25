@@ -42,25 +42,23 @@ echo "</pre>";*/
 								<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
 							</li>
 							<li role="presentation">
-								<a href="#seccion-2" aria-controls="pasajes_nacionales" role="tab" data-toggle="tab">Pasajes Nacionales</a>
+								<a href="#seccion-2" aria-controls="pasajes" role="tab" data-toggle="tab">Pasajes</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active" id="seccion-1">
-								<form class="form-paquetes">
+								<form name="form-paquetes" method="post" action="<?php echo base_url('buscar');?>">
+									<input type="hidden" name="tipo" value="paquetes">
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
-											<div class="dropdown">
-											<input type="text" name="ciudad_destino" id="ciudad_destino" class="form-control" placeholder="Ciudad de destino." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-											<ul class="dropdown-menu" aria-labelledby="ciudad_destino" id="ciudades-dropdown">
-											<li class="dropdown-header">LISTADO DE CIUDADES</li>
-											<li class="disabled cont-load" style="display: none;"><a href="#">CARGANDO...</a></li>
-											</ul>
-											</div>
+											<label>Ciudad.</label>
+											<input type="text" name="country" id="country_search_1" class="form-control" autocomplete="off" placeholder="Ciudad">
+											<input type="hidden" name="destino_id" id="destino_id" value="">
 										</div>
 
 										<div class="col-md-3 mrg-bottom-15">
+											<label>Mes de salida.</label>
 											<select name="mes_salida" id="mes_salida" class="form-control chosen-select" data-placeholder="Mes de salida">
 												<option value=""></option>
 												<?php
@@ -74,62 +72,61 @@ echo "</pre>";*/
 										</div>
 
 										<div class="col-md-3 mrg-bottom-15">
-											<select name="numero_noches" id="numero_noches" class="form-control chosen-select" data-placeholder="N° de Noches">
-												<option value=""></option>
-												<?php
-												if(!empty($numero_noches)){
-													foreach ($numero_noches as $nnoche) {
-														echo '<option value="' . $nnoche . '">' . $nnoche . '</option>';
-													}
-												}
-												?>
-											</select>
+											<label>N° de noches.</label>
+											<div class="input-group" data-trigger="spinner">
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button" data-spin="down">
+														<i class="fa fa-minus" aria-hidden="true"></i>
+													</button>
+												</span>
+												<input type="text" name="numero_noches" class="form-control text-center" data-rule="quantity" data-min="1" data-max="15">
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button" data-spin="up">
+														<i class="fa fa-plus" aria-hidden="true"></i>
+													</button>
+												</span>
+											</div><!-- /input-group -->
 										</div>
 
-										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
+										<div class="col-md-2 mrg-bottom-15">
+											<label>&nbsp;</label>
+											<div class="clearfix"></div>
+											<button type="submit" class="btn btn-primary-1"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+										</div>
 									</div>
 								</form>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
-								<form name="form-pasajes">
+								<form name="form-pasajes" method="post" action="<?php echo base_url('buscar');?>">
+									<input type="hidden" name="tipo" value="pasajes">
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
-											<select name="origen" id="origen" class="form-control chosen-select" data-placeholder="Origen">
-												<option value=""></option>
-												<?php
-												if(!empty($ciudades)){
-													/*foreach ($ciudades as $key => $value) {
-														$location_name = $value['country'] . ', ' . $value['city'];
-														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}*/
-												}
-												?>
-											</select>
+											<label>Ciudad de origen.</label>
+											<input type="text" name="ciudad_origen" id="country_search_2" class="form-control" autocomplete="off" placeholder="Ciudad de origen">
+											<input type="hidden" name="ciudad_origen_id" id="ciudad_origen_id" value="">
 										</div>
 
 										<div class="col-md-3 mrg-bottom-15">
-											<select name="destino" id="destino" class="form-control chosen-select" data-placeholder="Destino">
-												<option value=""></option>
-												<?php
-												if(!empty($ciudades)){
-													/*foreach ($ciudades as $key => $value) {
-														$location_name = $value['country'] . ', ' . $value['city'];
-														echo '<option value="' . $value['id'] . '">' . $location_name . '</option>';
-													}*/
-												}
-												?>
-											</select>
+											<label>Ciudad de destino.</label>
+											<input type="text" name="ciudad_destino" id="country_search_3" class="form-control" autocomplete="off" placeholder="Ciudad de destino">
+											<input type="hidden" name="ciudad_destino_id" id="ciudad_destino_id" value="">
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15">
-											<input type="text" class="form-control" name="partida" id="pasajes_partida" placeholder="Fecha de partida">
+											<label>Fecha de salida:</label>
+											<input type="text" class="form-control" name="partida" id="pasajes_partida" placeholder="Fecha de salida">
 										</div>
 
 										<div class="col-md-2 mrg-bottom-15">
+											<label>Fecha de retorno:</label>
 											<input type="text" class="form-control" name="retorno" id="pasajes_retorno" placeholder="Fecha de retorno">
 										</div>
 
-										<div class="col-md-2 mrg-bottom-15"><button type="submit" class="btn btn-primary-1">Buscar</button></div>
+										<div class="col-md-2 mrg-bottom-15">
+											<label>&nbsp;</label>
+											<div class="clearfix"></div>
+											<button type="submit" class="btn btn-block btn-primary-1"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+										</div>
 									</div>
 								</form>
 							</div>
@@ -280,7 +277,7 @@ echo "</pre>";*/
 
 			<div class="row">
 				<div class="col-md-4">
-						<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
+					<?php echo $prom_despegar = $this->load->view('paginas/motores/despegar', '', TRUE);?>
 				</div>
 				<div class="col-md-4">
 					<a href="<?php echo base_url('traslados-actividades-circuitos');?>">

@@ -59,6 +59,8 @@ $route['c/(:any)'] = 'paginas/productos/$1';
 $route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
 $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
 
+$route['buscar'] = 'paginas/buscar';
+
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 
