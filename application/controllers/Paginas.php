@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Paginas extends CI_Controller {
   public $website_info;
 
-public $listado_meses = array(
+  public $listado_meses = array(
     1 => 'Enero', 
     2 => 'Febrero',
     3 => 'Marzo',
@@ -21,7 +21,7 @@ public $listado_meses = array(
     12 => 'Diciembre'
   );
 
-public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
+  public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
 
   function __construct() {
     parent::__construct();
@@ -30,6 +30,7 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
     $this->load->model('inicio_model', 'Inicio');
     $this->load->model('paginas_model', 'Paginas');
 
+    $this->load->model("categorias_model","Categorias");
     $this->load->model('productos_model', 'Productos');
     $this->load->model("crud_model","Crud");
 
@@ -79,21 +80,96 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
     $this->template->build('paginas/index', $data);
   }
 
+  /**
+   * Página
+   */
+  public function pagina() {
+    //Consultar ciudades
+    $this->load->model('ciudades_model', 'Ciudades');
+
+    $categoria_url_key = ($this->uri->segment(1)) ? $this->uri->segment(1) : '';
+    /*echo "<hr>";*/
+    $producto_url_key = ($this->uri->segment(2)) ? $this->uri->segment(2) : '';
+
+    $total_ciudades = $this->Ciudades->total_registros();
+    $ciudades = $this->Ciudades->listado($total_ciudades, 0);
+    $data['ciudades'] = $ciudades;
+
+    $data['active_link'] = "inicio";
+
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    //Slider
+    $data_crud['table'] = "slider as t1";
+    $data_crud['columns'] = "t1.*";
+    $data_crud['where'] = array("t1.estado !=" => 0);
+    $data_crud['order_by'] = "t1.orden Asc";
+    $data['slider'] = $this->Crud->getRows($data_crud);
+
+
+    //Consultar meses
+    /*$meses = $this->Crud->getMonths(4);*/
+    
+    /*$locations = $this->Crud->getLocations();*/
+
+    $this->template->title('Inicio');
+    $this->template->build('paginas/index', $data);
+  }
+
 
   /**
    * Buscar
    */
   public function buscar(){
+    $data_search = array();
     if ($this->input->post()) {
       $post = $this->input->post();
-      echo "<pre>";
-      print_r($post);
-      echo "</pre>";
+      $categoria_id = $post['categoria_id'];
+
+      /**
+       * Consultar categoría
+       */
+      $data_row = array('id' => $categoria_id);
+      $categoria = $this->Categorias->get_row($data_row);
+      $categoria_url_key = $categoria['url_key'];
+
+      /*echo "<pre>";
+      print_r($categoria);
+      echo "</pre>";*/
+
+      $data_search['categoria_id'] = $categoria_id;
+      $data_search['categoria_url_key'] = $categoria_url_key;
+
+      switch ($categoria_id) {
+        case 1:
+        case 2:
+        /*echo "PASAJES";*/
+        $data_search['ciudad_origen'] = (!empty($post['ciudad_origen_id'])) ? $post['ciudad_origen_id'] : '' ;
+        $data_search['ciudad_destino'] = (!empty($post['ciudad_destino_id'])) ? $post['ciudad_destino_id'] : '' ;
+        break;
+
+        case 6:
+        /*echo "PAQUETES";*/
+        $data_search['ciudades'] = (!empty($post['destino_id'])) ? $post['destino_id'] : '' ;
+        $data_search['paquete_meses'] = (!empty($post['mes_salida'])) ? $post['mes_salida'] : '' ;
+        $data_search['paquete_noches'] = (!empty($post['numero_noches'])) ? $post['numero_noches'] : '' ;
+        break;
+        
+        default:
+          # code...
+        break;
+      }
+
     }
-    if(!empty($post)){
-      
-    }
-    die();
+
+
+    /*echo "<pre>";
+    print_r($data_search);
+    echo "</pre>";
+
+    die();*/
+    redirect(base_url($categoria_url_key));
   }
 
   /*public function addciudades(){
@@ -214,8 +290,8 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
              'rules' => 'required',
              'errors' => array(
                'required' => 'Campo requerido.',
-               )
-             ),
+             )
+           ),
            array(
              'field' => 'email',
              'label' => 'E-mail',
@@ -223,17 +299,17 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
              'errors' => array(
                'required' => 'Campo requerido.',
                'valid_email' => 'E-mail inválido.'
-               )
-             ),
+             )
+           ),
            array(
              'field' => 'telefono',
              'label' => 'Teléfono',
              'rules' => 'required',
              'errors' => array(
                'required' => 'Campo requerido.',
-               )
              )
-           );
+           )
+         );
 
           $this->form_validation->set_rules($config);
           $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
@@ -249,7 +325,7 @@ public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
               "email" => strip_tags($post['email']),
               "mensaje" => strip_tags($post['mensaje']),
               "agregar" => date("Y-m-d H:i:s")
-              );
+            );
 
             /*$this->db->insert('contactos', $data_insert);
             $contactos_id = $this->db->insert_id();*/

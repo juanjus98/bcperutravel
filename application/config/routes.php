@@ -53,16 +53,31 @@ $route['default_controller'] = 'paginas/index';
 $route['inicio'] = 'paginas/index';
 
 /**
+ * Categorias
+ */
+require_once( BASEPATH .'database/DB.php');
+$db =& DB();
+$query = $db->where( 'publico', 1 )->get( 'categoria' );
+$result = $query->result();
+foreach( $result as $row )
+{
+    $route[ $row->url_key ]                 = 'paginas/pagina';
+    $route[ $row->url_key.'/:any' ]         = 'paginas/pagina';
+    /*$route[ $row->controller ]           = 'error404';
+    $route[ $row->controller.'/:any' ]   = 'error404';*/
+}
+
+/**
  * Páginas
  */
-$route['c/(:any)'] = 'paginas/productos/$1';
+$route['buscar'] = 'paginas/buscar';
+
+/*$route['c/(:any)'] = 'paginas/productos/$1';
 $route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
 $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
 
-$route['buscar'] = 'paginas/buscar';
-
 $route['contactanos'] = 'paginas/contactanos';
-$route['confirmacion'] = 'paginas/confirmacion';
+$route['confirmacion'] = 'paginas/confirmacion';*/
 
 /**
  * Carrusel
@@ -71,7 +86,7 @@ $route['traslados-actividades-circuitos'] = 'paginas/carrusel';
 $route['carrusellist'] = 'paginas/carrusellist';
 
 //Servicio servicio
-$route['servicio/(:any)'] = 'paginas/servicio/$1';
+/*$route['servicio/(:any)'] = 'paginas/servicio/$1';*/
 
 /**
  * json

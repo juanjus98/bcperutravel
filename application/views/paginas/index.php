@@ -42,14 +42,15 @@ echo "</pre>";*/
 								<a href="#seccion-1" aria-controls="paquetes-turisticos" role="tab" data-toggle="tab">Paquetes turísticos</a>
 							</li>
 							<li role="presentation">
-								<a href="#seccion-2" aria-controls="pasajes" role="tab" data-toggle="tab">Pasajes</a>
+								<a href="#seccion-2" aria-controls="pasajes" role="tab" data-toggle="tab">Vuelos y Pasajes de Bus</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active" id="seccion-1">
 								<form name="form-paquetes" method="post" action="<?php echo base_url('buscar');?>">
-									<input type="hidden" name="tipo" value="paquetes">
+									<input type="hidden" name="categoria_id" value="6">
+
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
 											<label>Ciudad.</label>
@@ -99,6 +100,28 @@ echo "</pre>";*/
 							<div role="tabpanel" class="tab-pane fade" id="seccion-2">
 								<form name="form-pasajes" method="post" action="<?php echo base_url('buscar');?>">
 									<input type="hidden" name="tipo" value="pasajes">
+									<div class="row">
+										<div class="col-md-3 mrg-bottom-15">
+											<div class="btn-group btn-group-xs btn-group-justified" data-toggle="buttons">
+												<label class="btn btn-default active">
+													<input type="radio" name="categoria_id" id="tipo_transporte_1" autocomplete="off" value="1" checked> VUELOS
+												</label>
+												<label class="btn btn-default">
+													<input type="radio" name="categoria_id" id="tipo_transporte_2" autocomplete="off" value="2"> PASAJES DE BUS
+												</label>
+											</div>
+										</div>
+										<div class="col-md-3 mrg-bottom-15">
+											<div class="btn-group btn-group-xs btn-group-justified" data-toggle="buttons">
+												<label class="btn btn-default active">
+													<input type="radio" name="ida_vuelta" id="ida_vuelta_1" autocomplete="off" value="1" checked> IDA Y VUELTA
+												</label>
+												<label class="btn btn-default">
+													<input type="radio" name="ida_vuelta" id="ida_vuelta_2" autocomplete="off" value="2"> SOLO IDA
+												</label>
+											</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-md-3 mrg-bottom-15">
 											<label>Ciudad de origen.</label>
@@ -281,7 +304,7 @@ echo "</pre>";*/
 				</div>
 				<div class="col-md-4">
 					<a href="<?php echo base_url('traslados-actividades-circuitos');?>">
-						<img src="assets/images/banner-1.jpg" class="img-responsive">
+						<img src="<?php echo base_url('assets/images/banner-1.jpg" class="img-responsive');?>">
 					</a>
 				</div>
 
@@ -289,17 +312,17 @@ echo "</pre>";*/
 					<ul id="bannersHome">
 						<li>
 							<a href="#">
-								<img src="assets/images/bann-1.jpg" class="img-responsive">
+								<img src="<?php echo base_url('assets/images/bann-1.jpg" class="img-responsive');?>">
 							</a>
 						</li>
 						<li>
 							<a href="#">
-								<img src="assets/images/bann-2.jpg" class="img-responsive">
+								<img src="<?php echo base_url('assets/images/bann-2.jpg" class="img-responsive');?>">
 							</a>
 						</li>
 						<li>
 							<a href="#">
-								<img src="assets/images/bann-3.jpg" class="img-responsive">
+								<img src="<?php echo base_url('assets/images/bann-3.jpg" class="img-responsive');?>">
 							</a>
 						</li>
 					</ul>
