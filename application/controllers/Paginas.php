@@ -84,37 +84,87 @@ class Paginas extends CI_Controller {
    * Página
    */
   public function pagina() {
-    //Consultar ciudades
-    $this->load->model('ciudades_model', 'Ciudades');
-
     $categoria_url_key = ($this->uri->segment(1)) ? $this->uri->segment(1) : '';
-    /*echo "<hr>";*/
     $producto_url_key = ($this->uri->segment(2)) ? $this->uri->segment(2) : '';
 
-    $total_ciudades = $this->Ciudades->total_registros();
-    $ciudades = $this->Ciudades->listado($total_ciudades, 0);
-    $data['ciudades'] = $ciudades;
+    /**
+     * Validamos segmento 2
+     */
+    $isPage = (is_numeric($producto_url_key)) ? $producto_url_key : '';
+
+    /**
+     * Verificar session de busqueda ses_search
+     */
+    if($this->session->userdata('ses_search')){
+      $data_prod = $this->session->userdata('ses_search');
+    }
+
+    if(empty($data_prod)){
+      $data_row = array('url_key' => $categoria_url_key);
+      $categoria = $this->Categorias->get_row($data_row);
+      $categoria_id = $categoria['id'];
+      $data_prod = array('categoria_id' => $categoria_id);
+    }
+
+    $this->listar($categoria_url_key, $data_prod);
+
+    
+
+    /*$this->template->title('Inicio');
+    $this->template->build('paginas/index', $data);*/
+  }
+
+
+  /**
+   * Listar productos
+   */
+  public function listar($categoria_url_key, $data_prod){
+    /**
+     * Listar productos
+     */
+    $sessionName = 'ses_products';
+
+    $base_url = base_url($categoria_url_key);
+    $per_page = 4; //registros por página
+    $uri_segment = 2; //segmento de la url
+    $num_links = 4; //número de links
+    //Página actual
+    $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+
+    /*if (isset($_GET['refresh'])) {
+      $this->session->unset_userdata($sessionName);
+    }*/
+
+    //Setear post
+    $post = $this->Crud->set_post($data_prod,$sessionName);
+    $data['post'] = $post;
+
+    //Total de registros por post
+    $data['total_registros'] = $this->Productos->total_registros($post);
+
+    //Listado
+    $data['listado'] = $this->Productos->listado_tiny($per_page, $page, $post);
+
+    //Paginacion
+    $total_rows = $data['total_registros'];
+
+    $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+
+    $this->pagination->initialize($set_paginacion);
+    $data["links"] = $this->pagination->create_links();
+
+    /*echo "<pre>";
+    print_r($data['listado']);
+    echo "</pre>";
+
+    die();*/
 
     $data['active_link'] = "inicio";
-
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
 
-    //Slider
-    $data_crud['table'] = "slider as t1";
-    $data_crud['columns'] = "t1.*";
-    $data_crud['where'] = array("t1.estado !=" => 0);
-    $data_crud['order_by'] = "t1.orden Asc";
-    $data['slider'] = $this->Crud->getRows($data_crud);
-
-
-    //Consultar meses
-    /*$meses = $this->Crud->getMonths(4);*/
-    
-    /*$locations = $this->Crud->getLocations();*/
-
     $this->template->title('Inicio');
-    $this->template->build('paginas/index', $data);
+    $this->template->build('paginas/productos', $data);
   }
 
 
@@ -134,23 +184,17 @@ class Paginas extends CI_Controller {
       $categoria = $this->Categorias->get_row($data_row);
       $categoria_url_key = $categoria['url_key'];
 
-      /*echo "<pre>";
-      print_r($categoria);
-      echo "</pre>";*/
-
       $data_search['categoria_id'] = $categoria_id;
       $data_search['categoria_url_key'] = $categoria_url_key;
 
       switch ($categoria_id) {
         case 1:
         case 2:
-        /*echo "PASAJES";*/
         $data_search['ciudad_origen'] = (!empty($post['ciudad_origen_id'])) ? $post['ciudad_origen_id'] : '' ;
         $data_search['ciudad_destino'] = (!empty($post['ciudad_destino_id'])) ? $post['ciudad_destino_id'] : '' ;
         break;
 
         case 6:
-        /*echo "PAQUETES";*/
         $data_search['ciudades'] = (!empty($post['destino_id'])) ? $post['destino_id'] : '' ;
         $data_search['paquete_meses'] = (!empty($post['mes_salida'])) ? $post['mes_salida'] : '' ;
         $data_search['paquete_noches'] = (!empty($post['numero_noches'])) ? $post['numero_noches'] : '' ;
@@ -163,12 +207,8 @@ class Paginas extends CI_Controller {
 
     }
 
+    $this->session->set_userdata('ses_search', $data_search);
 
-    /*echo "<pre>";
-    print_r($data_search);
-    echo "</pre>";
-
-    die();*/
     redirect(base_url($categoria_url_key));
   }
 

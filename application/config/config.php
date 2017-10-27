@@ -466,7 +466,7 @@ $config['csrf_exclude_uris'] = array();
 |
 */
 /*$config['compress_output'] = FALSE;*/
-$config['compress_output'] = TRUE;
+$config['compress_output'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

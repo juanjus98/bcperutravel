@@ -34,8 +34,8 @@ class Productos_model extends CI_Model {
             $like["t1.nombre_corto"] = "";
         }
 
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key")
-        ->join("categoria as t2","t2.id = t1.categoria_id","left")
+        $resultado = $this->db->select("t1.id")
+        /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
         ->where($where)
         ->like($like)
         ->get("producto as t1")
@@ -93,17 +93,67 @@ class Productos_model extends CI_Model {
 
         return $resultado;
     }
+   
+    /**
+     * Listado de productos tiny
+     *
+     * Muestra un listado de todas las productos
+     *
+     * @package     productos
+     * @author      Juan Julio Sandoval Layza
+     * @copyright   webApu.com 
+     * @since       2017-07-07
+     * @version     Version 1.0
+     */
+    function listado_tiny($limit, $start, $data = NULL) {
+        //Where
+        $where = array('t1.estado != ' => 0);
+
+        //Where
+        if (!empty($data['categoria_id'])) {
+            $where["t1.categoria_id"] = $data['categoria_id'];
+        }
+
+        //Like
+        if (!empty($data['campo']) && !empty($data['busqueda'])) {
+            $like[$data['campo']] = $data['busqueda'];
+        } else {
+            $like["t1.nombre_corto"] = "";
+        }
+
+        //ORDENAR POR
+        if (!empty($data['ordenar_por'])) {
+            $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
+        } else {
+            $order_by = 't1.agregar DESC';
+        }
+
+        if ($start > 0) {
+            $start = ($start - 1) * $limit;
+        }
+
+        $resultado = $this->db->select("t1.id, t1.categoria_id, t1.nombre_corto, t1.nombre_largo, t1.resumen, t1.url_key, t1.precio_moneda, t1.precio, t1.precio_descuento, t1.mostrar_descuento, t1.imagen_2, t1.ciudades, t1.paquete_incluye")
+        /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
+        ->where($where)
+        ->like($like)
+        ->order_by($order_by)
+        ->limit($limit, $start)
+        ->get("producto as t1")
+        ->result_array();
+
+        return $resultado;
+    }
 
     /**
      * Cosultar producto
      *
      * Trae la información de una categoria
      *
-     * @package		productos
-     * @author		Juan Julio Sandoval Layza
+     * @package     productos
+     * @author      Juan Julio Sandoval Layza
      * @copyright   webApu.com 
-     * @since		2017-07-07
-     * @version		Version 1.0
+     * @since       2017-07-07
+     * @version     Version 1.0
      */
     function get_row($data) {
         $where = array('t1.estado != ' => 0);
@@ -196,45 +246,6 @@ class Productos_model extends CI_Model {
 
 
         return $result;
-    }
-    
-    /**
-     * Listado de productos relacionados
-     *
-     * Muestra un listado de todas las productos
-     *
-     * @package     productos
-     * @author      Juan Julio Sandoval Layza
-     * @copyright   webApu.com 
-     * @since       2017-07-07
-     * @version     Version 1.0
-     */
-    function get_relacionados($producto_id, $categoria_id, $limit = 3) {
-        //Where
-        $where = array('t1.estado != ' => 0);
-
-        //Where
-        if (!empty($data['producto_id'])) {
-            $where["t1.producto_id != "] = $data['producto_id'];
-        }
-
-        if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id != "] = $data['categoria_id'];
-        }
-
-        //ORDENAR POR
-        $order_by = 't1.agregar DESC';
-
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t2.url_key as categoria_key, t3.nombre as marca_nombre")
-        ->join("categoria as t2","t2.id = t1.categoria_id")
-        ->join("marca as t3","t3.id = t1.marca_id")
-        ->where($where)
-        ->order_by($order_by)
-        ->limit($limit)
-        ->get("producto as t1")
-        ->result_array();
-
-        return $resultado;
     }
 
 }
