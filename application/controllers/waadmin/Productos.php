@@ -7,14 +7,14 @@ class Productos extends CI_Controller{
 	private $primary_table = "producto"; //Tabla principal
 	public $base_title = "Productos";
 
-    public $tipos_transporte = array(
+  public $tipos_transporte = array(
     1 => 'Terrestre', 
     2 => 'Aéreo',
     3 => 'Marino',
     4 => 'Fluvial',
   );
 
-    public $paquete_incluye_list = array(
+  public $paquete_incluye_list = array(
     1 => 'Vuelo', 
     2 => 'Traslados',
     3 => 'Estadia',
@@ -35,11 +35,11 @@ class Productos extends CI_Controller{
     12 => 'DIC'
   );
 
-	public  $user_info;
+  public  $user_info;
 
-	function __construct(){
-		parent::__construct();
-		$this->template->set_layout('waadmin/intranet.php');
+  function __construct(){
+    parent::__construct();
+    $this->template->set_layout('waadmin/intranet.php');
 
 		/**
 		 * Verficamos si existe una session activa
@@ -177,15 +177,15 @@ class Productos extends CI_Controller{
 
 
         //Empresas de transporte
-        $data_empresas = array(
-          'tipo_transporte' => $post['tipo_transporte'],
-          'ordenar_por' => 'nombre',
-          'ordentipo' => 'ASC',
-        );
+          $data_empresas = array(
+            'tipo_transporte' => $post['tipo_transporte'],
+            'ordenar_por' => 'nombre',
+            'ordentipo' => 'ASC',
+          );
 
-        $total_empresas = $this->Transportes->total_registros($data_empresas);
-        $listado_empresas = $this->Transportes->listado($total_empresas, 0, $data_empresas);
-        $data['empresas_transporte'] = $listado_empresas;
+          $total_empresas = $this->Transportes->total_registros($data_empresas);
+          $listado_empresas = $this->Transportes->listado($total_empresas, 0, $data_empresas);
+          $data['empresas_transporte'] = $listado_empresas;
         }
 
         if ($this->input->post()) {
@@ -270,151 +270,150 @@ class Productos extends CI_Controller{
           //Paquetes turisticos
           if($categoria_id == 6){
             $data_form['ambito'] = $post['ambito'];
-            if(!empty($post['ciudades'])){
-                $ciudades = implode(",", $post['ciudades']);
+            
+              if(!empty($post['paquete_meses'])){
                 $paquete_meses = implode(",", $post['paquete_meses']);
-
-                $data_form['ciudades'] = $ciudades;
                 $data_form['paquete_meses'] = $paquete_meses;
-                $data_form['paquete_noches'] = $post['paquete_noches'];
+              }
 
-            }
+              $data_form['paquete_ciudad'] = $post['paquete_ciudad'];
+              $data_form['paquete_noches'] = $post['paquete_noches'];
 
-            if(!empty($post['paquete_incluye'])){
+              if(!empty($post['paquete_incluye'])){
                 $paquete_incluye = implode(",", $post['paquete_incluye']);
                 $data_form['paquete_incluye'] = $paquete_incluye;
-            }
-          }
-
-          //Tickets
-          if ($categoria_id == 1 || $categoria_id == 2) {
-            $data_form['tipo_transporte'] = $post['tipo_transporte'];
-            $data_form['transporte_id'] = $post['transporte_id'];
-            $data_form['ciudad_origen'] = $post['ciudad_origen'];
-            $data_form['ciudad_destino'] = $post['ciudad_destino'];
-          }
-
-          //Cargar Imagenes
-          $upload_path = $this->config->item('upload_path');
-          if($_FILES["imagen_1"]){
-            $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen_1");
-          }
-
-          if($_FILES["imagen_2"]){
-            $imagen_info2 = $this->imaupload->do_upload($upload_path, "imagen_2");
-          }
-
-          if (!empty($imagen_info1['upload_data'])) {
-            $data_form['imagen_1'] = $imagen_info1['upload_data']['file_name'];
-          }
-
-          if (!empty($imagen_info2['upload_data'])) {
-            $data_form['imagen_2'] = $imagen_info2['upload_data']['file_name'];
-          }
-
-          if(empty($post['url_key_pre'])){
-           $data_urlkey = array('tipo' => 'p', 'urlkey' => $post['nombre_largo']);
-           $url_key = $this->Crud->get_urlkey($data_urlkey);
-           $data_form['url_key'] = $url_key;
-
-           //Actualizamos la tabla urlkey
-           $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
-           $this->db->insert("urlkey",$data_urlkey_insert);
-         }
-
-          //Agregar
-         if($tipo == 'C'){
-          $codigo = strtoupper(random_string('alnum',5));
-          $data_form['codigo'] = $codigo;
-
-          $this->db->insert($this->primary_table, $data_form);
-          $producto_id = $this->db->insert_id();
-          $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
-        }
-
-          //Editar
-        if ($tipo == 'E') {
-          $this->db->where('id', $post['id']);
-          $this->db->update($this->primary_table, $data_form);
-          $producto_id = $post['id'];
-          $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-        }
-
-        //Agregar bloques y detalles
-        $wbox_blq = $post['wbox_blq'];
-        $this->db->where('producto_id', $producto_id);
-        $this->db->delete('producto_bloque');
-
-        $this->db->where('producto_id', $producto_id);
-        $this->db->delete('producto_bloque_detalle');
-
-        if(count($wbox_blq) > 1){
-          $row_1 = array_shift($wbox_blq);
-          foreach ($wbox_blq as $key => $value) {
-            $descripciones = $value['descripciones'];
-            $data_wbox = array(
-                "producto_id" => $producto_id,
-                "titulo" => $value['titulo']
-            );
-            $this->db->insert('producto_bloque', $data_wbox);
-            $producto_bloque_id = $this->db->insert_id();
-
-            if(count($descripciones)>1){
-              $row_0 = array_shift($descripciones);
-              foreach ($descripciones as $key => $value) {
-                $data_desc = array(
-                "producto_id" => $producto_id,
-                "producto_bloque_id" => $producto_bloque_id,
-                "titulo" => $value
-                );
-                $this->db->insert('producto_bloque_detalle', $data_desc);
               }
             }
 
+          //Tickets
+            if ($categoria_id == 1 || $categoria_id == 2) {
+              $data_form['tipo_transporte'] = $post['tipo_transporte'];
+              $data_form['transporte_id'] = $post['transporte_id'];
+              $data_form['ciudad_origen'] = $post['ciudad_origen'];
+              $data_form['ciudad_destino'] = $post['ciudad_destino'];
+            }
+
+          //Cargar Imagenes
+            $upload_path = $this->config->item('upload_path');
+            if($_FILES["imagen_1"]){
+              $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen_1");
+            }
+
+            if($_FILES["imagen_2"]){
+              $imagen_info2 = $this->imaupload->do_upload($upload_path, "imagen_2");
+            }
+
+            if (!empty($imagen_info1['upload_data'])) {
+              $data_form['imagen_1'] = $imagen_info1['upload_data']['file_name'];
+            }
+
+            if (!empty($imagen_info2['upload_data'])) {
+              $data_form['imagen_2'] = $imagen_info2['upload_data']['file_name'];
+            }
+
+            if(empty($post['url_key_pre'])){
+             $data_urlkey = array('tipo' => 'p', 'urlkey' => $post['nombre_largo']);
+             $url_key = $this->Crud->get_urlkey($data_urlkey);
+             $data_form['url_key'] = $url_key;
+
+           //Actualizamos la tabla urlkey
+             $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
+             $this->db->insert("urlkey",$data_urlkey_insert);
+           }
+
+          //Agregar
+           if($tipo == 'C'){
+            $codigo = strtoupper(random_string('alnum',5));
+            $data_form['codigo'] = $codigo;
+
+            $this->db->insert($this->primary_table, $data_form);
+            $producto_id = $this->db->insert_id();
+            $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
           }
-        }
+
+          //Editar
+          if ($tipo == 'E') {
+            $this->db->where('id', $post['id']);
+            $this->db->update($this->primary_table, $data_form);
+            $producto_id = $post['id'];
+            $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+          }
+
+        //Agregar bloques y detalles
+          $wbox_blq = $post['wbox_blq'];
+          $this->db->where('producto_id', $producto_id);
+          $this->db->delete('producto_bloque');
+
+          $this->db->where('producto_id', $producto_id);
+          $this->db->delete('producto_bloque_detalle');
+
+          if(count($wbox_blq) > 1){
+            $row_1 = array_shift($wbox_blq);
+            foreach ($wbox_blq as $key => $value) {
+              $descripciones = $value['descripciones'];
+              $data_wbox = array(
+                "producto_id" => $producto_id,
+                "titulo" => $value['titulo']
+              );
+              $this->db->insert('producto_bloque', $data_wbox);
+              $producto_bloque_id = $this->db->insert_id();
+
+              if(count($descripciones)>1){
+                $row_0 = array_shift($descripciones);
+                foreach ($descripciones as $key => $value) {
+                  $data_desc = array(
+                    "producto_id" => $producto_id,
+                    "producto_bloque_id" => $producto_bloque_id,
+                    "titulo" => $value
+                  );
+                  $this->db->insert('producto_bloque_detalle', $data_desc);
+                }
+              }
+
+            }
+          }
 
                 //INSERTAMOS CARACTERISTICAS
-                $this->db->where('producto_id', $producto_id);
-                $this->db->delete('producto_caracteristicas');
-                if (!empty($post['caracteristicas'])) {
-                    $caracteristicas = $post['caracteristicas'];
-                    foreach ($caracteristicas['titulo'] as $index => $titulo) {
-                        $descripcion = $caracteristicas['descripcion'][$index];
-                        $data_insert_caracteristica = array(
-                            "producto_id" => $producto_id,
-                            "nombre" => $titulo,
-                            "descripcion" => $descripcion
-                        );
-                        $this->db->insert('producto_caracteristicas', $data_insert_caracteristica);
-                    }
-                }
+          $this->db->where('producto_id', $producto_id);
+          $this->db->delete('producto_caracteristicas');
+          if (!empty($post['caracteristicas'])) {
+            $caracteristicas = $post['caracteristicas'];
+            foreach ($caracteristicas['titulo'] as $index => $titulo) {
+              $descripcion = $caracteristicas['descripcion'][$index];
+              $data_insert_caracteristica = array(
+                "producto_id" => $producto_id,
+                "nombre" => $titulo,
+                "descripcion" => $descripcion
+              );
+              $this->db->insert('producto_caracteristicas', $data_insert_caracteristica);
+            }
+          }
 
                 //INSERTAMOS ESPECIFICACIONES
-                $this->db->where('producto_id', $producto_id);
-                $this->db->delete('producto_especificaciones');
-                if (!empty($post['especificaciones'])) {
-                    $especificaciones = $post['especificaciones'];
-                    foreach ($especificaciones['titulo'] as $index => $titulo) {
-                        $descripcion = $especificaciones['descripcion'][$index];
-                        $data_insert_especificacion = array(
-                            "producto_id" => $producto_id,
-                            "nombre" => $titulo,
-                            "descripcion" => $descripcion
-                        );
-                        $this->db->insert('producto_especificaciones', $data_insert_especificacion);
-                    }
-                }
-        
+          $this->db->where('producto_id', $producto_id);
+          $this->db->delete('producto_especificaciones');
+          if (!empty($post['especificaciones'])) {
+            $especificaciones = $post['especificaciones'];
+            foreach ($especificaciones['titulo'] as $index => $titulo) {
+              $descripcion = $especificaciones['descripcion'][$index];
+              $data_insert_especificacion = array(
+                "producto_id" => $producto_id,
+                "nombre" => $titulo,
+                "descripcion" => $descripcion
+              );
+              $this->db->insert('producto_especificaciones', $data_insert_especificacion);
+            }
+          }
 
-        redirect($this->base_ctr . '/index');
+
+          redirect($this->base_ctr . '/index');
+        }
+
       }
 
+      $this->template->title($data['tipo'] . ' Producto');
+      $this->template->build($this->base_ctr.'/editar', $data);
     }
-
-    $this->template->title($data['tipo'] . ' Producto');
-    $this->template->build($this->base_ctr.'/editar', $data);
-  }
 
 /**
  * Eliminar

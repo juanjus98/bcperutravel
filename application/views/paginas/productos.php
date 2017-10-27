@@ -1,8 +1,3 @@
-<?php
-/*echo "<pre>";
-print_r($listado);
-echo "</pre>";*/
-?>
 <!--Cabecera-->
 <div class="container-cabecera" style="background-image: url('assets/images/slide-4.jpg')">
 
@@ -19,10 +14,18 @@ echo "</pre>";*/
 
 </div>
 <!-- //Cabecera-->
+
 <section class="wrapper">
   <div class="container container-principal">
     <div class="divider_border"></div>
     <div class="cont-main">
+
+      <?php
+      /*echo "<pre>";
+      print_r($post);
+      echo "</pre>";*/
+      ?>
+
       <div class="row">
         <?php
         if(!empty($listado)) {
@@ -38,11 +41,15 @@ echo "</pre>";*/
                 $nombre_paquete = trim($item['nombre_corto']);
                 $url_paquete = base_url('paquete-tour/' . $item['url_key']);
                 $urlImagen = (!empty($item['imagen_2'])) ? base_url($this->config->item('upload_path') . $item['imagen_2']) : base_url('assets/images/no-image.jpg') ;
+
+                $precio_descuento = $item['precio_descuento'];
+
                 ?>
 
                 <div class="col-sm-12 col-md-4">
                   <div class="thumbnail thumbnail-item">
-                    <div class="discount">25%</div>
+                    <?php echo $retVal = ($item['mostrar_descuento']==1) ? '<div class="discount">'.$precio_descuento.'</div>' : '' ; ?>
+                    <!-- <div class="discount">25%</div> -->
                     <figure>
                       <a href="<?php echo $url_paquete;?>">
                         <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre_paquete;?>">

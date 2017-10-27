@@ -93,7 +93,7 @@ class Productos_model extends CI_Model {
 
         return $resultado;
     }
-   
+
     /**
      * Listado de productos tiny
      *
@@ -106,12 +106,39 @@ class Productos_model extends CI_Model {
      * @version     Version 1.0
      */
     function listado_tiny($limit, $start, $data = NULL) {
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
         //Where
         $where = array('t1.estado != ' => 0);
 
         //Where
         if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
+        }
+
+        if(!empty($data['paquete_ciudad'])){
+            /*$value = $data['ciudades'];*/
+            $where["t1.paquete_ciudad"] = $data['paquete_ciudad'];
+        }
+
+        if(!empty($data['paquete_meses'])){
+            $value = $data['paquete_meses'];
+            $where["FIND_IN_SET('$value',t1.paquete_meses) !="] = 0;
+        }
+
+        if(!empty($data['paquete_noches'])){
+            $where["t1.paquete_noches"] = $data['paquete_noches'];
+        }
+
+        
+        if(!empty($data['ciudad_origen'])){
+            $where["t1.ciudad_origen"] = $data['ciudad_origen'];
+        }
+        
+        if(!empty($data['ciudad_destino'])){
+            $where["t1.ciudad_destino"] = $data['ciudad_destino'];
         }
 
         //Like
@@ -132,7 +159,7 @@ class Productos_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.id, t1.categoria_id, t1.nombre_corto, t1.nombre_largo, t1.resumen, t1.url_key, t1.precio_moneda, t1.precio, t1.precio_descuento, t1.mostrar_descuento, t1.imagen_2, t1.ciudades, t1.paquete_incluye")
+        $resultado = $this->db->select("t1.id, t1.categoria_id, t1.nombre_corto, t1.nombre_largo, t1.resumen, t1.url_key, t1.precio_moneda, t1.precio, t1.precio_descuento, t1.mostrar_descuento, t1.imagen_2, t1.paquete_ciudad, t1.paquete_incluye")
         /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
         ->where($where)
         ->like($like)
@@ -201,9 +228,9 @@ class Productos_model extends CI_Model {
                 }
 
                 $bloque[$value['id']] = array(
-                'id' => $value['id'], 
-                'titulo' => $value['titulo'], 
-                'descripciones' => $descripciones, 
+                    'id' => $value['id'], 
+                    'titulo' => $value['titulo'], 
+                    'descripciones' => $descripciones, 
                 );
 
                 unset($descripciones);

@@ -255,22 +255,17 @@ echo '</pre>';*/
                         </select>
                         <?php echo form_error('ambito', '<div class="error">', '</div>'); ?>
                       </div>
-                    </td>
-                  </tr>
 
-                  <tr>
-                   <td>
-                     <div class="form-group" style="margin-bottom: 0px;">
-                       <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
-                       <div class="col-sm-10">
-                         <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
+                      <label for="paquete_ciudad" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudad:</label>
+                       <div class="col-sm-4">
+                         <select name="paquete_ciudad" id="paquete_ciudad" data-placeholder="Seleccionar ciudad" class="chosen-select">
                           <option value=""></option>
                           <?php
                           if(!empty($ciudades)){
-                            $post_ciudades = $post['ciudades'];
-                            $post_ciudades = (is_array($post_ciudades)) ? $post_ciudades : explode(',', $post['ciudades']) ;
+/*                            $post_ciudades = $post['ciudades'];
+                            $post_ciudades = (is_array($post_ciudades)) ? $post_ciudades : explode(',', $post['ciudades']) ;*/
                             foreach ($ciudades as $key => $value) {
-                              $selected_ciudad = (in_array($value['id'], $post_ciudades)) ? 'selected' : '' ;
+                              $selected_ciudad = ($post['paquete_ciudad'] == $value['id']) ? 'selected' : '' ;
                               $location_name = $value['city'] . ', ' . $value['country'];
                               echo '<option value="'.$value['id'].'" ' . $selected_ciudad . '>'.$location_name.'</option>';
                             }
@@ -281,6 +276,7 @@ echo '</pre>';*/
                       </div>
                     </td>
                   </tr>
+
 
                   <tr>
                    <td>

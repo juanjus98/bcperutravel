@@ -119,6 +119,9 @@ class Paginas extends CI_Controller {
    * Listar productos
    */
   public function listar($categoria_url_key, $data_prod){
+    /*echo "<pre>";
+    print_r($data_prod);
+    echo "</pre>";*/
     /**
      * Listar productos
      */
@@ -130,10 +133,6 @@ class Paginas extends CI_Controller {
     $num_links = 4; //número de links
     //Página actual
     $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
-
-    /*if (isset($_GET['refresh'])) {
-      $this->session->unset_userdata($sessionName);
-    }*/
 
     //Setear post
     $post = $this->Crud->set_post($data_prod,$sessionName);
@@ -195,7 +194,7 @@ class Paginas extends CI_Controller {
         break;
 
         case 6:
-        $data_search['ciudades'] = (!empty($post['destino_id'])) ? $post['destino_id'] : '' ;
+        $data_search['paquete_ciudad'] = (!empty($post['destino_id'])) ? $post['destino_id'] : '' ;
         $data_search['paquete_meses'] = (!empty($post['mes_salida'])) ? $post['mes_salida'] : '' ;
         $data_search['paquete_noches'] = (!empty($post['numero_noches'])) ? $post['numero_noches'] : '' ;
         break;
