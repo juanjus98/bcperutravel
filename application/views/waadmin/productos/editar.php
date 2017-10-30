@@ -425,6 +425,28 @@ echo '</pre>';*/
                     </td>
                   </tr>
 
+                  <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="tipo_ticket" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Tipo de ticket:</label>
+                       <div class="col-sm-4">
+                         <select name="tipo_ticket" id="tipo_ticket" data-placeholder="Seleccionar ciudad" class="form-control">
+                          <!-- <option value=""></option> -->
+                          <?php
+                          $tipos_ticket = $this->tipos_ticket;
+                          if(!empty($tipos_ticket)){
+                            foreach ($tipos_ticket as $key => $value) {
+                              $selected_tipo_ticket = ($post['tipo_ticket'] == $key) ? 'selected' : '' ;
+                              echo '<option value="'.$key.'" ' . $selected_tipo_ticket . '>'.$value.'</option>';
+                            }
+                          }
+                          ?>
+                        </select>
+                        <?php echo form_error('tipo_ticket', '<div class="error">', '</div>'); ?>
+                      </div>
+                    </td>
+                  </tr>
+
                 </tbody>
               </table><br>
 

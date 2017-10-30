@@ -106,9 +106,9 @@ class Productos_model extends CI_Model {
      * @version     Version 1.0
      */
     function listado_tiny($limit, $start, $data = NULL) {
-        echo "<pre>";
+        /*echo "<pre>";
         print_r($data);
-        echo "</pre>";
+        echo "</pre>";*/
 
         //Where
         $where = array('t1.estado != ' => 0);
@@ -159,7 +159,7 @@ class Productos_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.id, t1.categoria_id, t1.nombre_corto, t1.nombre_largo, t1.resumen, t1.url_key, t1.precio_moneda, t1.precio, t1.precio_descuento, t1.mostrar_descuento, t1.imagen_2, t1.paquete_ciudad, t1.paquete_incluye")
+        $resultado = $this->db->select("t1.id, t1.categoria_id, t1.nombre_corto, t1.nombre_largo, t1.resumen, t1.url_key, t1.precio_moneda, t1.precio, t1.precio_descuento, t1.mostrar_descuento, t1.imagen_2, t1.paquete_ciudad, t1.paquete_incluye, t1.paquete_noches, t1.ciudad_origen, t1.ciudad_destino, t1.tipo_ticket, t1.tipo_transporte")
         /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
         ->where($where)
         ->like($like)

@@ -162,10 +162,13 @@ class Categorias extends CI_Controller{
             $imagen_info = $this->imaupload->do_upload($upload_path, "imagen");
           }
 
+          $publico = (isset($post['publico'])) ? $post['publico'] : 0 ;
+
     			$data_form = array(
     				"nombre" => $post['nombre'],
     				"descripcion" => $post['descripcion'],
             "orden" => $post['orden'],
+            "publico" => $publico,
     				);
 
           //cargar imágenes

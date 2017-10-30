@@ -14,6 +14,11 @@ class Productos extends CI_Controller{
     4 => 'Fluvial',
   );
 
+  public $tipos_ticket = array(
+    1 => 'IDA Y VUELTA', 
+    2 => 'SOLO IDA',
+  );
+
   public $paquete_incluye_list = array(
     1 => 'Vuelo', 
     2 => 'Traslados',
@@ -291,6 +296,7 @@ class Productos extends CI_Controller{
               $data_form['transporte_id'] = $post['transporte_id'];
               $data_form['ciudad_origen'] = $post['ciudad_origen'];
               $data_form['ciudad_destino'] = $post['ciudad_destino'];
+              $data_form['tipo_ticket'] = $post['tipo_ticket'];
             }
 
           //Cargar Imagenes

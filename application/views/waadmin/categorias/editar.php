@@ -82,9 +82,18 @@ echo '</pre>';*/
                            <input name="orden" id="orden" type="text" value="<?php echo $retVal = (!empty($post['orden'])) ? $post['orden'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                            <?php echo form_error('orden', '<div class="error">', '</div>'); ?>
                          </div>
+
+                         <label for="publico" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Publicar:</label>
+                         <div class="col-sm-4">
+                           <?php
+                           $checked = (!empty($post['publico']) && $post['publico'] == 1) ? 'checked' : '' ;
+                           ?>
+                           <input type="checkbox" name="publico" id="publico" value="1" <?php echo $checked; ?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>> <b>Mostrar publicamente.</b>
+                           <?php echo form_error('publico', '<div class="error">', '</div>'); ?>
+                         </div>
+
                        </td>
                      </tr>
-
 
                    </tbody>
                  </table><br>

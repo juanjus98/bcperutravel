@@ -44,33 +44,23 @@ if (!function_exists('divideTexto')) {
 if (!function_exists('wamenu')) {
 
     function wamenu() {
-        $CI= & get_instance();
-        //Menu
-        /*$CI->load->model('menu_model', 'Menu');*/
-
-        //Menú tours
-        /*$resultado = $CI->Menu->menuTours();
-        foreach ($resultado as $key => $value) {
-            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
-            $menuTours["tours/{$urlkey}"] = $value['provincia'];
-        }*/
-
-        //Menú estadia
-        /*$resultado = $CI->Menu->menuEstadia();
-        foreach ($resultado as $key => $value) {
-            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
-            $menuEstadia["hoteles/{$urlkey}"] = $value['provincia'];
-        }*/
+        $CI = & get_instance();
 
         $menu = array(
-            'inicio' => '<i class="fa fa-home" aria-hidden="true"></i>',
-            'paquetes-turisticos' => 'Paquetes turísticos',
-            'promociones' => 'Promociones',
-            'tickets' => 'Tickets',
-            'anio-nuevp' => 'Año nuevo',
-            /*'Tours' => $menuTours,
-            'Estadía' => $menuEstadia*/
+            'inicio' => 'Inicio',
             );
+
+        //Categorías
+        $result = $CI->db->select("t1.*")
+        ->where("t1.estado !=", 0)
+        ->where("t1.parent_id", 0)
+        ->where("t1.publico", 1)
+        ->order_by("t1.agregar","Desc")
+        ->get("categoria as t1")
+        ->result_array();
+        foreach ($result as $item) {
+            $menu[$item['url_key']] = $item['nombre'];
+        }
 
         return $menu;
     }
@@ -80,7 +70,7 @@ if (!function_exists('wamenu')) {
 if (!function_exists('crear_menu')) {
 
     function crear_menu($menu, $active_link) {
-        $nav = '<ul class="nav navbar-nav navbar-nav-wa">';
+        $nav = '<ul class="nav navbar-nav navbar-right navbar-nav-wa">';
         foreach ($menu as $key => $value) {
             $class_active = "";
             if ($key == $active_link) {

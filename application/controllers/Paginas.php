@@ -21,7 +21,19 @@ class Paginas extends CI_Controller {
     12 => 'Diciembre'
   );
 
-  public $numero_noches = array(1,2,3,4,5,6,7,8,9,10);
+public $tipos_transporte = array(
+    1 => array('title' => 'Terrestre', 'fa-icon' => 'fa-bus'), 
+    2 => array('title' => 'Aéreo', 'fa-icon' => 'fa-plane'),
+    3 => array('title' => 'Marino', 'fa-icon' => 'fa-ship'),
+    4 => array('title' => 'Fluvial', 'fa-icon' => 'fa-ship'),
+  );
+
+public $paquete_incluye_list = array(
+    1 => array('title' => 'Vuelo', 'fa-icon' => 'fa-plane'), 
+    2 => array('title' => 'Traslados', 'fa-icon' => 'fa-car'),
+    3 => array('title' => 'Estadía', 'fa-icon' => 'fa-bed'),
+  );
+
 
   function __construct() {
     parent::__construct();
@@ -32,14 +44,9 @@ class Paginas extends CI_Controller {
 
     $this->load->model("categorias_model","Categorias");
     $this->load->model('productos_model', 'Productos');
-    $this->load->model("crud_model","Crud");
+    $this->load->model('ciudades_model', 'Ciudades');
 
-    /*$this->load->model("promociones_model","Promociones");
-    $this->load->model("videos_model","Videos");
-    $this->load->model("paquetes_model","Paquetes");
-    $this->load->model("tours_model","Tours");
-    $this->load->model("hoteles_model","Hoteles");
-    $this->load->model("paquetes_galeria_model","Paquetes_galeria");*/
+    $this->load->model("crud_model","Crud");
 
     /**
      * Información del website
@@ -47,11 +54,12 @@ class Paginas extends CI_Controller {
     $this->website_info = $this->Inicio->get_website();
   }
 
-  public function redirect(){
-    redirect('waadmin', 'refresh');
-  }
 
   public function index() {
+    //Limpiar session de busqueda ses_search
+    unset($_SESSION['ses_search']);
+    unset($_SESSION['ses_products']);
+
     //Consultar ciudades
     $this->load->model('ciudades_model', 'Ciudades');
     $total_ciudades = $this->Ciudades->total_registros();
@@ -108,8 +116,6 @@ class Paginas extends CI_Controller {
 
     $this->listar($categoria_url_key, $data_prod);
 
-    
-
     /*$this->template->title('Inicio');
     $this->template->build('paginas/index', $data);*/
   }
@@ -119,16 +125,13 @@ class Paginas extends CI_Controller {
    * Listar productos
    */
   public function listar($categoria_url_key, $data_prod){
-    /*echo "<pre>";
-    print_r($data_prod);
-    echo "</pre>";*/
     /**
      * Listar productos
      */
     $sessionName = 'ses_products';
 
     $base_url = base_url($categoria_url_key);
-    $per_page = 4; //registros por página
+    $per_page = 3; //registros por página
     $uri_segment = 2; //segmento de la url
     $num_links = 4; //número de links
     //Página actual
@@ -137,6 +140,11 @@ class Paginas extends CI_Controller {
     //Setear post
     $post = $this->Crud->set_post($data_prod,$sessionName);
     $data['post'] = $post;
+
+    //Consultar Categoría
+    $data_categoria = array('id' => $post['categoria_id'],);
+    $categoria = $this->Categorias->get_row($data_categoria);
+    $data['categoria'] = $categoria;
 
     //Total de registros por post
     $data['total_registros'] = $this->Productos->total_registros($post);
@@ -151,12 +159,6 @@ class Paginas extends CI_Controller {
 
     $this->pagination->initialize($set_paginacion);
     $data["links"] = $this->pagination->create_links();
-
-    /*echo "<pre>";
-    print_r($data['listado']);
-    echo "</pre>";
-
-    die();*/
 
     $data['active_link'] = "inicio";
     $data['website'] = $this->Inicio->get_website();

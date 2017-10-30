@@ -880,6 +880,10 @@ fieldset[disabled] .btn-primary-1.active {
   background: rgba(0, 0, 0, 0.6);
   border-radius: 100%;
   cursor: pointer;
+  margin-right: 6px;
+}
+.thumbnail-item figure .tg-icons .badge i {
+  line-height: 19px;
 }
 .thumbnail-item .caption h3 {
   font-family: 'Lato', sans-serif;
@@ -891,12 +895,12 @@ fieldset[disabled] .btn-primary-1.active {
   color: #333;
   text-decoration: none;
 }
-.thumbnail-item .caption h4 {
-  font-size: 16px;
-  font-weight: normal;
+.thumbnail-item .caption h4 span {
+  font-size: 14px;
   color: #666;
+  font-weight: normal;
 }
-.thumbnail-item .caption h4 i {
+.thumbnail-item .caption h4 span i {
   color: #FF735D;
   margin-right: 6px;
 }

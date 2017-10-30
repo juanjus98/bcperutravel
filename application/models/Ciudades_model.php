@@ -139,6 +139,7 @@ class Ciudades_model extends CI_Model {
         return $resultado;
     }
 
+
     /**
      * Cosultar ciudades
      *

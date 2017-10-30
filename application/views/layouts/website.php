@@ -152,13 +152,16 @@ $tag_image = $head_info['image'];
 							</a>
 						</div>
 						<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav navbar-right navbar-nav-wa">
+							<!-- <ul class="nav navbar-nav navbar-right navbar-nav-wa">
 								<li class="active"><a href="#">Inicio</a></li>
 								<li><a href="#">Paquetes Turísticos</a></li>
 								<li><a href="#">Promociones</a></li>
 								<li><a href="#">Tickets</a></li>
 								<li><a href="#">Año Nuevo</a></li>
-							</ul>
+							</ul> -->
+							<?php
+								echo crear_menu(wamenu(), $active_link);
+							?>
 						</div>
 						<!--/.nav-collapse -->
 					</div>
