@@ -627,6 +627,9 @@ echo '</pre>';*/
              <div class="form-group" style="margin-bottom: 0px;">
                <label for="imagen_1" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Imagen:</label>
                <div class="col-sm-10">
+                <div class="alert alert-warning" role="alert">
+                      Dimensiones: 1300px * 520px
+                    </div>
                  <input type="file" name="imagen_1" id="imagen_1" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                  <?php
                  if(!empty($post['imagen_1'])){
@@ -656,6 +659,9 @@ echo '</pre>';*/
                <div class="form-group" style="margin-bottom: 0px;">
                  <label for="imagen_2" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Imagen:</label>
                  <div class="col-sm-10">
+                    <div class="alert alert-warning" role="alert">
+                      Dimensiones: 820px * 460px
+                    </div>
                    <input type="file" name="imagen_2" id="imagen_2" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                    <?php
                    if(!empty($post['imagen_2'])){
@@ -672,6 +678,7 @@ echo '</pre>';*/
              </tr>
            </tbody>
          </table><br>
+         
        </div>
      </fieldset >
    </div><!--end pad-->

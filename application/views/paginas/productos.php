@@ -39,7 +39,7 @@ $incluye_list = $this->paquete_incluye_list;
             echo "</pre>";*/
 
                 $nombreItem = trim($item['nombre_corto']);
-                $urlLink = base_url(categoria_url_key . '/' . $item['url_key']);
+                $urlLink = base_url($categoria['url_key'] . '/' . $item['url_key']);
 
                 $urlImagen = (!empty($item['imagen_2'])) ? base_url($this->config->item('upload_path') . $item['imagen_2']) : base_url('assets/images/no-image.jpg') ;
 

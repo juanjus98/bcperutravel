@@ -21,14 +21,14 @@ class Paginas extends CI_Controller {
     12 => 'Diciembre'
   );
 
-public $tipos_transporte = array(
+  public $tipos_transporte = array(
     1 => array('title' => 'Terrestre', 'fa-icon' => 'fa-bus'), 
     2 => array('title' => 'Aéreo', 'fa-icon' => 'fa-plane'),
     3 => array('title' => 'Marino', 'fa-icon' => 'fa-ship'),
     4 => array('title' => 'Fluvial', 'fa-icon' => 'fa-ship'),
   );
 
-public $paquete_incluye_list = array(
+  public $paquete_incluye_list = array(
     1 => array('title' => 'Vuelo', 'fa-icon' => 'fa-plane'), 
     2 => array('title' => 'Traslados', 'fa-icon' => 'fa-car'),
     3 => array('title' => 'Estadía', 'fa-icon' => 'fa-bed'),
@@ -96,28 +96,45 @@ public $paquete_incluye_list = array(
     $producto_url_key = ($this->uri->segment(2)) ? $this->uri->segment(2) : '';
 
     /**
-     * Validamos segmento 2
-     */
-    $isPage = (is_numeric($producto_url_key)) ? $producto_url_key : '';
-
-    /**
      * Verificar session de busqueda ses_search
      */
     if($this->session->userdata('ses_search')){
       $data_prod = $this->session->userdata('ses_search');
+      $this->session->unset_userdata('ses_search');
     }
 
-    if(empty($data_prod)){
+    /*if(empty($data_prod)){
       $data_row = array('url_key' => $categoria_url_key);
       $categoria = $this->Categorias->get_row($data_row);
       $categoria_id = $categoria['id'];
       $data_prod = array('categoria_id' => $categoria_id);
-    }
+    }*/
 
-    $this->listar($categoria_url_key, $data_prod);
+    if(!empty($producto_url_key) && !is_numeric($producto_url_key)){
+      $this->detalle($producto_url_key);
+    }else{
+      $this->listar($categoria_url_key, $data_prod);
+    }
 
     /*$this->template->title('Inicio');
     $this->template->build('paginas/index', $data);*/
+  }
+
+  /**
+   * Detalles del producto
+   */
+  public function detalle($url_key){
+    //Consultar producto
+    $data_prod = array('url_key' => $url_key);
+    $producto = $this->Productos->get_row($data_prod);
+    $data['producto'] = $producto;
+
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    $this->template->title('Inicio');
+    $this->template->build('paginas/detalle', $data);
   }
 
 
@@ -167,7 +184,6 @@ public $paquete_incluye_list = array(
     $this->template->title('Inicio');
     $this->template->build('paginas/productos', $data);
   }
-
 
   /**
    * Buscar
