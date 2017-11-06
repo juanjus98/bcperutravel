@@ -192,7 +192,47 @@ $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') .
           </div>
         </div>
         <div class="col-md-4">
-          FORM
+          <div class="box_style_1">
+            <div class="price">
+              <strong>$630</strong><small>por persona</small>
+            </div>
+            <ul class="list_ok">
+              <li>Item 1</li>
+              <li>Item 2</li>
+              <li>Item 3</li>
+              <li>Item 4</li>
+            </ul>
+            <small>*Precio sujeto a cambio.</small>
+          </div>
+          <div class="box_style_2">
+            <h3>Reservalo ahora!<span>Por favor completa el siguiente formulario.</span></h3>
+            <div id="message-booking"></div>
+            <form method="post" action="" id="check_avail" autocomplete="off">
+              <input type="hidden" id="tour_name" name="tour_name" value="Berlin">              
+              <div class="form-group">
+                <label>Nombres y Apellidos</label>
+                <input type="text" class="form-control" id="name_lastname_booking" name="name_lastname_booking" placeholder="Name and Lastname">
+              </div>
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="form-control" id="email_booking" name="email_booking" placeholder="E-mail">
+              </div>
+              <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
+              </div>
+              <div class="form-group">
+                <label>Fecha de viaje</label>
+                <input type="text" class="form-control" id="fecha_viaje" name="fecha_viaje" placeholder="Seleccionar Fecha">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Reservar" class="btn_full" id="submit-reservar">
+              </div>
+            </form>
+            <hr>
+            <a href="#0" class="btn_outline"> or Contáctenos</a>
+            <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>004542344599</a>
+          </div>
         </div>
       </div>
       <div class="row">
