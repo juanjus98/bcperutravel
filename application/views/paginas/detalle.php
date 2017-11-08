@@ -1,5 +1,6 @@
 <?php
 /*$incluye_list = $this->paquete_incluye_list;*/
+$categoria_id = $producto['categoria_id'];
 $nombre_corto = $producto['nombre_corto'];
 $nombre_largo = $producto['nombre_largo'];
 $resumen = $producto['resumen'];
@@ -19,7 +20,7 @@ $transporte_id = $producto['transporte_id'];
 $ciudad_origen = $producto['ciudad_origen'];
 $ciudad_destino = $producto['ciudad_destino'];
 $tipo_ticket = $producto['tipo_ticket'];
-$paquete_incluye = $producto['paquete_incluye'];
+$paquete_incluye = explode(',', $producto['paquete_incluye']);
 $paquete_meses = $producto['paquete_meses'];
 $paquete_noches = $producto['paquete_noches'];
 $categoria_nombre = $producto['categoria_nombre'];
@@ -30,6 +31,13 @@ $especificaciones = $producto['especificaciones'];
 $imgCabecera = (!empty($imagen_1)) ? base_url($this->config->item('upload_path') . $imagen_1) : base_url('assets/images/no-image.jpg') ;
 //Imagen principal
 $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') . $imagen_2) : base_url('assets/images/no-image.jpg') ;
+
+//Precio
+$monedas = array(1 => '$', 2 => 'S/' );
+$str_precio = $monedas[$precio_moneda] . $precio;
+
+//Paquete incluye
+$paquete_incluye_list = $this->paquete_incluye_list;
 ?>
 <!--Cabecera-->
 <div class="container-cabecera" style="background-image: url('<?php echo $imgCabecera;?>')">
@@ -50,10 +58,13 @@ $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') .
     <div class="divider_border"></div>
     <div class="cont-main">
       <?php
-      echo "<pre>";
+      /*echo "<pre>";
       print_r($producto);
+      echo "</pre>";*/
+
+      echo "<pre>";
+      print_r($paquete_incluye);
       echo "</pre>";
-      /*die();*/
       ?>
       <div class="row">
         <div class="col-md-8">
@@ -194,13 +205,23 @@ $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') .
         <div class="col-md-4">
           <div class="box_style_1">
             <div class="price">
-              <strong>$630</strong><small>por persona</small>
+              <strong><?php echo $str_precio;?></strong><small class="clearfix">por persona</small>
             </div>
             <ul class="list_ok">
-              <li>Item 1</li>
+              <?php
+              if ($categoria_id == 6) {
+                if (!empty($paquete_incluye)) {
+                  foreach ($paquete_incluye as $key => $value) {
+                    $incluye = $paquete_incluye_list[$value];
+                    echo '<li>'.$incluye['title'].'</li>';
+                  }
+                }
+              }
+              ?>
+              <!-- <li>Item 1</li>
               <li>Item 2</li>
               <li>Item 3</li>
-              <li>Item 4</li>
+              <li>Item 4</li> -->
             </ul>
             <small>*Precio sujeto a cambio.</small>
           </div>
@@ -230,8 +251,8 @@ $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') .
               </div>
             </form>
             <hr>
-            <a href="#0" class="btn_outline"> or Contáctenos</a>
-            <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>004542344599</a>
+            <a href="#0" class="btn_outline"> o Contáctenos</a>
+            <a href="tel://004542344599" id="phone_2"><i class="fa fa-phone" aria-hidden="true"></i> 004542344599</a>
           </div>
         </div>
       </div>
