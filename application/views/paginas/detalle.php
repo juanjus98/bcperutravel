@@ -60,9 +60,9 @@ $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') .
     <div class="cont-main">
 
       <?php
-      /*echo "<pre>";
+      echo "<pre>";
       print_r($producto);
-      echo "</pre>";*/
+      echo "</pre>";
       /*die();*/
       ?>
 
