@@ -85,6 +85,11 @@ $route['confirmacion'] = 'paginas/confirmacion';*/
 $route['traslados-actividades-circuitos'] = 'paginas/carrusel';
 $route['carrusellist'] = 'paginas/carrusellist';
 
+/**
+ * Utils
+ */
+$route['logos'] = 'utilidades/logos';
+
 //Servicio servicio
 /*$route['servicio/(:any)'] = 'paginas/servicio/$1';*/
 
