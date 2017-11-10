@@ -25,7 +25,10 @@ $paquete_meses = $producto['paquete_meses'];
 $paquete_noches = $producto['paquete_noches'];
 $categoria_nombre = $producto['categoria_nombre'];
 $categoria_key = $producto['categoria_key'];
+
 $wbox_blq = $producto['wbox_blq'];
+array_shift($wbox_blq);
+
 $especificaciones = $producto['especificaciones'];
 //Imagen cabecera
 $imgCabecera = (!empty($imagen_1)) ? base_url($this->config->item('upload_path') . $imagen_1) : base_url('assets/images/no-image.jpg') ;
@@ -62,9 +65,9 @@ $paquete_incluye_list = $this->paquete_incluye_list;
       print_r($producto);
       echo "</pre>";*/
 
-      echo "<pre>";
+      /*echo "<pre>";
       print_r($paquete_incluye);
-      echo "</pre>";
+      echo "</pre>";*/
       ?>
       <div class="row">
         <div class="col-md-8">
@@ -77,20 +80,40 @@ $paquete_incluye_list = $this->paquete_incluye_list;
           </div>
           <div class="cont-wboxes">
             <div class="row">
-              <div class="col-md-6">
-                <div class="feature-box">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-check" aria-hidden="true"></i>
+              <?php
+              if(!empty($wbox_blq)){
+                /*echo "<pre>";
+                print_r($wbox_blq);
+                echo "</pre>";*/
+                foreach ($wbox_blq as $key => $value) {
+                  $descripciones = $value['descripciones'];
+                  array_shift($descripciones);
+                  ?>
+                  <div class="col-md-6">
+                    <div class="feature-box">
+                      <div class="feature-box-icon">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </div>
+                      <div class="feature-box-info">
+                        <h4><?php echo $value['titulo'];?></h4>
+                        <?php
+                        if (!empty($descripciones)) {
+                          foreach ($descripciones as $key => $item) {
+                            echo '<p>- '.$item.'</p>';
+                          }
+                        }
+                        ?>
+                        <p>
+                          Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="feature-box-info">
-                    <h4>Fabulous (Based on 34 reviews)</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
+                  <?php
+                } 
+              }
+              ?>
+              <!-- <div class="col-md-6">
                 <div class="feature-box">
                   <div class="feature-box-icon">
                     <i class="fa fa-check" aria-hidden="true"></i>
@@ -128,7 +151,7 @@ $paquete_incluye_list = $this->paquete_incluye_list;
                     <p>- Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.</p>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <hr>
@@ -218,33 +241,31 @@ $paquete_incluye_list = $this->paquete_incluye_list;
                 }
               }
               ?>
-              <!-- <li>Item 1</li>
-              <li>Item 2</li>
-              <li>Item 3</li>
-              <li>Item 4</li> -->
             </ul>
             <small>*Precio sujeto a cambio.</small>
           </div>
           <div class="box_style_2">
             <h3>Reservalo ahora!<span>Por favor completa el siguiente formulario.</span></h3>
             <div id="message-booking"></div>
-            <form method="post" action="" id="check_avail" autocomplete="off">
+            <!-- <form method="post" action="" id="check_avail" autocomplete="off"  data-toggle="validator"> -->
+            <form class="form-vertical" name="form-reservar" id="form-reservar" action="" method="post" data-toggle="validator">
               <input type="hidden" id="tour_name" name="tour_name" value="Berlin">              
               <div class="form-group">
                 <label>Nombres y Apellidos</label>
-                <input type="text" class="form-control" id="name_lastname_booking" name="name_lastname_booking" placeholder="Name and Lastname">
+                <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres y apellidos" required>
               </div>
               <div class="form-group">
                 <label>E-mail</label>
-                <input type="email" class="form-control" id="email_booking" name="email_booking" placeholder="E-mail">
+                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" data-error="E-mail inválido." required>
+                <div class="help-block with-errors"></div>
               </div>
               <div class="form-group">
                 <label>Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
+                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required>
               </div>
               <div class="form-group">
                 <label>Fecha de viaje</label>
-                <input type="text" class="form-control" id="fecha_viaje" name="fecha_viaje" placeholder="Seleccionar Fecha">
+                <input type="text" class="form-control datepicker" id="fecha_viaje" name="fecha_viaje" placeholder="Seleccionar Fecha">
               </div>
               <div class="form-group">
                 <input type="submit" value="Reservar" class="btn_full" id="submit-reservar">

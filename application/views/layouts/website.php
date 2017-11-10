@@ -102,11 +102,13 @@ $tag_image = $head_info['image'];
 <!-- //Bootstrap datepicker-->
 
 <!--//Spinner-->
-<!-- <link href="assets/plugins/spinner/css/bootstrap-spinner.min.css?v=7887" /> -->
 <script src="<?=base_url('assets/plugins/spinner/js/jquery.spinner.min.js')?>"></script>
 
 <!-- bootstrap3-typeahead-->
 <script src="<?=base_url('assets/plugins/bootstrap3-typeahead/bootstrap3-typeahead.min.js')?>"></script>
+
+<!--//Bootstrap-validator-->
+<script src="<?=base_url('assets/plugins/bootstrap-validator/validator.min.js')?>"></script>
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/style.min.css')?>" />
 
