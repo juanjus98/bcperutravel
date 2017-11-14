@@ -44,6 +44,8 @@ class Paginas extends CI_Controller {
 
     $this->load->model("categorias_model","Categorias");
     $this->load->model('productos_model', 'Productos');
+    $this->load->model('productos_itinerario_model', 'Productos_itinerario');
+
     $this->load->model('ciudades_model', 'Ciudades');
 
     $this->load->model("crud_model","Crud");

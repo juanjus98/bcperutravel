@@ -41,6 +41,7 @@ $str_precio = $monedas[$precio_moneda] . $precio;
 
 //Paquete incluye
 $paquete_incluye_list = $this->paquete_incluye_list;
+
 ?>
 <!--Cabecera-->
 <div class="container-cabecera" style="background-image: url('<?php echo $imgCabecera;?>')">
@@ -62,7 +63,7 @@ $paquete_incluye_list = $this->paquete_incluye_list;
     <div class="cont-main">
       <?php
       /*echo "<pre>";
-      print_r($producto);
+      print_r($itinerario);
       echo "</pre>";*/
 
       /*echo "<pre>";
@@ -113,117 +114,53 @@ $paquete_incluye_list = $this->paquete_incluye_list;
                 } 
               }
               ?>
-              <!-- <div class="col-md-6">
-                <div class="feature-box">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4>Fabulous (Based on 34 reviews)</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="feature-box">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4>Fabulous (Based on 34 reviews)</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="feature-box">
-                  <div class="feature-box-icon">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                  <div class="feature-box-info">
-                    <h4>Fabulous (Based on 34 reviews)</h4>
-                    <p>- Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.</p>
-                    <p>- Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.</p>
-                    <p>- Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere temporibus nam.</p>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
+
+          <?php
+            //Itinerario
+            $data_itinerario['producto_id'] = $producto['id'];
+            $total_registros = $this->Productos_itinerario->total_registros($data_itinerario);
+            $itinerario = $this->Productos_itinerario->listado($total_registros, 0, $data_itinerario);
+            /*echo "<pre>";
+            print_r($itinerario);
+            echo "</pre>";*/
+            if(!empty($itinerario)){
+              $i=1;
+          ?>
           <hr>
           <div class="cont-itinerario">
             <h3>Itinerario</h3>
             <ul class="cbp_tmtimeline">
+              <?php
+              foreach ($itinerario as $key => $value) {
+                /*echo "<pre>";
+            print_r($value);
+            echo "</pre>";*/
+              ?>
               <li>
-                <time class="cbp_tmtime" datetime="09:30"><span>30 min</span><span>09:30</span>
+                <time class="cbp_tmtime"><span>Lunes 30</span><span><?php echo $value['fecha'];?></span>
                 </time>
-                <div class="cbp_tmicon">
-                  1
-                </div>
+                <div class="cbp_tmicon"><?php echo $i++;?></div>
                 <div class="cbp_tmlabel">
-                  <div class="hidden-xs">
+                  <!-- <div class="hidden-xs">
                     <img src="http://themetrademark.com/demo/bestours/wp-content/uploads/2017/03/tour_plan_1.jpg" alt="" class="img-circle thumb_visit">
-                  </div>
-                  <h4>Augue invidunt has</h4>
+                  </div> -->
+                  <h4><?php echo $value['titulo'];?></h4>
                   <p>
-                    Vero consequat cotidieque ad eam. Ea duis errem qui, impedit blandit sed eu. Ius diam vivendo ne.
+                    <?php echo str_replace("\n", "<br>", $value['descripcion']);?>
                   </p>
                 </div>
               </li>
-              <li>
-                <time class="cbp_tmtime" datetime="11:30"><span>2 hours</span><span>11:30</span>
-                </time>
-                <div class="cbp_tmicon">
-                  2
-                </div>
-                <div class="cbp_tmlabel">
-                  <div class="hidden-xs">
-                    <img src="http://themetrademark.com/demo/bestours/wp-content/uploads/2017/03/tour_plan_1.jpg" alt="" class="img-circle thumb_visit">
-                  </div>
-                  <h4>An eirmod doctus admodum</h4>
-                  <p>
-                    Vero consequat cotidieque ad eam. Ea duis errem qui, impedit blandit sed eu. Ius diam vivendo ne.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <time class="cbp_tmtime" datetime="13:30"><span>1 hour</span><span>13:30</span>
-                </time>
-                <div class="cbp_tmicon">
-                  3
-                </div>
-                <div class="cbp_tmlabel">
-                  <div class="hidden-xs">
-                    <img src="http://themetrademark.com/demo/bestours/wp-content/uploads/2017/03/tour_plan_1.jpg" alt="" class="img-circle thumb_visit">
-                  </div>
-                  <h4>Eos aeque fuisset</h4>
-                  <p>
-                    Vero consequat cotidieque ad eam. Ea duis errem qui, impedit blandit sed eu. Ius diam vivendo ne.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <time class="cbp_tmtime" datetime="14:30"><span>2 hours</span><span>14:30</span>
-                </time>
-                <div class="cbp_tmicon">
-                  4
-                </div>
-                <div class="cbp_tmlabel">
-                  <div class="hidden-xs">
-                    <img src="http://themetrademark.com/demo/bestours/wp-content/uploads/2017/03/tour_plan_1.jpg" alt="" class="img-circle thumb_visit">
-                  </div>
-                  <h4>No affert timeam mea</h4>
-                  <p>
-                    Vero consequat cotidieque ad eam. Ea duis errem qui, impedit blandit sed eu. Ius diam vivendo ne.
-                  </p>
-                </div>
-              </li>
+              <?php
+              }
+              ?>
             </ul>
           </div>
+          <?php 
+        }
+          ?>
+          <!-- //Itinerario-->
         </div>
         <div class="col-md-4">
           <div class="box_style_1">
@@ -249,7 +186,8 @@ $paquete_incluye_list = $this->paquete_incluye_list;
             <div id="message-booking"></div>
             <!-- <form method="post" action="" id="check_avail" autocomplete="off"  data-toggle="validator"> -->
             <form class="form-vertical" name="form-reservar" id="form-reservar" action="" method="post" data-toggle="validator">
-              <input type="hidden" id="tour_name" name="tour_name" value="Berlin">              
+              <input type="hidden" id="tour_name" name="tour_name" value="Berlin">
+              
               <div class="form-group">
                 <label>Nombres y Apellidos</label>
                 <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres y apellidos" required>
@@ -275,11 +213,6 @@ $paquete_incluye_list = $this->paquete_incluye_list;
             <a href="#0" class="btn_outline"> o Contáctenos</a>
             <a href="tel://004542344599" id="phone_2"><i class="fa fa-phone" aria-hidden="true"></i> 004542344599</a>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <?php echo $links;?>
         </div>
       </div>
     </div>

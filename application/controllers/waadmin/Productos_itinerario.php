@@ -133,6 +133,14 @@ function editar($tipo='C',$id=null,$id_relation){
 
   $config = array(
    array(
+     'field' => 'fecha',
+     'label' => 'Fecha',
+     'rules' => 'required',
+     'errors' => array(
+       'required' => 'Campo requerido.',
+       )
+     ),
+   array(
      'field' => 'titulo',
      'label' => 'Título',
      'rules' => 'required',
@@ -171,9 +179,14 @@ function editar($tipo='C',$id=null,$id_relation){
     $imagen_info = $this->imaupload->do_upload("/assets/images/uploads", "nombre_imagen");
   }
 
+  //Fecha
+  $pre_fecha = explode("/", $post['fecha']);
+  $fecha = date("Y-m-d",strtotime($pre_fecha[2]."-".$pre_fecha[1]. "-" .$pre_fecha[0]));
+
   $data_form = array(
     'titulo' => $post['titulo'],
     'descripcion' => $post['descripcion'],
+    'fecha' => $fecha,
     'orden' => $post['orden']
     );
 

@@ -143,6 +143,12 @@ die();*/
  <script type="text/javascript" src="<?php echo base_url('assets/plugins/strip/js/strip.pkgd.min.js');?>"></script>
  <script type="text/javascript" src="<?php echo base_url('assets/plugins/moment/moment-with-locales.min.js');?>"></script>
 
+ <!-- Bootstrap datepicker-->
+<link rel="stylesheet" type="text/css" href="<?=base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css')?>" />
+<script src="<?=base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')?>"></script>
+<script src="<?=base_url('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js')?>"></script>
+<!-- //Bootstrap datepicker-->
+
  <script src="<?php echo base_url('assets/plugins/jquery.cascadingdropdown.min.js');?>"></script>
  
  <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>

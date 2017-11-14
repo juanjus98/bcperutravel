@@ -635,6 +635,15 @@ $(function() {
  moment.locale('es');
  /*console.log(moment().format('LL'));*/
 
+ //Bootstrap datepicker solo una fecha
+$('.datepicker').datepicker({
+    language: "es",
+    autoclose: true,
+    todayHighlight: true,
+    /*startDate: '+1d',*/
+});
+
+
  //Chosen select
  $(".chosen-select").chosen({
      no_results_text: "Oops, sin resultados!",

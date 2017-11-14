@@ -46,6 +46,24 @@ echo "</pre>";*/
                    <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="fecha" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Fecha:</label>
+                         <div class="col-sm-10">
+                          <?php
+                          $fecha='';
+                          if($post['fecha'] != "0000-00-00" && $post['fecha'] != ""){
+                            $pre_fecha = explode("-");
+                            $fecha = date("d/m/Y",strtotime($post['fecha']));
+                          }
+                          ?>
+                           <input name="fecha" id="fecha" type="text" value="<?php echo $retVal = (!empty($fecha)) ? $fecha : '';?>" class="form-control input-sm datepicker" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <?php echo form_error('fecha', '<div class="error">', '</div>'); ?>
+                         </div>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
                          <label for="titulo" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Título:</label>
                          <div class="col-sm-10">
                            <input name="titulo" id="titulo" type="text" value="<?php echo $retVal = (!empty($post['titulo'])) ? $post['titulo'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>

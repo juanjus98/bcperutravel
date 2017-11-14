@@ -69,6 +69,12 @@ die();*/
  <script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
  <!-- <script src="<?php echo base_url('assets/plugins/chosen/chosen.order.jquery.min.js');?>"></script> -->
 
+  <!-- Bootstrap datepicker-->
+<link rel="stylesheet" type="text/css" href="<?=base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css')?>" />
+<script src="<?=base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')?>"></script>
+<script src="<?=base_url('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js')?>"></script>
+<!-- //Bootstrap datepicker-->
+
  <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
  
 </body>
