@@ -111,7 +111,7 @@ $incluye_list = $this->paquete_incluye_list;
                       </div>
                     </figure>
                     <div class="caption">
-                      <h3><a href="<?php echo $urlLink;?>" title="<?php echo $nombreItem;?>"><?php echo $nombreItem;?></a></h3>
+                      <h3><a href="<?php echo $urlLink;?>" title="<?php echo $nombreItem;?>"><?php echo character_limiter($nombreItem,30);?></a></h3>
                       <h4>
                         <?php echo $labels;?>
                         <!-- <span class="label"><i class="fa fa-calendar" aria-hidden="true"></i>4 días.</span>

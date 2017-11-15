@@ -96,7 +96,7 @@ class Productos extends CI_Controller{
 
 		//Paginacion
     $base_url = base_url($this->base_ctr . '/index');
-        $per_page = 10; //registros por página
+        $per_page = 30; //registros por página
         $uri_segment = 4; //segmento de la url
         $num_links = 4; //número de links
         //Página actual

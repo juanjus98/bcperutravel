@@ -79,13 +79,7 @@ class Paginas extends CI_Controller {
     $data_crud['where'] = array("t1.estado !=" => 0);
     $data_crud['order_by'] = "t1.orden Asc";
     $data['slider'] = $this->Crud->getRows($data_crud);
-
-
-    //Consultar meses
-    /*$meses = $this->Crud->getMonths(4);*/
     
-    $locations = $this->Crud->getLocations();
-
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
   }
@@ -150,20 +144,21 @@ class Paginas extends CI_Controller {
     $sessionName = 'ses_products';
 
     $base_url = base_url($categoria_url_key);
-    $per_page = 3; //registros por página
+    $per_page = 15; //registros por página
     $uri_segment = 2; //segmento de la url
     $num_links = 4; //número de links
     //Página actual
     $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
 
-    //Setear post
-    $post = $this->Crud->set_post($data_prod,$sessionName);
-    $data['post'] = $post;
-
     //Consultar Categoría
-    $data_categoria = array('id' => $post['categoria_id'],);
+    $data_categoria = array('url_key' => $categoria_url_key,);
     $categoria = $this->Categorias->get_row($data_categoria);
     $data['categoria'] = $categoria;
+
+    //Setear post
+    $data_prod['categoria_id'] = $categoria['id'];
+    $post = $this->Crud->set_post($data_prod,$sessionName);
+    $data['post'] = $post;
 
     //Total de registros por post
     $data['total_registros'] = $this->Productos->total_registros($post);
@@ -231,21 +226,7 @@ class Paginas extends CI_Controller {
     redirect(base_url($categoria_url_key));
   }
 
-  /*public function addciudades(){
-    $locations = $this->Crud->getLocations();
-    foreach ($locations as $key => $value) {
-      $data_form = array(
-          "altitude" => $value->altitude,
-          "city" => $value->city,
-          "country" => $value->country,
-          "latitude" => $value->altitude,
-          "longitude" => $value->altitude,
-          );
-      $this->db->insert("ciudades", $data_form);
-    }
-  }*/
-
-  public function paquetes($args=null) {
+/*  public function paquetes($args=null) {
     $data['dias'] = $this->Paquetes->listadoDias();
     
     $data_busqueda = array();
@@ -330,7 +311,7 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Paquete');
     $this->template->build('paginas/paquete', $data);
-  }
+  }*/
 
 
   public function contactanos() {
@@ -458,58 +439,6 @@ class Paginas extends CI_Controller {
       $this->template->build('paginas/confirmacion', $data);
     }
 
-    public function salones() {
-      $this->template->title('Salones');
-
-      $data['active_link'] = "salones";
-      $data['footer_line'] = "salones";
-      $data['website'] = $this->Inicio->get_website();
-
-      //Categorías para carousel parent_id != 0, destacar=1
-      $data_crud['table'] = "categoria as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.parent_id !=" => 0, "t1.destacar" => 1, "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.orden Asc";
-      $data['categorias_carousel'] = $this->Crud->getRows($data_crud);
-
-      $data['head_info'] = head_info($data['website']); //siempre
-      $this->template->build('paginas/salones', $data);
-    }
-
-    public function salon($url_key=null) {
-      $this->template->title('Salon');
-      $data['active_link'] = "salones";
-      $data['active_gallery'] = true;
-
-      $data['website'] = $this->Inicio->get_website();
-      
-      //Consultar salón
-      $data_crud['table'] = "producto as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.url_key" => $url_key, "t1.estado !=" => 0);
-      /*$data_crud['order_by'] = "t1.orden Asc";*/
-      $salon = $this->Crud->getRow($data_crud);
-      $data['salon'] = $salon;
-
-      //Consultar producto_especificaciones
-      $data_crud['table'] = "producto_especificaciones as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.producto_id" => $salon['id'], "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.id Asc";
-      $producto_especificaciones = $this->Crud->getRows($data_crud);
-      $data['producto_especificaciones'] = $producto_especificaciones;
-
-      //Consultar producto_imagen
-      $data_crud['table'] = "producto_imagen as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.producto_id" => $salon['id'], "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.id Asc";
-      $galeria = $this->Crud->getRows($data_crud);
-      $data['galeria'] = $galeria;
-
-      $data['head_info'] = head_info($salon,'salon'); //siempre
-      $this->template->build('paginas/salon', $data);
-    }
 
     public function servicio($url_key=null) {
       $data['active_link'] = "servicios";

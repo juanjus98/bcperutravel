@@ -74,6 +74,10 @@ function get_row($data) {
         $where['t1.id'] = $data['id'];
     }
 
+    if(!empty($data['url_key'])){
+        $where['t1.url_key'] = $data['url_key'];
+    }
+
     $resultado = $this->db->select("t1.*")
     ->where($where)
     ->get("categoria as t1")
