@@ -20,9 +20,12 @@ class Productos extends CI_Controller{
   );
 
   public $paquete_incluye_list = array(
-    1 => 'Vuelo', 
-    2 => 'Traslados',
-    3 => 'Estadia',
+    1 => 'Todo incluido.', 
+    2 => 'Traslados.',
+    3 => 'Alimentación.',
+    4 => 'Alojamiento.',
+    5 => 'Tarjetas de asistencia.',
+    6 => 'Tours.',
   );
 
   public $listado_meses = array(

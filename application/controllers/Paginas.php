@@ -29,9 +29,12 @@ class Paginas extends CI_Controller {
   );
 
   public $paquete_incluye_list = array(
-    1 => array('title' => 'Vuelo', 'fa-icon' => 'fa-plane'), 
-    2 => array('title' => 'Traslados', 'fa-icon' => 'fa-car'),
-    3 => array('title' => 'Estadía', 'fa-icon' => 'fa-bed'),
+    1 => array('title' => 'Todo incluido.', 'fa-icon' => 'fa-bel'), 
+    2 => array('title' => 'Traslados.', 'fa-icon' => 'fa-plane'),
+    3 => array('title' => 'Alimentación.', 'fa-icon' => 'fa-cutlery'),
+    4 => array('title' => 'Alojamiento.', 'fa-icon' => 'fa-bed'),
+    5 => array('title' => 'Tarjetas de asistencia.', 'fa-icon' => 'fa-id-card-o'),
+    6 => array('title' => 'Tours.', 'fa-icon' => 'fa-male'),
   );
 
 
