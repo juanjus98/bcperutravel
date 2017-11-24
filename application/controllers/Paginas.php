@@ -128,6 +128,12 @@ class Paginas extends CI_Controller {
     $producto = $this->Productos->get_row($data_prod);
     $data['producto'] = $producto;
 
+    if ($this->input->post()) {
+      $post= $this->input->post();
+      $this->reservar($post);
+      die();
+    }
+
     $data['active_link'] = "inicio";
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
@@ -228,93 +234,6 @@ class Paginas extends CI_Controller {
 
     redirect(base_url($categoria_url_key));
   }
-
-/*  public function paquetes($args=null) {
-    $data['dias'] = $this->Paquetes->listadoDias();
-    
-    $data_busqueda = array();
-    $nroDias = 0;
-    if(isset($args)){
-      $_hasta = explode('hasta_', $args);
-      if(count($_hasta) > 1){
-        $_desde = explode('desde_',$_hasta[0]);
-        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
-        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
-        $fechaDesde = date('Y-m-d', strtotime($strDesde));
-        $fechaHasta = date('Y-m-d', strtotime($strHasta));
-        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-        $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
-        $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
-        $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
-      }
-
-      $_dias = explode('dias', $args);
-      if(count($_dias) > 1){
-        $nroDias = $_dias[0];
-      }
-    }
-
-    $data['active_link'] = "paquetes-tours";
-    $data['website'] = $this->Inicio->get_website();
-    $data['head_info'] = head_info($this->website_info); //siempre
-
-    //Paquetes
-    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
-    if($nroDias > 0){
-      $data_paquetes['nro_dias'] = $nroDias;
-      $data_busqueda['nroDias'] = $nroDias;
-    }
-
-    $total_paquetes = $this->Paquetes->total_registros($data_paquetes);
-    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
-
-    //Información de busqueda
-    $data['busqueda'] = $data_busqueda;
-
-    $this->template->title('Paquetes');
-    $this->template->build('paginas/paquetes', $data);
-  }
-
-  public function paquete($url_key) {
-    if(isset($args)){
-      $_hasta = explode('hasta_', $args);
-      if(count($_hasta) > 1){
-        $_desde = explode('desde_',$_hasta[0]);
-        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
-        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
-        $fechaDesde = date('Y-m-d', strtotime($strDesde));
-        $fechaHasta = date('Y-m-d', strtotime($strHasta));
-        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-        $nroDias = floor($dateDiff / (60 * 60 * 24));
-      }
-
-      $_dias = explode('dias', $args);
-      if(count($_dias) > 1){
-        $nroDias = $_dias[0];
-      }
-    }
-
-    //Consultar Paquete
-    $data_paquete = array('url_key' => $url_key);
-    $paquete = $this->Paquetes->get_row($data_paquete);
-    $data['paquete'] = $paquete;
-
-    $data['active_link'] = "paquetes-tours";
-    $data['website'] = $this->Inicio->get_website();
-    $data['head_info'] = head_info($paquete, 'paquete'); //siempre
-
-    //Formas de pago (página)
-    if(!empty($paquete['formas_pago_id'])){
-      $data_pagina = array('id' => $paquete['formas_pago_id']);
-      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
-    }
-
-    //Paises
-    $data['paises'] = $this->Crud->getPaises();
-
-    $this->template->title('Paquete');
-    $this->template->build('paginas/paquete', $data);
-  }*/
 
 
   public function contactanos() {
@@ -489,6 +408,176 @@ class Paginas extends CI_Controller {
     function despegar(){
       $this->load->view('paginas/motores/despegar');
     }
+
+
+/**
+ * Reservar
+ */
+public function reservar()
+  {
+    /*$ema = $this->input->post('txtEmailUsuario');
+    $nom = $this->input->post('txtNombreUsuario');
+    $tel = $this->input->post('txtTelefonoUsuario');
+    $tip = $this->input->post('txtTipoServicio');
+    $des = $this->input->post('txtNombrePaqueteSol');
+    $mfe = $this->input->post('txtFechaViaje');
+    $adu = $this->input->post('txtCantidadAdultos');
+    $nin = $this->input->post('txtCantidadNinos');
+    $men = $this->input->post('txtMensajeSolicitar');*/
+
+    //$res = $this->Paquetes_model->solicitarPaquete($ema, $nom, $tel, $paq, $ser, $mfe, $adu, $nin, $men);
+
+    $this->load->library('email');
+    $configuraciones['mailtype'] = 'html';
+    $this->email->initialize($configuraciones);
+    $this->email->from("juanjus@yahoo.com", "bcperutravel Test");
+    $this->email->to('counter@bcperutravel.com', 'Solicitud - Paquete turistico');
+    /*$this->email->to('juanjus98@gmail.com', 'Solicitud - Paquete turistico');*/
+    $this->email->subject('PRUEBA DE CORREO V2');
+    $this->email->message('<h1>PRUEBA ENVIADO POR JUAN JULIO</h1>');
+    if ($this->email->send()) {
+      $msg = 'ENVIADO!!';
+    }
+    else {
+      $msg = 'NO ENVIADO';
+    }
+
+    echo "<br>";
+
+    print_r($this->email->print_debugger());
+
+    echo $msg;
+  }
+
+public function reservar_bk($post) {
+
+        //Enviar formulario
+
+            //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
+            $adultos = (!empty($post['adultos'])) ? strip_tags($post['adultos']) : 0 ;
+            $adolecentes = (!empty($post['adolecentes'])) ? strip_tags($post['adolecentes']) : 0 ;
+            $ninios = (!empty($post['ninios'])) ? strip_tags($post['ninios']) : 0 ;
+            $infantes = (!empty($post['infantes'])) ? strip_tags($post['infantes']) : 0 ;
+
+            $fecha_arribo = (!empty($post['fecha_arribo'])) ? strip_tags($post['fecha_arribo']) : '' ;
+
+            $data_insert = array(
+              "tipo_info" => strip_tags($post['tipo_info']),
+              "id_info" => strip_tags($post['id_info']),
+              "date_desde" => strip_tags($post['dateDesde']),
+              "date_hasta" => strip_tags($post['dateHasta']),
+              "pais_origen" => strip_tags($post['pais_origen']),
+              "ciudad" => strip_tags($post['ciudad']),
+              "fecha_arribo" => $fecha_arribo,
+              "adultos" => $adultos,
+              "adolecentes" => $adolecentes,
+              "ninios" => $ninios,
+              "infantes" => $infantes,
+              "nombres" => strip_tags($post['nombres']),
+              "telefono" => strip_tags($post['telefono']),
+              "celular" => strip_tags($post['celular']),
+              "email" => strip_tags($post['email']),
+              "mensaje" => strip_tags($post['mensaje']),
+              "agregar" => date("Y-m-d H:i:s")
+              );
+
+            /*$this->db->insert('reservas', $data_insert);
+            $reservas_id = $this->db->insert_id();*/
+
+            //Templates Email
+            $data_email['post'] = $data_insert;
+
+            //Otros datos para el email
+            $data_email['website'] = $this->Inicio->get_website();
+            
+            if($post['tipo_info'] == 'P'){
+            //Consultar Paquete
+              $data_paquete = array('id' => $post['id_info']);
+              $paquete = $this->Paquetes->get_row($data_paquete);
+
+              $url_servicio = base_url() . 'paquete-tour/' . $paquete['url_key'];
+              $servicio = array(
+                'nombre_servicio' => $paquete['nombre'],
+                'descripcion_servicio' => $paquete['detalles'],
+                'url_servicio' => $url_servicio,
+                'itinerario' => $paquete['itinerarios']
+                );
+
+              $data_email['servicio'] = $servicio;
+
+              $titulo_email_admin = 'Solicitud de reserva - Paquete';
+            }
+
+            if($post['tipo_info'] == 'T'){
+              //Consultar Tour
+              $data_tour = array('id' => $post['id_info']);
+              $tour = $this->Tours->get_row($data_tour);
+
+              $url_servicio = base_url() . 'tour/' . $tour['url_key'];
+              $servicio = array(
+                'nombre_servicio' => $tour['nombre'],
+                'descripcion_servicio' => $tour['detalle'],
+                'url_servicio' => $url_servicio,
+                'itinerario' => $tour['itinerarios']
+                );
+
+              $data_email['servicio'] = $servicio;
+              $titulo_email_admin = 'Solicitud de reserva - Tour';
+            }
+
+            $cabeceras_email = $this->config->item('waemail');
+            $cabeceras_email['titulo_email_admin'] = $titulo_email_admin;
+            $data_email['cabeceras'] = $cabeceras_email;
+            
+            //Template user email
+            $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
+
+            //Template admin admin
+            $email_admin = $this->load->view('paginas/email/tp_reservar', $data_email, TRUE);
+
+            //Enviar email
+            $this->load->library('email');
+
+            /*$config['useragent']           = "CodeIgniter";*/
+            /*$config['protocol'] = 'sendmail';*/
+            /*$config['protocol']            = "smtp";
+            $config['smtp_host']           = "mail.bcperutravel.com";
+            $config['smtp_port']           = "587";*/
+            /*$config['mailpath'] = "/usr/bin/sendmail";*/
+            $config['charset'] = 'iso-8859-1';
+            $config['wordwrap'] = TRUE;
+            $config['mailtype'] = 'html';
+
+            $this->email->initialize($config);
+
+            $this->email->from('reservas@bcperutravel.com', utf8_decode('Reservas BC Perú Travel'));
+            $this->email->reply_to($post['email'], utf8_decode($post['nombres']));
+            $this->email->to('juanjus98@gmail.com'); //Email destino (quién recibe el correo)
+            /*$this->email->cc('juanjus98@gmail.com');*/
+            //$this->email->bcc('them@their-example.com');
+
+            $subject_admin = utf8_decode($titulo_email_admin) . utf8_decode(' - ' . $post['nombres']);
+            $this->email->subject($subject_admin);
+            $this->email->message($email_admin);
+            $this->email->send(); //Envia email al administrador
+            /*echo $this->email->print_debugger();*/
+
+            //ENVIAMOS EMAIL DE CONFIRMACIÓN
+            $this->email->clear();
+            $this->email->initialize($config);
+
+            $this->email->from('reservas@bcperutravel.com', utf8_decode('Reservas BC Perú Travel'));
+            $this->email->to($post['email'], utf8_decode($post['nombres']));
+            $this->email->subject(utf8_decode('Confirmación de reserva.'));
+            $this->email->message($email_user);
+            $this->email->send();
+
+            print_r($this->email->print_debugger());
+            die();
+
+            $redirect = $url_servicio . '?ack=success';
+            redirect($redirect);
+      }
 
 
 

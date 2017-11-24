@@ -19,7 +19,7 @@
 										<tr>
 											<td style="padding:36px 48px;display:block">
 												<h1 style="color:#ffffff;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left">
-													<?php echo utf8_decode('Gracias por contáctanos.');?>
+													<?php echo utf8_decode($cabeceras['titulo_email_admin']);?>
 												</h1>
 											</td>
 										</tr>
@@ -49,7 +49,7 @@
 												<ul>
 												<li>
 													<strong>Nombres y Apellidos:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-													<?php echo $post['nombres'];?>
+													<?php echo utf8_decode($post['nombres']);?>
 												</span>
 											</li>
 											<li>
@@ -63,7 +63,7 @@
 										<li>
 											<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 											<?php
-											echo str_replace("\n", "<br>", $post['mensaje']);
+											echo str_replace("\n", "<br>", utf8_decode($post['mensaje']));
 											?>
 										</span>
 									</li>

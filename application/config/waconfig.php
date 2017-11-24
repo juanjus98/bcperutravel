@@ -28,4 +28,4 @@ $config['upload_path'] = "/assets/images/uploads/";
  */
 $config['waemail']['dominio'] = "www.bcperutravel.com";
 $config['waemail']['logo'] = "http://www.bcperutravel.com/assets/images/logo.png";
-$config['waemail']['color'] = "#F3A313";
+$config['waemail']['color'] = "#F58634";
