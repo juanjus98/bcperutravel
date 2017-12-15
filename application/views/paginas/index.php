@@ -4,6 +4,8 @@ $numero_noches = $this->numero_noches;
 /*echo "<pre>";
 print_r($meses);
 echo "</pre>";*/
+
+$incluye_list = $this->paquete_incluye_list;
 ?>
 <!--Carousel-->
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
@@ -176,39 +178,106 @@ echo "</pre>";*/
 					</div>
 					<!-- cont-promos-->
 					<div class="cont-promos tabbable-line">
+						<?php 
+						if(!empty($destacados)){
+						?>
 						<ul id="carousel-promo-1" class="carousel-promo">
+							<?php
+							foreach ($destacados as $key => $item) {
+
+				$nombreItem = trim($item['nombre_corto']);
+                $urlLink = base_url($item['categoria_key'] . '/' . $item['url_key']);
+
+                $urlImagen = (!empty($item['imagen_2'])) ? base_url($this->config->item('upload_path') . $item['imagen_2']) : base_url('assets/images/no-image.jpg') ;
+
+                $precio_descuento = $item['precio_descuento'];
+
+                $badges='';
+
+                switch ($item['categoria_id']) {
+                  case 1:
+                  case 2:
+                    $ciudad_origen = ($item['ciudad_origen'] != 0) ? $this->Ciudades->get_row(array('id' => $item['ciudad_origen'])) : '';
+                    $ciudad_destino = ($item['ciudad_destino'] != 0) ? $this->Ciudades->get_row(array('id' => $item['ciudad_destino'])) : '';
+
+                    //Tipo de Ticket
+                    $tipo_ticket = ($item['tipo_ticket'] == 1) ? 'IDA Y VUELTA' : 'SOLO IDA' ;
+                    $tipo_ticket_icon = ($item['tipo_ticket'] == 1) ? 'fa-exchange' : 'fa-long-arrow-right' ;
+
+                    //Tipo de transporte
+                    $tipos_transporte = $this->tipos_transporte;
+                    $tipo_transporte = $tipos_transporte[$item['tipo_transporte']];
+                    if(!empty($tipo_transporte)){
+                      $badges .= '<span class="badge" data-toggle="tooltip" title="'.$tipo_transporte['title'].'"><i class="fa '.$tipo_transporte['fa-icon'].'" aria-hidden="true"></i></span>';
+                    }
+
+                    $badges .= '<span class="badge" data-toggle="tooltip" title="'.$tipo_ticket.'"><i class="fa '.$tipo_ticket_icon.'" aria-hidden="true"></i></span>';
+
+                    $city_label = $ciudad_origen['city'] . ', ' . $ciudad_origen['country'] .  ' - ' . $ciudad_destino['city'] . ', ' . $ciudad_destino['country'];
+
+                    $labels = '<span class="label"><i class="fa fa-map-marker" aria-hidden="true"></i>'.$city_label.'</span>';
+                    break;
+                  case 6:
+                    //Incluye
+                    $paquete_incluye = explode(',', $item['paquete_incluye']);
+                    if(!empty($paquete_incluye)){
+                      foreach ($paquete_incluye as $key => $value) {
+                        $incluye = $incluye_list[$value];
+                        $badges .= '<span class="badge" data-toggle="tooltip" title="'.$incluye['title'].'"><i class="fa '.$incluye['fa-icon'].'" aria-hidden="true"></i></span>';
+                      }
+                    }
+
+                    $paquete_ciudad = ($item['paquete_ciudad'] != 0) ? $this->Ciudades->get_row(array('id' => $item['paquete_ciudad'])) : '';
+
+                    /*$badges = '<span class="badge" data-toggle="tooltip" title="'.$tipo_ticket.'"><i class="fa '.$tipo_ticket_icon.'" aria-hidden="true"></i></span>';*/
+
+                    $labels = '<span class="label"><i class="fa fa-calendar" aria-hidden="true"></i>'.$item['paquete_noches'].' Noches.</span>';
+                    $city_label = $paquete_ciudad['city'] . ', ' . $paquete_ciudad['country'];
+                    $labels .= '<span class="label"><i class="fa fa-map-marker" aria-hidden="true"></i>' . $city_label . '</span>';
+                    break;
+                  
+                  default:
+                    # code...
+                    break;
+                }
+
+							?>
 							<li>
 								<div class="thumbnail thumbnail-item">
-									<div class="discount">25%</div>
-									<figure>
-										<a href="#">
-											<img src="https://unsplash.it/800/600" alt="Alt aquí">
-										</a>
-										<div class="tg-icons">
-											<span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
-											<span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span>
-										</div>
-									</figure>
-									<div class="caption">
-										<h3><a href="">Titulo INICIO 1</a></h3>
-										<h4>
-											<i class="fa fa-calendar" aria-hidden="true"></i>4 días.
-											&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i>Lima
-										</h4>
-										<p>Descripción</p>
-									</div>
-									<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-										<div class="btn-group" role="group">
-											<a href="javascript:;" class="btn btn-precio"><small>desde</small> $200.00</a>
-										</div>
-										<div class="btn-group" role="group">
-											<a href="#" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
-										</div>
-									</div>
-								</div>
+                    <?php echo $retVal = ($item['mostrar_descuento']==1) ? '<div class="discount">'.$precio_descuento.'</div>' : '' ; ?>
+                    <!-- <div class="discount">25%</div> -->
+                    <figure>
+                      <a href="<?php echo $urlLink;?>">
+                        <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombreItem;?>">
+                      </a>
+                      <div class="tg-icons">
+                        <?php echo $badges;?>
+                        <!-- <span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
+                        <span class="badge"  data-toggle="tooltip" title="Título"><i class="fa fa-car" aria-hidden="true"></i></span> -->
+                      </div>
+                    </figure>
+                    <div class="caption">
+                      <h3><a href="<?php echo $urlLink;?>" title="<?php echo $nombreItem;?>"><?php echo character_limiter($nombreItem,30);?></a></h3>
+                      <h4>
+                        <?php echo $labels;?>
+                        <!-- <span class="label"><i class="fa fa-calendar" aria-hidden="true"></i>4 días.</span>
+                        <span class="label"><i class="fa fa-map-marker" aria-hidden="true"></i>Lima</span> -->
+                      </h4>
+                      <p><?php echo $item['resumen'];?></p>
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                      <?php
+                      $precio_moneda = ($item['precio_moneda'] == 1) ? '$' : 'S/' ;
+                      $precio = (!empty($item['precio'])) ? $item['precio'] : '' ;
+                      ?>
+                      <a href="javascript:;" class="btn btn-precio" role="button"><small><?php echo $precio_moneda;?></small> <?php echo $precio;?></a>
+                      <a href="<?php echo $urlLink;?>" class="btn btn-detalles" role="button" title="<?php echo $nombreItem;?>"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
+                    </div>
+                  </div>
 							</li>
+							<?php } //End foreach?>
 
-							<li>
+							<!-- <li>
 								<div class="thumbnail thumbnail-item">
 									<div class="discount">60%</div>
 									<figure>
@@ -290,8 +359,9 @@ echo "</pre>";*/
 										</div>
 									</div>
 								</div>
-							</li>
+							</li> -->
 						</ul>
+						<?php } //Endif?>
 					</div>
 					<!-- //cont-promos-->
 				</div>

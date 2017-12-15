@@ -200,7 +200,17 @@ $('.datepicker').datepicker({
 
  //Submit Eliminar 
  $(document).on("click", "#btn-eliminar", function() {
-     if (confirm("Realemente desea aliminar")) {
+     if (confirm("Realemente desea aliminar?")) {
+         $("#index_form").submit();
+     } else {
+         return false;
+     }
+     return false;
+ });
+
+  //Submit Quitar de destacados 
+ $(document).on("click", "#btn-quitar-destacados", function() {
+     if (confirm("Realemente desea quitar de destacados?")) {
          $("#index_form").submit();
      } else {
          return false;

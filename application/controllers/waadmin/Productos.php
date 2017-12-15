@@ -137,6 +137,86 @@ class Productos extends CI_Controller{
         $this->template->build($this->base_ctr . '/index', $data);
       }
 
+/**
+ * Productos destacados
+ */
+  function destacados(){
+    /*$data['wa_tipo'] = $tipo;*/
+    $data['wa_modulo'] = 'Destacados';
+    $data['wa_menu'] = $this->base_title;
+
+    //URLS
+    $controlador = $this->base_ctr;
+    $data['agregar_url'] = base_url($controlador . '/editar/C');
+    $data['ver_url'] = base_url($controlador . '/editar/V/'); //Adicionar ID
+    $data['editar_url'] = base_url($controlador . '/editar/E/'); //Adicionar ID
+    $data['eliminar_url'] = base_url($controlador . '/eliminar');
+    
+    $data['undestacar_url'] = base_url($controlador . '/undestacar');
+
+    $data['refresh_url'] = base_url($controlador . '/index?refresh');
+
+    $data['detacar_order_url'] = base_url($controlador . '/upordendestacar');
+
+    //BUSQUEDA
+    $data['campos_busqueda'] = array(
+     't1.codigo' => 'Código',
+     't1.nombre_largo' => 'Nombre producto'
+   );
+
+    $sessionName = 's_' . $this->primary_table; //Session name
+
+    //Categorías
+    $total_categorias = $this->Categorias->total_registros();
+    $categorias = $this->Categorias->listado($total_categorias, 0);
+    $data['categorias'] = $categorias;
+
+    //Paginacion
+        $base_url = base_url($this->base_ctr . '/destacados');
+        $per_page = 30; //registros por página
+        $uri_segment = 4; //segmento de la url
+        $num_links = 4; //número de links
+        //Página actual
+        $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+
+        if (isset($_GET['refresh'])) {
+          $this->session->unset_userdata($sessionName);
+        }
+
+        //Setear post
+        $post = $this->Crud->set_post($this->input->post(),$sessionName);
+        $post['destacar'] = 1;
+        $post['ordenar_por'] = 'destacar_orden';
+        $post['ordentipo'] = 'ASC';
+        //destacar_orden
+
+        $data['post'] = $post;
+
+        //Total de registros por post
+        $data['total_registros'] = $this->Productos->total_registros($post);
+
+        //Listado
+        $data['listado'] = $this->Productos->listado($per_page, $page, $post);
+
+        //Paginacion
+        $total_rows = $data['total_registros'];
+
+        $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+
+        $this->pagination->initialize($set_paginacion);
+        $data["links"] = $this->pagination->create_links();
+
+
+        if ($this->session->userdata("mensaje")) {
+          $data["mensaje"] = $this->session->userdata("mensaje");
+          $this->session->unset_userdata("mensaje");
+        }
+
+        $this->template->title('Listado ' . $this->base_title);
+        $this->template->build($this->base_ctr . '/destacados', $data);
+      }
+
+
       function editar($tipo='C',$id=NULL){
         $path = '../../../../assets/plugins/ckfinder';
         $width = 'auto';
@@ -258,6 +338,9 @@ class Productos extends CI_Controller{
           $destacar = (isset($post['destacar'])) ? $post['destacar'] : 0 ;
           $mostrar_descuento = (isset($post['mostrar_descuento'])) ? $post['mostrar_descuento'] : 0 ;
 
+          //publicar
+          $publicar = (isset($post['publicar'])) ? $post['publicar'] : 0 ;
+
           $categoria_id = $post['categoria_id'];
 
           $data_form = array(
@@ -273,6 +356,7 @@ class Productos extends CI_Controller{
             "keywords" => $post['keywords'],
             "orden" => $post['orden'],
             "destacar" => $destacar,
+            "publicar" => $publicar,
           );
 
           //Paquetes turisticos
@@ -462,6 +546,39 @@ public function eliminar() {
  $this->template->build('inicio');
 }
 
+/**
+ * Undestacar
+ */
+public function undestacar() {
+ if ($this->input->post()) {
+   $items = $this->input->post('items');
+
+   if (!empty($items)) {
+     foreach ($items as $item) {
+       $fecha = date("Y-m-d H:i:s");
+       $data_eliminar = array(
+         "editar" => $fecha,
+         "destacar" => 0,
+         "destacar_orden" => 99,
+       );
+       $this->db->where('id', $item);
+       $this->db->update($this->primary_table, $data_eliminar);
+     }
+     $this->session->set_userdata('msj_success', "Registros quitados satisfactoriamente.");
+     redirect($this->base_ctr . "/destacados");
+   } else {
+     $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+     redirect($this->base_ctr . "/destacados");
+   }
+ } else {
+   $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+   redirect($this->base_ctr . "/destacados");
+ }
+
+ $this->template->title('Undestacar.');
+ $this->template->build('inicio');
+}
+
 function editor($path, $width) {
 
  //Loading Library For Ckeditor
@@ -492,6 +609,19 @@ function editor($path, $width) {
   if($this->input->post()){
     $post = $this->input->post();
     $data_form = array('orden' => $post['orden']);
+    $this->db->where('id', $post['id']);
+    $this->db->update($this->primary_table, $data_form);
+    echo "Orden actualizado.";
+  }
+}
+
+/**
+ * Ajax actualizar orden destacar
+ */
+ public function upordendestacar(){
+  if($this->input->post()){
+    $post = $this->input->post();
+    $data_form = array('destacar_orden' => $post['orden']);
     $this->db->where('id', $post['id']);
     $this->db->update($this->primary_table, $data_form);
     echo "Orden actualizado.";

@@ -325,4 +325,11 @@ $('.datepicker').datepicker({
 	 	pager: false
 	 });
 
+	 //Select ciudad -  listado de productos sel_ciudad_list
+	$(document).on("change","#sel_ciudad_list",function() {
+		var link = $(this).val();
+		window.location.href = link;
+		return false;
 	});
+
+});

@@ -22,6 +22,54 @@ $incluye_list = $this->paquete_incluye_list;
   <div class="container container-principal">
     <div class="divider_border"></div>
     <div class="cont-main">
+      
+      <div class="tool-box-form">
+      <div class="row">
+        <div class="col-md-8">
+          <form class="form-inline">
+          <div class="form-group">
+            <div class="btn-group" role="group" aria-label="...">
+              <a href="<?php echo $link_int;?>" class="btn btn-primary <?php echo $active_int;?>">Internacional</a>
+              <a href="<?php echo $link_nac;?>" class="btn btn-primary <?php echo $active_nac;?>">Nacional</a>
+            </div>
+          </div>
+          <div class="form-group">
+          <!-- <label for="exampleInputEmail2">Ciudad</label> -->
+          <?php
+          $disabled_ciudad = (!empty($active_nac)) ? '' : 'disabled' ;
+          ?>
+          <select name="sel_ciudad" id="sel_ciudad_list" class="form-control" <?php echo $disabled_ciudad;?>>
+              <option value="all">Ciudad</option>
+              <?php
+              if(!empty($ciudades_peru)){
+                foreach ($ciudades_peru as $key => $value) {
+                  $link = $link_nac . '&city='.$value['id'];
+                  $selected_city = ($_GET['city'] == $value['id']) ? 'selected' : '' ;
+                  echo '<option value="'.$link.'" '.$selected_city.'>'.$value['city'].'</option>';
+                }
+              }
+              ?>
+              <!-- <option value="nacional">NACIONAL</option>
+              <option value="internacional">INTERNACIONAL</option> -->
+            </select>
+          </div>
+          
+          </form>
+        </div>
+        <div class="col-md-4">
+          <!-- <form class="form-inline">
+          <div class="form-group pull-right">
+          <label for="exampleInputEmail2">Ordenar: </label>
+          <select class="form-control">
+              <option value="all">Ciudad</option>
+              <option value="nacional">NACIONAL</option> <option value="internacional">INTERNACIONAL</option>
+            </select>
+          </div>
+          </form> -->
+        </div>
+      </div>
+    </div>
+    
 
       <?php
       /*echo "<pre>";

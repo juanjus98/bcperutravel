@@ -27,5 +27,7 @@ $config['upload_path'] = "/assets/images/uploads/";
  * Configuración de email
  */
 $config['waemail']['dominio'] = "www.bcperutravel.com";
-$config['waemail']['logo'] = "http://www.bcperutravel.com/assets/images/logo.png";
+$config['waemail']['logo'] = "http://www.bcperutravel.com/v2/assets/images/logo.png";
 $config['waemail']['color'] = "#F58634";
+
+$config['waemail']['reservar_title'] = "Reservar []";

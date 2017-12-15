@@ -186,7 +186,7 @@ $paquete_incluye_list = $this->paquete_incluye_list;
             <div id="message-booking"></div>
             <!-- <form method="post" action="" id="check_avail" autocomplete="off"  data-toggle="validator"> -->
             <form class="form-vertical" name="form-reservar" id="form-reservar" action="" method="post" data-toggle="validator">
-              <input type="hidden" id="tour_name" name="tour_name" value="Berlin">
+              <input type="hidden" id="url_key" name="url_key" value="<?php echo $url_key;?>">
               <div class="form-group">
                 <label>Nombres y Apellidos</label>
                 <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres y apellidos" required>

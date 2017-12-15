@@ -27,6 +27,22 @@ class Productos_model extends CI_Model {
             $where["t1.categoria_id"] = $data['categoria_id'];
         }
 
+        if(!empty($data['paquete_ciudad'])){
+            $where["t1.paquete_ciudad"] = $data['paquete_ciudad'];
+        }
+
+        if (!empty($data['ambito'])) {
+            $where["t1.ambito"] = $data['ambito'];
+        }
+
+        if (!empty($data['destacar'])) {
+            $where["t1.destacar"] = $data['destacar'];
+        }
+
+        if(!empty($data['publicar'])){
+            $where["t1.publicar"] = $data['publicar'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -62,6 +78,14 @@ class Productos_model extends CI_Model {
         //Where
         if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
+        }
+
+        if (!empty($data['ambito'])) {
+            $where["t1.ambito"] = $data['ambito'];
+        }
+
+        if (!empty($data['destacar'])) {
+            $where["t1.destacar"] = $data['destacar'];
         }
 
         //Like
@@ -141,6 +165,18 @@ class Productos_model extends CI_Model {
             $where["t1.ciudad_destino"] = $data['ciudad_destino'];
         }
 
+        if (!empty($data['ambito'])) {
+            $where["t1.ambito"] = $data['ambito'];
+        }
+
+        if(!empty($data['publicar'])){
+            $where["t1.publicar"] = $data['publicar'];
+        }
+
+        if (!empty($data['destacar'])) {
+            $where["t1.destacar"] = $data['destacar'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -167,6 +203,10 @@ class Productos_model extends CI_Model {
         ->limit($limit, $start)
         ->get("producto as t1")
         ->result_array();
+
+        /*echo "<pre>";
+        print_r($this->db->last_query());
+        echo "</pre>";*/
 
         return $resultado;
     }

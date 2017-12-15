@@ -563,6 +563,15 @@ body {
   border-bottom: solid 1px #FFF339;
   color: #E02406;
 }
+/**
+ * Forumulario tool-box
+ */
+.tool-box-form {
+  background: #f7f4f4;
+  border-radius: 6px;
+  margin-bottom: 26px;
+  padding: 10px;
+}
 .cont-descripcion {
   font-family: 'Lato', sans-serif;
   font-size: 14px;

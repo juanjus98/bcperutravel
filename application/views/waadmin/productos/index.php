@@ -80,6 +80,7 @@ echo '</pre>';*/
                             <?php
                             if(!empty($listado)){
                                 foreach ($listado as $key => $item) {
+                                    $link_web = base_url($item['categoria_key'].'/'.$item['url_key']);
                                     ?>
                                     <tr>
                                         <td>
@@ -98,6 +99,8 @@ echo '</pre>';*/
                                         </td>
 
                                         <td class="text-center">
+                                            <a href="<?php echo $link_web; ?>" class="btn btn-success btn-xs" data-toggle="tooltip" title="Link" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
+
                                             <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/productos_itinerario/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
 
                                             <a href="<?php echo $ver_url . $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
