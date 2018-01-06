@@ -1,9 +1,6 @@
 <?php
 $meses = $this->listado_meses;
 $numero_noches = $this->numero_noches;
-/*echo "<pre>";
-print_r($meses);
-echo "</pre>";*/
 
 $incluye_list = $this->paquete_incluye_list;
 ?>
@@ -379,13 +376,24 @@ $incluye_list = $this->paquete_incluye_list;
 				</div>
 
 				<div class="col-md-4">
+					<?php 
+					if(!empty($banners)){
+					?>
 					<ul id="bannersHome">
+						<?php 
+						foreach ($banners as $key => $value) {
+							$banner_imagen = base_url($upload_path . $value['imagen_1']);
+							$banner_url = $value['url'];
+							$banner_target = $value['target'];
+							$banner_titulo = $value['titulo1'];
+							?>
 						<li>
-							<a href="#">
-								<img src="<?php echo base_url('assets/images/bann-1.jpg" class="img-responsive');?>">
+							<a href="<?php echo $banner_url;?>" target="<?php echo $banner_target;?>" title="<?php echo $banner_titulo;?>">
+								<img src="<?php echo $banner_imagen;?>" alt="<?php echo $banner_titulo;?>" class="img-responsive" >
 							</a>
 						</li>
-						<li>
+						<?php } ?>
+						<!-- <li>
 							<a href="#">
 								<img src="<?php echo base_url('assets/images/bann-2.jpg" class="img-responsive');?>">
 							</a>
@@ -394,8 +402,11 @@ $incluye_list = $this->paquete_incluye_list;
 							<a href="#">
 								<img src="<?php echo base_url('assets/images/bann-3.jpg" class="img-responsive');?>">
 							</a>
-						</li>
+						</li> -->
 					</ul>
+				<?php
+					}
+				?>
 				</div>
 
 			</div>

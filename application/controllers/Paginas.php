@@ -65,6 +65,8 @@ class Paginas extends CI_Controller {
     unset($_SESSION['ses_search']);
     unset($_SESSION['ses_products']);
 
+    $data['upload_path'] = $this->config->item('upload_path');
+
     //Consultar ciudades
     /*$this->load->model('ciudades_model', 'Ciudades');
     $total_ciudades = $this->Ciudades->total_registros();
@@ -82,6 +84,13 @@ class Paginas extends CI_Controller {
     $data_crud['where'] = array("t1.estado !=" => 0);
     $data_crud['order_by'] = "t1.orden Asc";
     $data['slider'] = $this->Crud->getRows($data_crud);
+
+    //Banners
+    $data_crud_banner['table'] = "banner as t1";
+    $data_crud_banner['columns'] = "t1.*";
+    $data_crud_banner['where'] = array("t1.estado !=" => 0);
+    $data_crud_banner['order_by'] = "t1.orden Asc";
+    $data['banners'] = $this->Crud->getRows($data_crud_banner);
 
     //Proeductos destacados
     $data['destacados'] = $this->getDestacados(8);
