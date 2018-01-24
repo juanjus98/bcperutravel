@@ -48,10 +48,16 @@ if (!function_exists('wamenu')) {
 
         $menu = array(
             'inicio' => 'Inicio',
-            );
+            'Paquetes Turísticos' => array(
+                'c/paquetes-turisticos/nacionales' => 'Nacionales',
+                'c/paquetes-turisticos/internacionales' => 'Internacionales',
+            ),
+            'c/tickets-de-bus' => 'Tickets de Bus',
+            'c/tickets-aereos' => 'Tickets Aéreos',
+        );
 
         //Categorías
-        $result = $CI->db->select("t1.*")
+        /*$result = $CI->db->select("t1.*")
         ->where("t1.estado !=", 0)
         ->where("t1.parent_id", 0)
         ->where("t1.publico", 1)
@@ -60,7 +66,7 @@ if (!function_exists('wamenu')) {
         ->result_array();
         foreach ($result as $item) {
             $menu[$item['url_key']] = $item['nombre'];
-        }
+        }*/
 
         return $menu;
     }

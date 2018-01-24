@@ -251,8 +251,8 @@ body {
   transition: background-color 0.5s ease;
 }
 .navbar-website .navbar-nav-wa li .dropdown-menu li a:hover {
-  color: #fff;
-  background-color: #E02406;
+  color: #E02406;
+  background-color: #fff;
 }
 .navbar-website .navbar-nav-wa li .dropdown-menu .active a,
 .navbar-website .navbar-nav-wa li .dropdown-menu .open a,
@@ -260,8 +260,8 @@ body {
 .navbar-website .navbar-nav-wa li .dropdown-menu .open a:focus,
 .navbar-website .navbar-nav-wa li .dropdown-menu .active a:hover,
 .navbar-website .navbar-nav-wa li .dropdown-menu .open a:hover {
-  color: #fff;
-  background-color: #E02406;
+  color: #E02406;
+  background-color: #fff;
 }
 .navbar-website .navbar-nav-wa .active a,
 .navbar-website .navbar-nav-wa .open a,

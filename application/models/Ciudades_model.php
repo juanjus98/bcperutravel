@@ -20,11 +20,22 @@ class Ciudades_model extends CI_Model {
      */
     function total_registros($data = NULL) {
         //Where
-        $where = array('t1.estado != ' => 0);
+        $where = array(
+            't1.estado != ' => 0,
+            't2.estado != ' => 0,
+            't2.publicar' => 1,
+        );
 
-        //Where
         if (!empty($data['country'])) {
-            $where["t1.country"] = $data['country'];
+            if($data['country'] == 'ALL'){
+                $where["t1.country !="] = 'Peru';
+            }else{
+                $where["t1.country"] = $data['country'];
+            }
+        }
+
+        if (!empty($data['categoria_id'])) {
+            $where["t2.categoria_id"] = $data['categoria_id'];
         }
 
         //Like
@@ -35,8 +46,10 @@ class Ciudades_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
+        ->join('producto as t2','t2.paquete_ciudad = t1.id')
         ->where($where)
         ->like($like)
+        ->group_by('t1.id')
         ->get("ciudades as t1")
         ->num_rows();
 
@@ -56,11 +69,22 @@ class Ciudades_model extends CI_Model {
      */
     function listado($limit, $start, $data = NULL) {
         //Where
-        $where = array('t1.estado != ' => 0);
+        $where = array(
+            't1.estado != ' => 0,
+            't2.estado != ' => 0,
+            't2.publicar' => 1,
+        );
 
-        //Where
         if (!empty($data['country'])) {
-            $where["t1.country"] = $data['country'];
+            if($data['country'] == 'ALL'){
+                $where["t1.country !="] = 'Peru';
+            }else{
+                $where["t1.country"] = $data['country'];
+            }
+        }
+
+        if (!empty($data['categoria_id'])) {
+            $where["t2.categoria_id"] = $data['categoria_id'];
         }
 
         //Like
@@ -81,13 +105,18 @@ class Ciudades_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.*")
+        $resultado = $this->db->select("t1.*, count(t2.id) As n_productos")
+        ->join('producto as t2','t2.paquete_ciudad = t1.id')
         ->where($where)
         ->like($like)
-        ->order_by($order_by)
+        ->group_by('t1.id')
+        ->order_by('t1.city', 'Asc')
         ->limit($limit, $start)
         ->get("ciudades as t1")
         ->result_array();
+
+        /*echo $this->db->last_query();
+        die();*/
 
         return $resultado;
     }

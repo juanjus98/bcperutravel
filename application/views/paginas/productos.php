@@ -1,8 +1,15 @@
 <?php
 $incluye_list = $this->paquete_incluye_list;
+
+/*echo "<pre>";
+print_r($categoria);
+echo "</pre>";*/
+//Background header
+$upload_path = $this->upload_path;
+$categoria_imagen = ($categoria['imagen'] != 'no-imagen.jpg') ? $upload_path . $categoria['imagen'] : 'assets/images/slide-4.jpg' ;
 ?>
 <!--Cabecera-->
-<div class="container-cabecera" style="background-image: url('assets/images/slide-4.jpg')">
+<div class="container-cabecera" style="background-image: url('<?php echo base_url($categoria_imagen);?>')">
 
   <div class="container">
     <div class="row">

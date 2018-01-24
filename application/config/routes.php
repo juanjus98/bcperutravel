@@ -72,6 +72,15 @@ foreach( $result as $row )
  */
 $route['buscar'] = 'paginas/buscar';
 
+$route['c/(:any)'] = 'paginas/productos/$1';
+$route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
+
+$route['c/(:any)/(:any)'] = 'paginas/productos_ambito/$1/$2'; //Por ambito (nacional/internacional)
+$route['c/(:any)/(:any)/(:num)'] = 'paginas/productos_ambito/$1/$2/$3'; //Paginación
+
+$route['p/(:num)-(:any)'] = 'paginas/productos_ciudad/$1/$2';
+$route['p/(:num)-(:any)/(:num)'] = 'paginas/productos_ciudad/$1/$2/$3'; //Paginación
+
 /*$route['c/(:any)'] = 'paginas/productos/$1';
 $route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
 $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto

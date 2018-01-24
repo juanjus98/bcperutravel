@@ -37,6 +37,7 @@ class Paginas extends CI_Controller {
     6 => array('title' => 'Tours.', 'fa-icon' => 'fa-male'),
   );
 
+  public $upload_path;
 
   function __construct() {
     parent::__construct();
@@ -57,6 +58,8 @@ class Paginas extends CI_Controller {
      * Información del website
      */
     $this->website_info = $this->Inicio->get_website();
+
+    $this->upload_path = $this->config->item('upload_path');
   }
 
 
@@ -97,6 +100,228 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Inicio');
     $this->template->build('paginas/index', $data);
+  }
+
+  //Productos
+  public function productos($categoria_url_key,$arg2=null, $arg3=null) {
+
+    //$uri_segment = (isset($arg2) && is_numeric($arg2)) ? 3 : 4 ;
+
+    if(isset($arg2) && is_numeric($arg2)){
+      $uri_segment = 3;
+      $base_url = base_url('c/'. $categoria_url_key);
+    }else{
+      $uri_segment = 4;
+      $base_url = base_url('c/'. $categoria_url_key . '/' . $arg2);
+    }
+   
+    /**
+      * Listar productos
+    */
+    $sessionName = 'ses_products';
+
+    //$base_url = base_url('c/'. $categoria_url_key);
+    $per_page = 15; //registros por página
+    //$uri_segment = 3; //segmento de la url
+    $num_links = 4; //número de links
+    //Página actual
+    $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+
+    //Consultar Categoría
+    $data_categoria = array('url_key' => $categoria_url_key,);
+    $categoria = $this->Categorias->get_row($data_categoria);
+    $data['categoria'] = $categoria;
+
+    //Setear post
+    $data_prod['publicar'] = 1; //Muestra solo las que están publicadas
+    $data_prod['categoria_id'] = $categoria['id'];
+    $data_prod['ambito'] = (!empty($gets['amb'])) ? strtoupper($gets['amb']) : '';
+    $data_prod['paquete_ciudad'] = (!empty($gets['city'])) ? $gets['city'] : '';
+
+    $post = $this->Crud->set_post($data_prod,$sessionName);
+    $data['post'] = $post;
+
+    //Total de registros por post
+    $data['total_registros'] = $this->Productos->total_registros($post);
+
+    //Listado
+    $data['listado'] = $this->Productos->listado_tiny($per_page, $page, $post);
+
+    //Paginacion
+    $total_rows = $data['total_registros'];
+
+    $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+
+    $this->pagination->initialize($set_paginacion);
+    $data["links"] = $this->pagination->create_links();
+
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    $this->template->title('Inicio');
+    $this->template->build('paginas/productos', $data);
+  }
+
+  //Productos
+  public function productos_ambito($categoria_url_key,$arg2=null, $arg3=null) {
+    //ambito = NAL, INTL
+    $ambito = ($arg2 == 'nacionales') ? 'NAL' : 'INTL';
+
+    if ($arg2 == 'nacionales') {
+      $ambito = 'NAL';
+      $country = 'Peru';
+      $data['subtitulo'] = 'Nacionales';
+      $data['ambito'] = 'nacionales';
+    }
+
+    if ($arg2 == 'internacionales') {
+      $ambito = 'INTL';
+      $country = 'ALL';
+      $data['subtitulo'] = 'Internacionales';
+      $data['ambito'] = 'internacionales';
+    }
+
+    if(isset($arg2) && is_numeric($arg2)){
+      $uri_segment = 3;
+      $base_url = base_url('c/'. $categoria_url_key);
+    }else{
+      $uri_segment = 4;
+      $base_url = base_url('c/'. $categoria_url_key . '/' . $arg2);
+    }
+
+
+    /**
+      * Listar productos
+    */
+    $sessionName = 'ses_products';
+
+    //$base_url = base_url('c/'. $categoria_url_key);
+    $per_page = 16; //registros por página
+    //$uri_segment = 3; //segmento de la url
+    $num_links = 4; //número de links
+    //Página actual
+    $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+
+    //Consultar Categoría
+    $data_categoria = array('url_key' => $categoria_url_key,);
+    $categoria = $this->Categorias->get_row($data_categoria);
+    $data['categoria'] = $categoria;
+
+  //Consultar ciudades
+    $data_ciudades = array(
+      'country' => $country,
+      'categoria_id' => 6,
+    );
+
+    $total_ciudades = $this->Ciudades->total_registros($data_ciudades);
+    $ciudades = $this->Ciudades->listado($total_ciudades, 0, $data_ciudades);
+    $data['ciudades'] = $ciudades;
+
+    //Setear post
+    $data_prod['publicar'] = 1; //Muestra solo las que están publicadas
+    $data_prod['categoria_id'] = $categoria['id'];
+    $data_prod['ambito'] = $ambito;
+    $data_prod['paquete_ciudad'] = (!empty($gets['city'])) ? $gets['city'] : '';
+
+    $post = $this->Crud->set_post($data_prod,$sessionName);
+    $data['post'] = $post;
+
+    //Total de registros por post
+    $data['total_registros'] = $this->Productos->total_registros($post);
+
+    //Listado
+    $data['listado'] = $this->Productos->listado_tiny($per_page, $page, $post);
+
+    //Paginacion
+    $total_rows = $data['total_registros'];
+
+    $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+
+    $this->pagination->initialize($set_paginacion);
+    $data["links"] = $this->pagination->create_links();
+
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    $this->template->title('Productos');
+    $this->template->build('paginas/productos_ambito', $data);
+  }
+
+//Productos
+  public function productos_ciudad($city_id,$arg2=null, $arg3=null) {
+    //Consultar ciudad
+    $data_ciudad = array('id' => $city_id, );
+    $ciudad = $this->Ciudades->get_row($data_ciudad);
+
+    $data['titulo'] = 'Paquetes Turísticos';
+    $data['subtitulo'] = $ciudad['city'];
+
+    if ($ciudad['country'] == 'Peru') {
+      $ambito = 'NAL';
+      $country = $ciudad['country'];
+    }else{
+      $ambito = 'INTL';
+      $country = 'ALL'; 
+      //Internacional
+    }
+
+    //Consultar ciudades
+    $data_ciudades = array(
+      'country' => $country,
+      'categoria_id' => 6,
+    );
+    $total_ciudades = $this->Ciudades->total_registros($data_ciudades);
+    $ciudades = $this->Ciudades->listado($total_ciudades, 0, $data_ciudades);
+    $data['ciudades'] = $ciudades;
+   
+    /**
+      * Listar productos
+    */
+    $sessionName = 'ses_products';
+
+    $base_url = base_url('paquetes-nacionales/' . $city_id . '-' . $arg2);
+    $per_page = 16; //registros por página
+    $uri_segment = 3; //segmento de la url
+    $num_links = 4; //número de links
+    //Página actual
+    $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+
+    //Consultar Categoría
+    /*$data_categoria = array('url_key' => $categoria_url_key,);
+    $categoria = $this->Categorias->get_row($data_categoria);
+    $data['categoria'] = $categoria;*/
+
+    //Setear post
+    $data_prod['publicar'] = 1; //Muestra solo las que están publicadas
+    $data_prod['categoria_id'] = 6;    
+    $data_prod['ambito'] = $ambito;
+    $data_prod['paquete_ciudad'] = $city_id;
+
+    $post = $this->Crud->set_post($data_prod,$sessionName);
+    $data['post'] = $post;
+
+    //Total de registros por post
+    $data['total_registros'] = $this->Productos->total_registros($post);
+
+    //Listado
+    $data['listado'] = $this->Productos->listado_tiny($per_page, $page, $post);
+
+    //Paginacion
+    $total_rows = $data['total_registros'];
+
+    $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+
+    $this->pagination->initialize($set_paginacion);
+    $data["links"] = $this->pagination->create_links();
+
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    $this->template->title('Productos');
+    $this->template->build('paginas/productos_ciudad', $data);
   }
 
   /**
@@ -440,7 +665,7 @@ class Paginas extends CI_Controller {
  * Reservar
  */
 public function reservar_bk()
-  {
+{
     /*$ema = $this->input->post('txtEmailUsuario');
     $nom = $this->input->post('txtNombreUsuario');
     $tel = $this->input->post('txtTelefonoUsuario');
@@ -482,19 +707,19 @@ public function reservar_bk()
     echo $msg;
   }
 
-public function reservar($post,$data) {
+  public function reservar($post,$data) {
 /*  echo "<pre>";
   print_r($data);
   echo "</pre>";*/
 
 //Imagen principal
-$imagen_2 = $data['imagen_2'];
-$urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') . $imagen_2) : base_url('assets/images/no-image.jpg') ;
+  $imagen_2 = $data['imagen_2'];
+  $urlImagen = (!empty($imagen_2)) ? base_url($this->config->item('upload_path') . $imagen_2) : base_url('assets/images/no-image.jpg') ;
 
 //URL
-$categoria_key = $data['categoria_key'];
-$url_key = $data['url_key'];
-$url_servicio = base_url($categoria_key."/".$url_key);
+  $categoria_key = $data['categoria_key'];
+  $url_key = $data['url_key'];
+  $url_servicio = base_url($categoria_key."/".$url_key);
 
   $servicio_info = array(
     'nombre_servicio' => $data['nombre_largo'],
@@ -508,14 +733,14 @@ $url_servicio = base_url($categoria_key."/".$url_key);
         //Enviar formulario
 
             //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
-            $adultos = (!empty($post['adultos'])) ? strip_tags($post['adultos']) : 0 ;
-            $adolecentes = (!empty($post['adolecentes'])) ? strip_tags($post['adolecentes']) : 0 ;
-            $ninios = (!empty($post['ninios'])) ? strip_tags($post['ninios']) : 0 ;
-            $infantes = (!empty($post['infantes'])) ? strip_tags($post['infantes']) : 0 ;
+  $adultos = (!empty($post['adultos'])) ? strip_tags($post['adultos']) : 0 ;
+  $adolecentes = (!empty($post['adolecentes'])) ? strip_tags($post['adolecentes']) : 0 ;
+  $ninios = (!empty($post['ninios'])) ? strip_tags($post['ninios']) : 0 ;
+  $infantes = (!empty($post['infantes'])) ? strip_tags($post['infantes']) : 0 ;
 
-            $fecha_arribo = (!empty($post['fecha_viaje'])) ? strip_tags($post['fecha_viaje']) : '' ;
+  $fecha_arribo = (!empty($post['fecha_viaje'])) ? strip_tags($post['fecha_viaje']) : '' ;
 
-            $data_insert = array(
+  $data_insert = array(
               /*"tipo_info" => strip_tags($post['tipo_info']),
               "id_info" => strip_tags($post['id_info']),
               "date_desde" => strip_tags($post['dateDesde']),
@@ -533,7 +758,7 @@ $url_servicio = base_url($categoria_key."/".$url_key);
               "email" => strip_tags($post['email']),
               /*"mensaje" => strip_tags($post['mensaje']),*/
               "agregar" => date("Y-m-d H:i:s")
-              );
+            );
 
             /*$this->db->insert('reservas', $data_insert);
             $reservas_id = $this->db->insert_id();*/
@@ -602,7 +827,7 @@ $url_servicio = base_url($categoria_key."/".$url_key);
 
             $redirect = $url_servicio . '?ack=success';
             redirect($redirect);
-      }
+          }
 
   /**
    * Listar productos destacados
@@ -635,7 +860,8 @@ $url_servicio = base_url($categoria_key."/".$url_key);
   }
 
 
-  }
 
-  /* End of file categorias.php */
+}
+
+/* End of file categorias.php */
 /* Location: ./application/controllers/waadmin/categorias.php */
