@@ -80,7 +80,7 @@ echo '</pre>';*/
                             <?php
                             if(!empty($listado)){
                                 foreach ($listado as $key => $item) {
-                                    $link_web = base_url($item['categoria_key'].'/'.$item['url_key']);
+                                    $link_web = base_url('s/'.$item['url_key']);
                                     ?>
                                     <tr>
                                         <td>

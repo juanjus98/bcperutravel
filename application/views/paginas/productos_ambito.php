@@ -55,7 +55,8 @@ $categoria_imagen = ($categoria['imagen'] != 'no-imagen.jpg') ? $upload_path . $
           if(!empty($listado)) {
             foreach ($listado as $key => $item) {
               $nombreItem = trim($item['nombre_corto']);
-              $urlLink = base_url($categoria['url_key'] . '/' . $item['url_key']);
+              /*$urlLink = base_url($categoria['url_key'] . '/' . $item['url_key']);*/
+              $urlLink = base_url('s/' . $item['url_key']);
 
               $urlImagen = (!empty($item['imagen_2'])) ? base_url($this->config->item('upload_path') . $item['imagen_2']) : base_url('assets/images/no-image.jpg') ;
 
@@ -149,15 +150,18 @@ $categoria_imagen = ($categoria['imagen'] != 'no-imagen.jpg') ? $upload_path . $
                 }
               }
               ?>
-            </div>
 
-          </div>
-
-          <div class="row">
+              <div class="row">
             <div class="col-md-12">
+              <div class="pull-right">
               <?php echo $links;?>
+              </div>
             </div>
           </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
 

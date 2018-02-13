@@ -281,8 +281,8 @@ class Paginas extends CI_Controller {
     */
     $sessionName = 'ses_products';
 
-    $base_url = base_url('paquetes-nacionales/' . $city_id . '-' . $arg2);
-    $per_page = 16; //registros por página
+    $base_url = base_url('p/' . $city_id . '-' . $arg2);
+    $per_page = 3; //registros por página
     $uri_segment = 3; //segmento de la url
     $num_links = 4; //número de links
     //Página actual

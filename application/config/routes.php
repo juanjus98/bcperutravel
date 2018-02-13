@@ -81,6 +81,11 @@ $route['c/(:any)/(:any)/(:num)'] = 'paginas/productos_ambito/$1/$2/$3'; //Pagina
 $route['p/(:num)-(:any)'] = 'paginas/productos_ciudad/$1/$2';
 $route['p/(:num)-(:any)/(:num)'] = 'paginas/productos_ciudad/$1/$2/$3'; //Paginación
 
+/**
+ * Detalle del producto
+ */
+$route['s/(:any)'] = 'paginas/detalle/$1';
+
 /*$route['c/(:any)'] = 'paginas/productos/$1';
 $route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
 $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
